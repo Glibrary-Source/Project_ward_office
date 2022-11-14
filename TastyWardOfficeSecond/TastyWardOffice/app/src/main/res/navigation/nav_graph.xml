@@ -4,23 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/google_map">
-
     <fragment
         android:id="@+id/google_map"
         android:name="com.example.tastywardoffice.google_map"
         android:label="fragment_google_map"
         tools:layout="@layout/fragment_google_map" >
         <action
-            android:id="@+id/action_google_map_to_restaurant_list2"
-            app:destination="@id/restaurant_list2" />
+            android:id="@+id/action_google_map_to_restaurant_list"
+            app:destination="@id/restaurant_list" />
     </fragment>
     <fragment
-        android:id="@+id/restaurant_list2"
+        android:id="@+id/restaurant_list"
         android:name="com.example.tastywardoffice.restaurant_list"
         android:label="fragment_restaurant_list"
         tools:layout="@layout/fragment_restaurant_list" >
         <action
-            android:id="@+id/action_restaurant_list2_to_google_map"
+            android:id="@+id/action_restaurant_list_to_google_map"
             app:destination="@id/google_map" />
     </fragment>
 </navigation>

@@ -45,10 +45,12 @@
         android:layout_weight="11">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/mapview"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph"
             tools:layout="@layout/abc_search_view"
             tools:ignore="ObsoleteLayoutParam" />
 
