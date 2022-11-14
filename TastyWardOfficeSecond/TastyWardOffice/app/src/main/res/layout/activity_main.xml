@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="13">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/app_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/image_2"
+            tools:layout_editor_absoluteX="194dp"
+            tools:layout_editor_absoluteY="15dp" />
+
+        <TextView
+            android:layout_width="85dp"
+            android:layout_height="29dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/notoserifkr_bold"
+            android:layout_gravity="center_horizontal"
+            android:gravity="top"
+            android:includeFontPadding="false"
+            android:text="@string/title_name"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mapview"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/abc_search_view"
+            tools:ignore="ObsoleteLayoutParam" />
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        app:itemIconSize="20dp"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/bottom_menu" />
+
+</LinearLayout>
+

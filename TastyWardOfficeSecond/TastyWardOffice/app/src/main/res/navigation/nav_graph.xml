@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/google_map">
+
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.example.tastywardoffice.google_map"
+        android:label="fragment_google_map"
+        tools:layout="@layout/fragment_google_map" >
+        <action
+            android:id="@+id/action_google_map_to_restaurant_list2"
+            app:destination="@id/restaurant_list2" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurant_list2"
+        android:name="com.example.tastywardoffice.restaurant_list"
+        android:label="fragment_restaurant_list"
+        tools:layout="@layout/fragment_restaurant_list" >
+        <action
+            android:id="@+id/action_restaurant_list2_to_google_map"
+            app:destination="@id/google_map" />
+    </fragment>
+</navigation>
