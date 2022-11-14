@@ -31,37 +31,5 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
 
-
-//        initNavigationBar()
     }
-
-
-
-
-
-    //하단 네비게이션바에서 프래그먼트 이동 코드
-//    fun initNavigationBar() {
-//        binding.bottomNavigation.run {
-//            setOnItemSelectedListener {
-//                when (it.itemId) {
-//                    R.id.item_list -> {
-//                        changeFragment(restaurant_list())
-//                    }
-//                    R.id.item_map -> {
-//                        changeFragment(google_map())
-//                    }
-//                }
-//                true
-//            }
-//            selectedItemId = R.id.item_map
-//        }
-//    }
-//
-//    fun changeFragment(fragment: Fragment) {
-//        supportFragmentManager
-//            .beginTransaction()
-//            .replace(binding.navHostFragment.id , fragment)
-//            .commit()
-//    }
-
 }
