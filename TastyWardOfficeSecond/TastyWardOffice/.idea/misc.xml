@@ -16,11 +16,14 @@
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/ic_connection_error.xml" value="0.1955" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/loading_img.xml" value="0.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/round_image.xml" value="0.1" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_splash.xml" value="0.1875" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_gmap.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_gmap_view.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.25" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/grid_view_item.xml" value="0.22946175637393768" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/grid_view_item.xml" value="0.5" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/menu/bottom_menu.xml" value="0.1875" />
       </map>
     </option>

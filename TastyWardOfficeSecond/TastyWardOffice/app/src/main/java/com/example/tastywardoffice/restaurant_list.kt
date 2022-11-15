@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentRestaurantListBinding
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.example.tastywardoffice.overview.PhotoGridAdapter
@@ -13,6 +16,7 @@ import com.example.tastywardoffice.overview.PhotoGridAdapter
 class restaurant_list : Fragment() {
 
     private val viewModel: OverviewViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +30,10 @@ class restaurant_list : Fragment() {
         binding.photosGrid.adapter = PhotoGridAdapter()
         binding.photosGrid.setHasFixedSize(true)
 
+
+
+
         return binding.root
     }
+
 }

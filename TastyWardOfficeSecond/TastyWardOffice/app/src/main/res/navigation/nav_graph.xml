@@ -21,5 +21,20 @@
         <action
             android:id="@+id/action_restaurant_list_to_google_map"
             app:destination="@id/google_map" />
+        <action
+            android:id="@+id/action_restaurant_list_to_detail_menu3"
+            app:destination="@id/detail_menu3" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_menu3"
+        android:name="com.example.tastywardoffice.detail_menu"
+        android:label="fragment_detail_menu"
+        tools:layout="@layout/fragment_detail_menu" >
+        <argument
+            android:name="storename"
+            app:argType="string" />
+        <argument
+            android:name="imgUri"
+            app:argType="string" />
     </fragment>
 </navigation>

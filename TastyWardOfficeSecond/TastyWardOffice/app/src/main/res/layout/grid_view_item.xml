@@ -77,7 +77,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
                     tools:src="@tools:sample/backgrounds/scenic" />
-
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

@@ -73,7 +73,6 @@
                 android:layout_height="match_parent"
                 app:TastyApiStatus="@{viewModel.status}"
                 tools:ignore="ContentDescription" />
-
         </FrameLayout>
     </LinearLayout>
 </layout>
