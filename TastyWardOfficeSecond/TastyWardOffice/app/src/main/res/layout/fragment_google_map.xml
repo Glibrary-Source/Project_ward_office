@@ -11,10 +11,4 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints"
             tools:layout="@layout/fragment_google_map"/>
-
-        <Button
-            android:id="@+id/getLocation"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
-
 </FrameLayout>

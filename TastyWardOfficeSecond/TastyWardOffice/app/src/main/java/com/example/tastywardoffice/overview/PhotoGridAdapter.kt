@@ -32,7 +32,7 @@ class PhotoGridAdapter : ListAdapter<TastyPhoto,
         val tastyPhoto = getItem(position)
         holder.bind(tastyPhoto)
 
-        holder.ImageView.setOnClickListener {
+        holder.itemView.setOnClickListener {
             val action = restaurant_listDirections.actionRestaurantListToDetailMenu3(
                 storename = holder.TextView.text.toString(),
                 imgUri = tastyPhoto.imgSrcUrl)
