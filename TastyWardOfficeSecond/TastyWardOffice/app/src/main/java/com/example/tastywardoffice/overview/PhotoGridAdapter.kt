@@ -38,7 +38,6 @@ class PhotoGridAdapter : ListAdapter<TastyPhoto,
                 imgUri = tastyPhoto.imgSrcUrl)
             holder.itemView.findNavController().navigate(action)
         }
-
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<TastyPhoto>() {

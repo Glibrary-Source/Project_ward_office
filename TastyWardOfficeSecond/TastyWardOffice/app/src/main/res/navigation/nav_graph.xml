@@ -36,5 +36,23 @@
         <argument
             android:name="imgUri"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detail_menu3_to_menu_image3"
+            app:destination="@id/menu_image3" />
+        <action
+            android:id="@+id/action_detail_menu3_to_google_map"
+            app:destination="@id/google_map" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_image3"
+        android:name="com.example.tastywardoffice.menu_image"
+        android:label="fragment_menu_image"
+        tools:layout="@layout/fragment_menu_image" >
+        <argument
+            android:name="imgUri"
+            app:argType="string" />
+        <argument
+            android:name="storename"
+            app:argType="string" />
     </fragment>
 </navigation>

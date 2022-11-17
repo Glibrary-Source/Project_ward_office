@@ -22,6 +22,7 @@ class restaurant_list : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val binding = FragmentRestaurantListBinding.inflate(inflater)
 
@@ -29,8 +30,6 @@ class restaurant_list : Fragment() {
         binding.viewModel = viewModel
         binding.photosGrid.adapter = PhotoGridAdapter()
         binding.photosGrid.setHasFixedSize(true)
-
-
 
 
         return binding.root
