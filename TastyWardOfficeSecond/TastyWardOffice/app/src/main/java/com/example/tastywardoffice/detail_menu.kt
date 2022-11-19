@@ -28,6 +28,8 @@ class detail_menu : Fragment() {
         binding.storeName.text = StoreData.storename
         binding.locationText.text = getString(R.string.location)
 
+        arguments = Bundle()
+
         parentFragmentManager.beginTransaction().replace(
             R.id.nav_bar,
             menu_image().apply {

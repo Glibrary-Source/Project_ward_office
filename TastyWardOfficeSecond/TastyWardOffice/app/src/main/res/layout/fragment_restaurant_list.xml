@@ -64,7 +64,7 @@
                 android:layout_gravity="center"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:listData="@{viewModel.photos}"
-                tools:itemCount="8"
+                tools:itemCount="7"
                 tools:listitem="@layout/grid_view_item" />
 
             <ImageView

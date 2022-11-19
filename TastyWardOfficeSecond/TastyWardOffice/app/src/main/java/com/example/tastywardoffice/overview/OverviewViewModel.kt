@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tastywardoffice.network.TastyApi
 import com.example.tastywardoffice.network.TastyPhoto
+import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import kotlinx.coroutines.launch
 
 enum class TastyApiStatus { LOADING, ERROR, DONE }
@@ -36,6 +37,16 @@ class OverviewViewModel : ViewModel() {
             _status.value = TastyApiStatus.LOADING
             try {
                 _photos.value = TastyApi.retrofitService.getPhotos()
+
+                //데이터 개수 또는 조건문을 통한 데이터 개수 제한
+//                val testMutableList = mutableListOf<TastyPhoto>()
+//                for(value in _photos.value!!){
+//                    if (value.id.toInt() <= 424909) {
+//                        testMutableList.add(value)
+//                    }
+//                }
+//                _photos.value = testMutableList
+
                 _status.value = TastyApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = TastyApiStatus.ERROR

@@ -1,30 +1,18 @@
 package com.example.tastywardoffice
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.app.Activity
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
+import android.location.LocationRequest
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.places.api.Places
-import java.util.jar.Manifest
+
 
 
 class google_map : Fragment(), OnMapReadyCallback {
@@ -77,16 +65,11 @@ class google_map : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        val marker = LatLng(37.568291,126.997780)
-        googleMap.addMarker(MarkerOptions().position(marker).title("여기"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+        val noryangjin = LatLng(37.514630, 126.945358)
 
-        val sydney = LatLng(-33.852, 151.211)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-
-        val seoul = LatLng(33.981166667, 58.677166667)
-        googleMap.addMarker(MarkerOptions().position(seoul).title("Desk"))
+        googleMap.addMarker(MarkerOptions().position(noryangjin).title("노량진 입니다"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(noryangjin))
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(13f))
 
         Log.d(TAG, "onMapReady")
     }
