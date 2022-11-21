@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".google_map">
 
         <com.google.android.gms.maps.MapView
@@ -11,4 +12,16 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints"
             tools:layout="@layout/fragment_google_map"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/myLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_my_location_24"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:fabSize="mini"
+            android:focusable="true"
+            android:contentDescription="TODO" />
 </FrameLayout>

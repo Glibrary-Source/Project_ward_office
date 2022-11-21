@@ -31,7 +31,6 @@ class restaurant_list : Fragment() {
         binding.photosGrid.adapter = PhotoGridAdapter()
         binding.photosGrid.setHasFixedSize(true)
 
-
         return binding.root
     }
 

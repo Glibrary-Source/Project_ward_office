@@ -21,6 +21,7 @@ class OverviewViewModel : ViewModel() {
     val status: LiveData<TastyApiStatus> = _status
     val photos: LiveData<List<TastyPhoto>> = _photos
 
+
     /**
      * Call getMarsPhotos() on init so we can display status immediately.
      */
@@ -37,22 +38,27 @@ class OverviewViewModel : ViewModel() {
             _status.value = TastyApiStatus.LOADING
             try {
                 _photos.value = TastyApi.retrofitService.getPhotos()
-
-                //데이터 개수 또는 조건문을 통한 데이터 개수 제한
-//                val testMutableList = mutableListOf<TastyPhoto>()
-//                for(value in _photos.value!!){
-//                    if (value.id.toInt() <= 424909) {
-//                        testMutableList.add(value)
-//                    }
-//                }
-//                _photos.value = testMutableList
-
                 _status.value = TastyApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = TastyApiStatus.ERROR
                 _photos.value = listOf()
             }
         }
+    }
+
+    //데이터 개수 또는 조건문을 통한 데이터 개수 제한
+    fun filterMenu() {
+        val testMutableList = mutableListOf<TastyPhoto>()
+        for(value in _photos.value!!){
+            if (value.id.toInt() <= 424909) {
+                testMutableList.add(value)
+            }
+        }
+        _photos.value = testMutableList
+    }
+
+    fun filterMenu2() {
+
     }
 
 }

@@ -1,7 +1,5 @@
 package com.example.tastywardoffice.network
 
-import com.example.tastywardoffice.overview.PhotoGridAdapter
-import com.example.tastywardoffice.overview.TastyApiStatus
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
