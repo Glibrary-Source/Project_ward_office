@@ -19,7 +19,6 @@ import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
 import com.example.tastywardoffice.network.JoinData
 import com.example.tastywardoffice.network.MyDTO
 import com.example.tastywardoffice.network.TastyWardApi
-import com.example.tastywardoffice.overview.testModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
@@ -112,7 +111,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         setDefaultLocation()
 //        aroundShop()
         googleMap?.setOnInfoWindowClickListener(this)
-        Log.d("testModel", testModel().storeName)
 
 //        googleMap.setOnMarkerClickListener(this)
 

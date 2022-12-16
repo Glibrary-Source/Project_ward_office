@@ -46,6 +46,10 @@ class OverviewViewModel : ViewModel() {
      * [MarsPhoto] [List] [LiveData].
      */
 
+    private fun getStores() {
+
+    }
+
     private fun getMarsPhotos() {
         viewModelScope.launch {
             _status.value = TastyApiStatus.LOADING
