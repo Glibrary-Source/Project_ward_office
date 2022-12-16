@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_google_map_to_restaurant_list"
             app:destination="@id/restaurant_list" />
+        <action
+            android:id="@+id/action_google_map_to_detail_menu3"
+            app:destination="@id/detail_menu3" />
     </fragment>
     <fragment
         android:id="@+id/restaurant_list"

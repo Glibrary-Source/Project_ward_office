@@ -41,13 +41,17 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.libraries.places:places:2.7.0'
-    implementation 'androidx.test:core-ktx:1.5.0'
     def lifecycle_version = "2.4.0"
     def nav_version = "2.3.1"
 
+    implementation 'com.google.android.libraries.places:places:2.7.0'
+    implementation 'androidx.test:core-ktx:1.5.0'
+
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    //snackbar 관련
+    implementation 'com.google.android.material:material:1.8.0-alpha03'
 
     //nav_graph 관련
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -62,10 +66,11 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
     // Retrofit with Moshi Converter
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // Coil
     implementation "io.coil-kt:coil:1.1.1"
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
@@ -78,5 +83,4 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
-
 }

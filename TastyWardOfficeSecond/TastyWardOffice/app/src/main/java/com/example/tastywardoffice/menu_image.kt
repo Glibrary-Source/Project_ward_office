@@ -22,7 +22,6 @@ class menu_image : Fragment() {
     ): View? {
         val binding = FragmentMenuImageBinding.inflate(inflater)
 
-
         bindImage(binding.mainMenuImage, arguments?.getString("Url"))
 
         return binding.root

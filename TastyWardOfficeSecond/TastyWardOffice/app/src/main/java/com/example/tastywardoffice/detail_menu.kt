@@ -8,15 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.test.core.app.ApplicationProvider
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
+import com.example.tastywardoffice.overview.OverviewViewModel
 import com.example.tastywardoffice.overview.bindImage
 
 
 class detail_menu : Fragment() {
 
     val StoreData by navArgs<detail_menuArgs>()
+    private val viewModel: OverviewViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +27,7 @@ class detail_menu : Fragment() {
     ): View? {
 
         val binding = FragmentDetailMenuBinding.inflate(inflater)
+
         bindImage(binding.foodImage, StoreData.imgUri)
         binding.storeName.text = StoreData.storename
         binding.locationText.text = getString(R.string.location)
@@ -40,7 +44,6 @@ class detail_menu : Fragment() {
         ).commit()
 
         //뷰를 처음 불러올때 메뉴부터 불러오기
-
         binding.menuButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
