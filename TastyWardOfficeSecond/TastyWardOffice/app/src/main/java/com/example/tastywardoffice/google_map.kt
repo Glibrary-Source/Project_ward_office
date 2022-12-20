@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
+import com.example.tastywardoffice.datamodel.LatLngData
 import com.example.tastywardoffice.network.JoinData
 import com.example.tastywardoffice.network.MyDTO
 import com.example.tastywardoffice.network.TastyWardApi
@@ -28,6 +29,8 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.android.libraries.places.api.Places
+import com.google.maps.android.clustering.ClusterManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,7 +54,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var mView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val TAG = "MapFragment"
-    private val viewModels: OverviewViewModel by viewModels()
 
     private val multiplePermissionCode = 100
     private val requiredPermissions = arrayOf(
@@ -76,15 +78,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         Log.d(TAG, "onCreate")
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putDouble("testlatItude", latiTude)
-        outState.putDouble("testlongItude", longItude)
-
-        super.onSaveInstanceState(outState)
-    }
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -94,7 +87,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         mView = binding.mapView
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
-        binding.viewModel = viewModels
 
         checkLocationPermission()
 
@@ -106,8 +98,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     .position(current)
                     .title("현재위치")
             )
-
-            GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,15f))
         }
 
         Log.d(TAG, "onCreateView")
@@ -126,6 +116,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         setDefaultLocation()
         aroundShop()
         googleMap?.setOnInfoWindowClickListener(this)
+
 
 //        googleMap.setOnMarkerClickListener(this)
 
@@ -210,10 +201,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     //지도 처음 띄웠을때 서울로 위치되도록
     private fun setDefaultLocation() {
         val defaultLocation = LatLng(latiTude, longItude)
-        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation,14f))
+        GoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation,14f))
     }
 
-    //퍼미션 체크 및 권한 요청 함수
+    //퍼미션 체크 및 권한 요청 후 현위치로 이동 함수
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
                 mContext,
@@ -229,7 +220,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     if (location != null) {
                         latiTude = location.latitude
                         longItude = location.longitude
-                        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latiTude,longItude),15f))
+                        GoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latiTude,longItude),15f))
                         Log.d(TAG, "$latiTude , $longItude")
                     }
                 }

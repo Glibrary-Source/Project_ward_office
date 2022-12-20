@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.tastywardoffice.overview.OverviewViewModel"/>
-    </data>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".google_map">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".google_map">
+        tools:ignore="MissingConstraints"
+        tools:layout="@layout/fragment_google_map" />
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="MissingConstraints"
-            tools:layout="@layout/fragment_google_map" />
+    <ImageButton
+        android:id="@+id/myLocationButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:contentDescription="TODO"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_my_location_24"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="7dp"
+        app:fabSize="mini" />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="358dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:gravity="center">
 
         <ImageButton
-            android:id="@+id/myLocationButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/white"
-            android:clickable="true"
+            android:id="@+id/search_button"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:contentDescription="TODO"
-            android:focusable="true"
-            android:src="@drawable/ic_baseline_my_location_24"
-            app:fabSize="mini" />
-    </FrameLayout>
-</layout>
+            android:background="@android:color/transparent"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_baseline_search_24" />
+        
+        <EditText
+            android:id="@+id/search_text"
+            android:layout_width="281dp"
+            android:layout_height="40dp"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/delete_text"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_baseline_close_24" />
+
+    </LinearLayout>
+</FrameLayout>
+
 
 
