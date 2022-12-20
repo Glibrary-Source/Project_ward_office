@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_detail_menu3_to_google_map"
             app:destination="@id/google_map" />
+        <action
+            android:id="@+id/action_detail_menu3_to_detail_googleMap"
+            app:destination="@id/detail_googleMap" />
     </fragment>
     <fragment
         android:id="@+id/menu_image3"
@@ -58,4 +61,9 @@
             android:name="storename"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/detail_googleMap"
+        android:name="com.example.tastywardoffice.detail_googleMap"
+        android:label="fragment_detail_google_map"
+        tools:layout="@layout/fragment_detail_google_map" />
 </navigation>

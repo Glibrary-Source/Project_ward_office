@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.test.core.app.ApplicationProvider
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
@@ -56,8 +57,10 @@ class detail_menu : Fragment() {
         }
 
         binding.mapButton.setOnClickListener {
-            val fragment2 = google_map()
-            parentFragmentManager.beginTransaction().replace(R.id.nav_bar, fragment2).commit()
+            parentFragmentManager.beginTransaction().replace(
+                R.id.nav_bar,
+                detail_googleMap()
+            ).commit()
         }
 
         return binding.root
