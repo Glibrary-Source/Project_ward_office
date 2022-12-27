@@ -57,7 +57,6 @@ class google_map : Fragment(), OnMapReadyCallback {
                 .position(seoul)
                 .title("Desk")
         )
-
     }
 
     override fun onStart() {
