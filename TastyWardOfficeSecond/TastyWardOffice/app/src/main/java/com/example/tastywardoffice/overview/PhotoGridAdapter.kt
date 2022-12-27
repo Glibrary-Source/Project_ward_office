@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tastywardoffice.databinding.GridViewItemBinding
 import com.example.tastywardoffice.network.TastyPhoto
 import com.example.tastywardoffice.restaurant_listDirections
+import com.google.android.gms.maps.model.LatLng
 
 class PhotoGridAdapter : ListAdapter<TastyPhoto,
         PhotoGridAdapter.TastyPhotoViewHolder>(DiffCallback) {
@@ -35,7 +36,8 @@ class PhotoGridAdapter : ListAdapter<TastyPhoto,
         holder.itemView.setOnClickListener {
             val action = restaurant_listDirections.actionRestaurantListToDetailMenu3(
                 storename = holder.TextView.text.toString(),
-                imgUri = tastyPhoto.imgSrcUrl
+                imgUri = tastyPhoto.imgSrcUrl,
+                LatLng(37.56, 126.97)
             )
             holder.itemView.findNavController().navigate(action)
         }

@@ -59,7 +59,11 @@ class detail_menu : Fragment() {
         binding.mapButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
-                detail_googleMap()
+                detail_googleMap().apply {
+                    arguments = Bundle().apply {
+                        putParcelable("LatLng", StoreData.latlng)
+                    }
+                }
             ).commit()
         }
 

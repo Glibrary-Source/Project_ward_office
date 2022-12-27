@@ -7,14 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.tastywardoffice.databinding.FragmentDetailGoogleMapBinding
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class detail_googleMap : Fragment(), OnMapReadyCallback {
 
     private lateinit var mView: MapView
     private val TAG = "MapFragment"
+
+    lateinit var GoogleMap: GoogleMap
 
 
     override fun onCreateView(
@@ -30,7 +35,19 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
+        GoogleMap = googleMap
+
+        val current = arguments?.getParcelable<LatLng>("LatLng")
+        Log.d("TestPar", current.toString())
+        googleMap.addMarker(
+            arguments?.getParcelable<LatLng>("LatLng")?.let {
+                MarkerOptions()
+                    .position(it)
+                    .title("성공")
+            }!!
+        )
+        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current!!,16f))
 
     }
 
