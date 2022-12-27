@@ -29,7 +29,9 @@ data class First(
     @SerializedName("storeId")
     val storeId: String,
     @SerializedName("storeGEOPoints")
-    val storeGEOPoints: Geo
+    val storeGEOPoints: Geo,
+    @SerializedName("storeMenuPictureUrls ")
+    val storeMenuPictureUrls : List<String>
 )
 
 data class Geo(

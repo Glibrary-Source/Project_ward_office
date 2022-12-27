@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_detail_menu3_to_google_map"
             app:destination="@id/google_map" />
+        <argument
+            android:name="latlng"
+            app:argType="com.google.android.gms.maps.model.LatLng" />
     </fragment>
     <fragment
         android:id="@+id/menu_image3"
