@@ -95,18 +95,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,15f))
         }
 
-<<<<<<< HEAD
-        val seoul = LatLng(33.981166667, 58.677166667)
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(seoul)
-                .title("Desk")
-        )
-=======
-        Log.d(TAG, "onCreateView")
-
         return binding.root
->>>>>>> d69b2e7b1290a0cb6f0fcbc77293d4c323b79233
     }
 
     override fun onStart() {
@@ -153,7 +142,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                             .title(storeName)
                             .snippet("김밥나라 입니다")
                     )
-                    sampleMarker.showInfoWindow()
+                    sampleMarker!!.showInfoWindow()
 
                 } else {
                     var result: MyDTO? = response.body()
@@ -203,7 +192,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //    }
 
 
-    override fun onInfoWindowClick(Marker: Marker?) {
+    override fun onInfoWindowClick(p0: Marker) {
         val action = google_mapDirections.actionGoogleMapToDetailMenu3(storeName,"https://i.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU")
         findNavController().navigate(action)
     }
