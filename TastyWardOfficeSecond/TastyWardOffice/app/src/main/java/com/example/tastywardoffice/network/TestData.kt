@@ -1,6 +1,5 @@
 package com.example.tastywardoffice.network
 
-import android.location.Geocoder
 import com.google.gson.annotations.SerializedName
 
 data class JoinData(

@@ -25,14 +25,15 @@
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#00000000"
+            android:background="@drawable/border_img"
             android:clickable="true"
             android:contentDescription="TODO"
             android:focusable="true"
             android:src="@drawable/ic_baseline_my_location_24"
             android:layout_gravity="right"
             android:layout_marginStart="7dp"
-            app:fabSize="mini" />
+            app:fabSize="mini"
+            app:tint="@color/quantum_lightblue" />
 
     </LinearLayout>
 
@@ -42,7 +43,7 @@
         android:layout_width="358dp"
         android:layout_height="52dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white"
+        android:background="@drawable/border_img"
         android:gravity="center">
 
         <ImageButton

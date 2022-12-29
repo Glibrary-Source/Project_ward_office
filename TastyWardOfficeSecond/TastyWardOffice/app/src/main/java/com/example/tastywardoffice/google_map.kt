@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.*
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
-import com.example.tastywardoffice.network.JoinData
-import com.example.tastywardoffice.network.MyDTO
-import com.example.tastywardoffice.network.TastyWardApi
+import com.example.tastywardoffice.network.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
@@ -31,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.concurrent.timer
+import kotlin.system.exitProcess
 
 
 //시작시 위치와 맵 정보 저장
@@ -89,7 +87,20 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         checkLocationPermission()
 
+        var second = 0
+        timertest = timer(period = 1000, initialDelay = 1000) {
+
+            second++
+            Log.d(TAG, second.toString())
+
+            if(second == 10) {
+                cancel()
+                Log.d(TAG, "타이머종료")
+            }
+        }
+
         binding.myLocationButton.setOnClickListener {
+
             val current = LatLng(latiTude, longItude)
             checkLocationPermission()
             GoogleMap.addMarker(
@@ -98,7 +109,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     .title("현재위치")
             )
 
-            var second = 0
+            second = 0
             timertest = timer(period = 1000, initialDelay = 1000) {
 
                 second++
@@ -110,7 +121,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 }
             }
         }
-
 
         binding.searchButton.setOnClickListener {
             binding.searchButton.setBackgroundColor(Color.parseColor("#afe3ff"))
@@ -125,10 +135,22 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         mView.onStart()
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
         setDefaultLocation()
         aroundShop()
+        totalShopData()
+
+//        val locationButton =
+//            (mView.findViewById<View>("1".toInt()).getParent() as View).findViewById<View>("2".toInt())
+//        val rlp = locationButton.layoutParams as RelativeLayout.LayoutParams
+//
+//        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+//        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE)
+//        rlp.setMargins(0, 180, 180, 0)
+
+
         googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
 
@@ -171,6 +193,40 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //    }
 
 
+    private fun totalShopData() {
+        val tempData = RequestType("whole_stores")
+        TastyWardApi.service.getWholeData(tempData).enqueue(object : Callback<WholeData>{
+            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
+                if (response.isSuccessful) {
+                    for (i in response.body()!!.stores){
+
+                        if(i.district == "E") {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(
+                                        LatLng(
+                                            i.storeGEOPoints.latitude,
+                                            i.storeGEOPoints.longitude
+                                        )
+                                    )
+                                    .title(i.storeId)
+                                    .snippet("성공입니다")
+                            )?.showInfoWindow()
+                        }
+                    }
+
+                } else {
+                    val result: WholeData? = response.body()
+                    Log.d("YMC", "onResponse 실패 " + result?.toString())
+                }
+            }
+            override fun onFailure(call: Call<WholeData>, t: Throwable) {
+                Log.d("YMC", "onFailure 에러 " + t.message.toString())
+            }
+        })
+    }
+
+
     //데이터 불러오기
     private fun aroundShop() {
         var storeLocation: LatLng
@@ -191,14 +247,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     val address2 = geocoder.getFromLocation(37.56, 126.97, 1)
                     Log.d("YMC", " onResponse 성공 " + address2[0].subLocality)
 
-                    //레트로핏으로 받아온 데이터를 구글맵 마크로 찍음
-                    val sampleMarker = GoogleMap.addMarker(
-                        MarkerOptions()
-                            .position(storeLocation)
-                            .title(storeName)
-                            .snippet("김밥나라 입니다")
-                    )
-                    sampleMarker!!.showInfoWindow()
+
 
                 } else {
                     val result: MyDTO? = response.body()
@@ -234,8 +283,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     if (location != null) {
                         latiTude = location.latitude
                         longItude = location.longitude
-                        GoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latiTude,longItude),15f))
+                        GoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latiTude,longItude),17f))
                         Log.d(TAG, "$latiTude , $longItude")
+                    } else {
+                        Log.d(TAG, "fail")
                     }
                 }
         } else {
@@ -251,7 +302,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 val array = arrayOfNulls<String>(rejectedPermissionList.size)
                 ActivityCompat.requestPermissions(mContext as Activity, rejectedPermissionList.toArray(array), multiplePermissionCode)
             }
-            Toast.makeText(mContext, "위치권한이 없습니다..", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -284,6 +335,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop")
+
 
         timertest.cancel()
 

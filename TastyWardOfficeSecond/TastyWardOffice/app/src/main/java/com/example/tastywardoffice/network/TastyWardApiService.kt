@@ -19,6 +19,11 @@ interface TastyWardApiService {
     fun getStoreData(
         @Body data: JoinData
     ): Call<MyDTO>
+
+    @POST("test1")
+    fun getWholeData(
+        @Body data: RequestType
+    ): Call<WholeData>
 }
 
 object TastyWardApi{
