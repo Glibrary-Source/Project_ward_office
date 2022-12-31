@@ -35,6 +35,19 @@
             app:fabSize="mini"
             app:tint="@color/quantum_lightblue" />
 
+        <TextView
+            android:id="@+id/testText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            tools:text="hellow"/>
+
+        <Button
+            android:id="@+id/testButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"/>
+
     </LinearLayout>
 
 

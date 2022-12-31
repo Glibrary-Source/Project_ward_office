@@ -11,19 +11,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.tastywardoffice.databinding.ActivityMainBinding
+import com.example.tastywardoffice.overview.MainViewModel
 import com.example.tastywardoffice.overview.OverviewViewModel
+import com.google.android.gms.maps.model.LatLng
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mainViewModel: MainViewModel
+    private var liveText: MutableLiveData<String> = MutableLiveData()
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(binding.root)
 
         val navHostFragment =
@@ -31,5 +40,20 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         binding.bottomNavigation.setupWithNavController(navController)
+
+        val nameObserver = Observer<Int> { it ->
+            binding.testText.text = it.toString()
+        }
+
+//        liveText.observe(this, Observer {
+//            binding.testText.text = it
+//        })
+//
+//        binding.textbutton.setOnClickListener {
+//            liveText.value = "Hellow World ${++count}"
+//        }
+
+        mainViewModel.height.observe(this, nameObserver)
+
     }
 }

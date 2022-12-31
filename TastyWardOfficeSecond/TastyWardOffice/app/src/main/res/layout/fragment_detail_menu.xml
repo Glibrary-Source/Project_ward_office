@@ -48,12 +48,12 @@
                 <TextView
                     android:id="@+id/location_text"
                     android:layout_width="184dp"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/store_name"
                     app:layout_constraintTop_toBottomOf="@id/store_name"
-                    tools:text="서울 동작구 솔밭로 110" />
+                    tools:text="대한민국 서울특별시 동작구 노량진동1동123-43" />
 
                 <ImageView
                     android:layout_width="40dp"
