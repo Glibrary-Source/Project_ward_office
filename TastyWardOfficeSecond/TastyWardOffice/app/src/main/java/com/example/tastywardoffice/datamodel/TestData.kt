@@ -1,4 +1,4 @@
-package com.example.tastywardoffice.network
+package com.example.tastywardoffice.datamodel
 
 import com.google.gson.annotations.SerializedName
 

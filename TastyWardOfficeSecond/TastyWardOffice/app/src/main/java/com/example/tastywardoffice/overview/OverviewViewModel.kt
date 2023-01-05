@@ -7,9 +7,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tastywardoffice.datamodel.DistanceToData
+import com.example.tastywardoffice.datamodel.RequestLocationData
 import com.example.tastywardoffice.network.*
 import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.launch
@@ -22,51 +25,18 @@ enum class TastyApiStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel : ViewModel() {
 
-    // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<TastyApiStatus>()
     private val _photos = MutableLiveData<List<TastyPhoto>>()
-//    private val _testDTO = MutableLiveData<MyDTO>()
+    private val _distanceStoreData = MutableLiveData<DistanceToData>()
 
-
-
-    // The external immutable LiveData for the request status
     val status: LiveData<TastyApiStatus> = _status
     val photos: LiveData<List<TastyPhoto>> = _photos
-//    val testDTO: LiveData<MyDTO> = _testDTO
+    val distanceStoreData: LiveData<DistanceToData> = _distanceStoreData
 
-
-    /**
-     * Call getMarsPhotos() on init so we can display status immediately.
-     */
     init {
         getMarsPhotos()
-//        getStores()
+        distanceTo(position = LatLng(37.510402, 126.945915))
     }
-
-    /**
-     * Gets Mars photos information from the Mars API Retrofit service and updates the
-     * [MarsPhoto] [List] [LiveData].
-     */
-//
-//    private fun getStores() {
-//        val tempData = JoinData("filter_stores","E",5,4000,6000)
-//        viewModelScope.launch{
-//            TastyWardApi.service.getStoreData(tempData)?.enqueue(object : Callback<MyDTO> {
-//                override fun onResponse(call: retrofit2.Call<MyDTO>, response: Response<MyDTO>) {
-//                    if (response.isSuccessful) {
-//                        _testDTO.value = response.body()
-//                        Log.d("YMC", " onResponse 성공 " + _testDTO.value.toString())
-//                    } else {
-//                        var result: MyDTO? = response.body()
-//                        Log.d("YMC", "onResponse 실패 " + "이거아님")
-//                    }
-//                }
-//                override fun onFailure(call: retrofit2.Call<MyDTO>, t: Throwable) {
-//                    Log.d("YMC", "onFailure 에러 " + t.message.toString())
-//                }
-//            })
-//        }
-//    }
 
     private fun getMarsPhotos() {
         viewModelScope.launch {
@@ -80,6 +50,26 @@ class OverviewViewModel : ViewModel() {
             }
         }
     }
+
+    fun distanceTo(position: LatLng) {
+        val myLocation = listOf<Double>(position.latitude, position.longitude)
+        val requestType = RequestLocationData("How_long", myLocation)
+        TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<DistanceToData> {
+            override fun onResponse(call: retrofit2.Call<DistanceToData>, response: Response<DistanceToData>) {
+                if (response.isSuccessful) {
+                    Log.d("LocationDB", position.toString())
+                    _distanceStoreData.value = response.body()
+                } else {
+                    val result: DistanceToData? = response.body()
+                    Log.d("LocationDB", "onResponse 실패 " + result?.toString())
+                }
+            }
+            override fun onFailure(call: retrofit2.Call<DistanceToData>, t: Throwable) {
+                Log.d("LocationDB", "onFailure 에러 " + t.message.toString())
+            }
+        })
+    }
+
 }
 
 

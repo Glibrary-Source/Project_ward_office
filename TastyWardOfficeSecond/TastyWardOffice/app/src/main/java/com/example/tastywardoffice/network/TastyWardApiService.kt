@@ -1,5 +1,6 @@
 package com.example.tastywardoffice.network
 
+import com.example.tastywardoffice.datamodel.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,6 +25,11 @@ interface TastyWardApiService {
     fun getWholeData(
         @Body data: RequestType
     ): Call<WholeData>
+
+    @POST("test1")
+    fun getLocationDistanceTo(
+        @Body data: RequestLocationData
+    ): Call<DistanceToData>
 }
 
 object TastyWardApi{
