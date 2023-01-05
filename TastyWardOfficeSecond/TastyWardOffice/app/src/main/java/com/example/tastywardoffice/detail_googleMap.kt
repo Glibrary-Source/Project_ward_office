@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.tastywardoffice.databinding.FragmentDetailGoogleMapBinding
+import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -21,6 +23,12 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
 
     lateinit var GoogleMap: GoogleMap
 
+    private lateinit var overViewModel: OverviewViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +52,10 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
             arguments?.getParcelable<LatLng>("LatLng")?.let {
                 MarkerOptions()
                     .position(it)
-                    .title("성공")
+                    .title(arguments?.getString("storeName"))
             }!!
         )
+
         GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current!!,16f))
 
     }

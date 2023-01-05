@@ -35,8 +35,8 @@ data class LocationItems(
     @SerializedName("storeId")
     val storeId: String,
     @Expose
-    @SerializedName("storeMenuPictureUrls ")
-    val storeMenuPictureUrls :List<String>,
+    @SerializedName("storeMenuPictureUrls")
+    val storeMenuPictureUrls :StoreMenuPictureUrls,
     @Expose
     @SerializedName("storePriceMax")
     val storePriceMax: Int,
@@ -49,6 +49,15 @@ data class LocationItems(
     @Expose
     @SerializedName("storeTitle")
     val storeTitle: String
+)
+
+data class StoreMenuPictureUrls(
+    @Expose
+    @SerializedName("menu")
+    val menu: List<String>,
+    @Expose
+    @SerializedName("store")
+    val store: List<String>
 )
 
 data class StoreGEOPoints(

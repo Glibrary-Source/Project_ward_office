@@ -1,108 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".detail_menu" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail_menu">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/my_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
-            android:id="@+id/my_scroll"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/food_image"
+                android:layout_width="366dp"
+                android:layout_height="361dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_imgview"
+                android:contentDescription="TODO"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/store_name"
+                android:layout_width="184dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="46dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/food_image"
+                app:layout_constraintTop_toBottomOf="@id/food_image"
+                tools:text="돌쇠와 석쇠" />
+
+            <TextView
+                android:id="@+id/location_text"
+                android:layout_width="184dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:focusable="true"
-                android:focusableInTouchMode="true">
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/store_name"
+                app:layout_constraintTop_toBottomOf="@id/store_name"
+                tools:text="대한민국 서울특별시 동작구 노량진동1동123-43" />
 
-                <ImageView
-                    android:id="@+id/food_image"
-                    android:layout_width="366dp"
-                    android:layout_height="361dp"
-                    android:paddingTop="13dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars"
-                    android:contentDescription="TODO" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="54dp"
+                app:layout_constraintEnd_toEndOf="@id/food_image"
+                app:layout_constraintTop_toBottomOf="@id/food_image"
+                tools:srcCompat="@drawable/bottomnavfirst" />
 
-                <TextView
-                    android:id="@+id/store_name"
-                    android:layout_width="184dp"
-                    android:layout_height="28dp"
-                    android:textSize="18sp"
-                    android:layout_marginTop="46dp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/food_image"
-                    app:layout_constraintTop_toBottomOf="@id/food_image"
-                    tools:text="돌쇠와 석쇠" />
+            <LinearLayout
+                android:id="@+id/nav_button"
+                android:layout_width="366dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="130dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/food_image"
+                app:layout_constraintTop_toBottomOf="@id/food_image">
 
-                <TextView
-                    android:id="@+id/location_text"
-                    android:layout_width="184dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/store_name"
-                    app:layout_constraintTop_toBottomOf="@id/store_name"
-                    tools:text="대한민국 서울특별시 동작구 노량진동1동123-43" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="54dp"
-                    app:layout_constraintEnd_toEndOf="@id/food_image"
-                    app:layout_constraintTop_toBottomOf="@id/food_image"
-                    tools:srcCompat="@drawable/bottomnavfirst" />
-
-                <LinearLayout
-                    android:id="@+id/nav_button"
-                    android:layout_width="366dp"
+                <Button
+                    android:id="@+id/menu_button"
+                    android:layout_width="122dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="130dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="@id/food_image"
-                    app:layout_constraintTop_toBottomOf="@id/food_image" >
+                    android:text="@string/menu_button"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/menu_button"
-                        android:text="@string/menu_button"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_width="122dp"
-                        android:layout_height="48dp" />
-                    <Button
-                        android:id="@+id/map_button"
-                        android:text="@string/map_button"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_width="122dp"
-                        android:layout_height="48dp" />
-                    <Button
-                        android:id="@+id/review_button"
-                        android:text="@string/review_button"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_width="122dp"
-                        android:layout_height="48dp" />
-                </LinearLayout>
+                <Button
+                    android:id="@+id/map_button"
+                    android:layout_width="122dp"
+                    android:layout_height="48dp"
+                    android:text="@string/map_button"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/nav_bar"
-                    android:layout_width="366dp"
-                    android:layout_height="487dp"
-                    app:layout_constraintStart_toStartOf="@id/food_image"
-                    app:layout_constraintTop_toBottomOf="@id/nav_button" />
+                <Button
+                    android:id="@+id/review_button"
+                    android:layout_width="122dp"
+                    android:layout_height="48dp"
+                    android:text="@string/review_button"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+            <FrameLayout
+                android:id="@+id/nav_bar"
+                android:layout_width="366dp"
+                android:layout_height="487dp"
+                android:background="@drawable/border_imgview"
+                app:layout_constraintStart_toStartOf="@id/food_image"
+                app:layout_constraintTop_toBottomOf="@id/nav_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

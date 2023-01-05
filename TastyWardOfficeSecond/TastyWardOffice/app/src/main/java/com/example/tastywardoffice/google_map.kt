@@ -21,26 +21,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
-import com.example.tastywardoffice.datamodel.DistanceToData
-import com.example.tastywardoffice.datamodel.JoinData
-import com.example.tastywardoffice.datamodel.MyDTO
-import com.example.tastywardoffice.datamodel.RequestLocationData
-import com.example.tastywardoffice.network.*
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.*
-import kotlin.math.log
-
 
 //시작시 위치와 맵 정보 저장
-private const val KEY_CAMERA_POSITION = "camera_position"
-private const val KEY_LOCATION = "location"
+//private const val KEY_CAMERA_POSITION = "camera_position"
+//private const val KEY_LOCATION = "location"
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
     GoogleMap.OnMarkerClickListener {
@@ -95,14 +85,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         checkLocationPermission()
 
         binding.myLocationButton.setOnClickListener {
-
-            val current = LatLng(latiTude, longItude)
             checkLocationPermission()
-            GoogleMap.addMarker(
-                MarkerOptions()
-                    .position(current)
-                    .title("현재위치")
-            )
         }
 
         binding.searchButton.setOnClickListener {
@@ -126,6 +109,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
 
+//           val current = LatLng(latiTude, longItude)
+
         googleMap.setOnCameraIdleListener {
 
             //지도에서 마커 초기화
@@ -135,15 +120,16 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             val position = GoogleMap.cameraPosition.target
             overViewModel.distanceTo(position)
 
-            val current = LatLng(latiTude, longItude)
+//            val current = LatLng(latiTude, longItude)
             googleMap.addCircle(CircleOptions()
-                .center(current)
-                .radius(500.0)
-                .strokeColor(Color.RED)
+                .center(position)
+                .radius(1000.0)
+                .strokeColor(Color.BLACK)
             )
 
             try {
-                if(googleMap.cameraPosition.zoom >= 16){
+                if(googleMap.cameraPosition.zoom >= 15){
+                    Log.d("viewModelTest",  overViewModel.distanceStoreData.value!!.Howlong.toString())
                     for (i in overViewModel.distanceStoreData.value!!.Howlong) {
                         val storeLatLng =
                             LatLng(i.storeGEOPoints.latitude, i.storeGEOPoints.longitude)
@@ -151,7 +137,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                             MarkerOptions()
                                 .position(storeLatLng)
                                 .title(i.storeId)
-                                .snippet(i.storeMenuPictureUrls[0])
+                                .snippet(i.storeMenuPictureUrls.menu[0])
                         )
                     }
                 } else {
@@ -168,44 +154,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         geocoder = Geocoder(mContext, Locale.KOREA)
         adress = geocoder.getFromLocation(latiTude, longItude, 1)
     }
-
-    private fun distanceTo() {
-        val position = GoogleMap.cameraPosition.target
-        val myLocation = listOf<Double>(position.latitude, position.longitude)
-        val requestType = RequestLocationData("How_long", myLocation)
-        TastyWardApi.service.getLocationDistanceTo(requestType)
-            .enqueue(object : Callback<DistanceToData> {
-                override fun onResponse(
-                    call: Call<DistanceToData>,
-                    response: Response<DistanceToData>
-                ) {
-                    if (response.isSuccessful) {
-                        Log.d("LocationDB", position.toString())
-                        for (i in response.body()!!.Howlong) {
-                            Log.d("LocationDB", i.toString())
-                            GoogleMap.addMarker(
-                                MarkerOptions()
-                                    .position(
-                                        LatLng(
-                                            i.storeGEOPoints.latitude,
-                                            i.storeGEOPoints.longitude
-                                        )
-                                    )
-                                    .title(i.storeId)
-                            )
-                        }
-                    } else {
-                        val result: DistanceToData? = response.body()
-                        Log.d("LocationDB", "onResponse 실패 " + result?.toString())
-                    }
-                }
-
-                override fun onFailure(call: Call<DistanceToData>, t: Throwable) {
-                    Log.d("LocationDB", "onFailure 에러 " + t.message.toString())
-                }
-            })
-    }
-
 
 //    private fun totalShopData() {
 //        val tempData = RequestType("whole_stores")
@@ -283,7 +231,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     //지도 처음 띄웠을때 서울로 위치되도록
     private fun setDefaultLocation() {
         val defaultLocation = LatLng(latiTude, longItude)
-        GoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 16f))
+        GoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 15f))
     }
 
     //퍼미션 체크 및 권한 요청 후 현위치로 이동 함수
@@ -304,7 +252,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         latiTude = location.latitude
                         longItude = location.longitude
                         GoogleMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 16f)
+                            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
                         )
                         Log.d(TAG, "$latiTude , $longItude")
                     } else {
@@ -346,10 +294,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         findNavController().navigate(action)
     }
 
-    //마커 클릭시 그쪽으로 확대
+    //마커 클릭시 그쪽으로 확대 멈춤
     override fun onMarkerClick(p0: Marker): Boolean {
         p0.showInfoWindow()
-
         return true
     }
 

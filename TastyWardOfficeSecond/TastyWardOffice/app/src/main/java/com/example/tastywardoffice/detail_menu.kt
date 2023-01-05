@@ -2,7 +2,6 @@ package com.example.tastywardoffice
 
 
 import android.content.Context
-import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -11,22 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.test.core.app.ApplicationProvider
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
-import com.example.tastywardoffice.network.RequestType
-import com.example.tastywardoffice.network.TastyWardApi
-import com.example.tastywardoffice.network.WholeData
-import com.example.tastywardoffice.overview.OverviewViewModel
-import com.example.tastywardoffice.overview.bindImage
-import com.google.android.gms.maps.model.LatLng
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
-
 
 class detail_menu : Fragment() {
 
@@ -34,9 +19,6 @@ class detail_menu : Fragment() {
     private val TAG = "detailFG"
 
     lateinit var mContext: Context
-    lateinit var storepostion : LatLng
-    lateinit var adress: MutableList<Address>
-    lateinit var geocoder: Geocoder
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,34 +35,11 @@ class detail_menu : Fragment() {
 
         val binding = FragmentDetailMenuBinding.inflate(inflater)
 
-        val tempData = RequestType("whole_stores")
-        TastyWardApi.service.getWholeData(tempData).enqueue(object: Callback<WholeData> {
-            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
-                if(response.isSuccessful) {
-                    for(i in response.body()!!.stores) {
-                        if (StoreData.storename == i.storeId) {
-                            Log.d("detailFG", i.storeId + "/" + StoreData.storename + "\n" + i.storeMenuPictureUrls[0])
-                            bindImage(binding.foodImage, i.storeMenuPictureUrls[0])
-                        }
-                    }
-                } else {
-                    Log.d("YMC", "실패입니다")
-                }
-            }
-            override fun onFailure(call: Call<WholeData>, t: Throwable) {
-                Log.d("YMC", "onFailure 에러 " + t.message.toString())
-            }
-        })
+        Log.d(TAG, "\n" + StoreData.storename +"\n" + StoreData.imgUri+ "\n" + StoreData.latlng)
 
-        Log.d(TAG, StoreData.storename)
-
-        storepostion = StoreData.latlng
-        geocoder = Geocoder(mContext, Locale.KOREA)
-        adress = geocoder.getFromLocation(StoreData.latlng.latitude, StoreData.latlng.longitude, 1)
-
-
-        binding.storeName.text = StoreData.storename
-        binding.locationText.text = adress[0].getAddressLine(0)
+        //메인가게 이미지
+        bindImage(binding.foodImage, StoreData.imgUri)
+        binding.foodImage.clipToOutline = true
 
         arguments = Bundle()
 
@@ -111,6 +70,7 @@ class detail_menu : Fragment() {
                 detail_googleMap().apply {
                     arguments = Bundle().apply {
                         putParcelable("LatLng", StoreData.latlng)
+                        putString("storeName", StoreData.storename)
                     }
                 }
             ).commit()
