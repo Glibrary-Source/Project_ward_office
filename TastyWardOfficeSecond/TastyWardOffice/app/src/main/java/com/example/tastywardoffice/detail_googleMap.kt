@@ -54,7 +54,7 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
                     .position(it)
                     .title(arguments?.getString("storeName"))
             }!!
-        )
+        )!!.showInfoWindow()
 
         GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current!!,16f))
 

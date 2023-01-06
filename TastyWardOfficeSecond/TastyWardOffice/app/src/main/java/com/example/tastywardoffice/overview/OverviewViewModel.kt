@@ -16,10 +16,16 @@ enum class TastyApiStatus { LOADING, ERROR, DONE }
 class OverviewViewModel : ViewModel() {
 
     private val _distanceStoreData = MutableLiveData<DistanceToData>()
+    private val _cameraTarget = MutableLiveData<LatLng>()
 
     val distanceStoreData: LiveData<DistanceToData> = _distanceStoreData
+    val cameraTarget: LiveData<LatLng> = _cameraTarget
 
-    fun distanceTo(position: LatLng) {
+    init {
+        saveCameraTarget()
+    }
+
+    fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf<Double>(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
         TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<DistanceToData> {
@@ -37,6 +43,12 @@ class OverviewViewModel : ViewModel() {
             }
         })
     }
+
+    fun saveCameraTarget(position: LatLng = LatLng(37.510402, 126.945915)) {
+        _cameraTarget.value = position
+    }
+
+
 
 }
 

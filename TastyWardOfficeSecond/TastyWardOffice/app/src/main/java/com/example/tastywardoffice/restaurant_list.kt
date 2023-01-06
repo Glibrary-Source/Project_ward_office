@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tastywardoffice.adapter.StoreListAdapter
 import com.example.tastywardoffice.databinding.FragmentRestaurantListBinding
+import com.example.tastywardoffice.datamodel.DistanceToData
 import com.example.tastywardoffice.overview.OverviewViewModel
 
 
@@ -36,17 +37,24 @@ class restaurant_list : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
         val binding = FragmentRestaurantListBinding.inflate(inflater)
 
         binding.photosGrid.setHasFixedSize(true)
 
-//        Log.d("viewModelTest" ,overViewModel.distanceStoreData.value.toString())
+        val myDataset : DistanceToData =
+            try{
+            overViewModel.distanceStoreData.value!!
+            } catch (e: Exception) {
+            DistanceToData(Howlong = listOf())
+            }
 
-        val myDataset = overViewModel.distanceStoreData.value
         val recyclerView = binding.photosGrid
 
-        recyclerView.adapter = StoreListAdapter(mContext, myDataset!!)
+        if(myDataset.Howlong.isEmpty()) {
+            binding.statusImage.setImageResource(R.drawable.emptylist)
+        }
+
+        recyclerView.adapter = StoreListAdapter(mContext, myDataset)
 
         return binding.root
     }
