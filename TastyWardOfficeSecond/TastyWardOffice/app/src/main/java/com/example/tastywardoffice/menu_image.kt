@@ -13,11 +13,6 @@ import com.example.tastywardoffice.databinding.FragmentMenuImageBinding
 
 class menu_image : Fragment() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,7 +20,7 @@ class menu_image : Fragment() {
         val binding = FragmentMenuImageBinding.inflate(inflater)
 
         bindImage(binding.mainMenuImage, arguments?.getString("Url"))
-        binding.mainMenuImage.scaleType = ImageView.ScaleType.FIT_CENTER
+        binding.mainMenuImage.scaleType = ImageView.ScaleType.FIT_XY
         Log.d("testLog", arguments?.getString("Url").toString() )
 
         return binding.root

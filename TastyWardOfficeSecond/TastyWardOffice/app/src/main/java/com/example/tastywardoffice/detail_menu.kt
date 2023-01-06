@@ -2,7 +2,6 @@ package com.example.tastywardoffice
 
 
 import android.content.Context
-import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
+import java.util.*
 
 class detail_menu : Fragment() {
 
@@ -40,6 +40,10 @@ class detail_menu : Fragment() {
         //메인가게 이미지
         bindImage(binding.foodImage, StoreData.imgUri)
         binding.foodImage.clipToOutline = true
+        binding.storeName.text = StoreData.storename
+        val geocoder = Geocoder(mContext, Locale.KOREA)
+        val address = geocoder.getFromLocation(StoreData.latlng.latitude, StoreData.latlng.longitude, 1)
+        binding.locationText.text = address[0].toString()
 
         arguments = Bundle()
 
