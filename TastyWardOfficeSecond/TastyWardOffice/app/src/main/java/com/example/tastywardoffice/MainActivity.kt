@@ -3,24 +3,23 @@ package com.example.tastywardoffice
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.tastywardoffice.databinding.ActivityMainBinding
+import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
-import java.util.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,6 +48,20 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
 
     }
+
+//    private fun replaceFragment(fragment: Fragment) {
+//        val fragmentManager: FragmentManager = supportFragmentManager
+//        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentTransaction.setCustomAnimations(
+//            R.anim.enter_from_right,
+//            R.anim.exit_to_right,
+//            R.anim.enter_from_right,
+//            R.anim.exit_to_right
+//        )
+//        fragmentTransaction.addToBackStack(null)
+//        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
+//        fragmentTransaction.commit()
+//    }
 
     @SuppressLint("MissingPermission")
     private fun checkLocationPermission() {

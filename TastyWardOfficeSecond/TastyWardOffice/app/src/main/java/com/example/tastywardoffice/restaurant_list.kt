@@ -29,7 +29,6 @@ class restaurant_list : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
-
     }
 
     override fun onCreateView(

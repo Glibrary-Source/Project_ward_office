@@ -18,10 +18,14 @@ data class DistanceToData(
     val Howlong : List<LocationItems>
 )
 
+
 data class LocationItems(
     @Expose
     @SerializedName("district")
     val district: String,
+    @Expose
+    @SerializedName("docId")
+    val docId: String,
     @Expose
     @SerializedName("storeCategory")
     val storeCategory: Int,

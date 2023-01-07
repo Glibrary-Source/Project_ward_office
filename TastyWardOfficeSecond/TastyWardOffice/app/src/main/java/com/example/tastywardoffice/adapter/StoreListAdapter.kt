@@ -39,8 +39,8 @@ class StoreListAdapter(private val context: Context, private val dataset: Distan
         holder.itemView.setOnClickListener {
             val action = restaurant_listDirections.actionRestaurantListToDetailMenu3(
                 storename = holder.textView.text.toString(),
-                imgUri = item.storeMenuPictureUrls.menu[0],
-                LatLng(item.storeGEOPoints.latitude, item.storeGEOPoints.longitude)
+                dogId = item.docId,
+                latlng = LatLng(item.storeGEOPoints.latitude, item.storeGEOPoints.longitude)
             )
             holder.itemView.findNavController().navigate(action)
         }

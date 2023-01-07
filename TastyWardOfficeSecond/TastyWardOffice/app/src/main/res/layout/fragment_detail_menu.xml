@@ -27,11 +27,36 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border_imgview"
                 android:contentDescription="TODO"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/food_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <RadioButton
+                    android:id="@+id/first_menu_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <RadioButton
+                    android:id="@+id/second_menu_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <RadioButton
+                    android:id="@+id/third_menu_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/store_name"

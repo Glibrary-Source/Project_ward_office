@@ -25,6 +25,7 @@ class OverviewViewModel : ViewModel() {
         saveCameraTarget()
     }
 
+    //기본위치 서울
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf<Double>(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)

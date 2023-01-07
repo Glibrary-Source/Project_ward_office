@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -62,6 +63,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         Log.d(TAG, "onCreate")
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -99,6 +101,16 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
 
+        //더 괜찮은 현위치
+//        googleMap.isMyLocationEnabled = true
+//
+//        val locationButton = (mView.findViewById<View>(Integer.parseInt("1"))?.parent as View).findViewById<View>(Integer.parseInt("2"))
+//        val rlp =  locationButton.getLayoutParams() as RelativeLayout.LayoutParams
+//        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+//        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+//        rlp.setMargins(0, 0, 30, 30)
+
+
         //이전에 사용자가 보던 위치
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(overViewModel.cameraTarget.value!!, 15f))
 
@@ -115,44 +127,54 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         //지도이동시 다시 storesdata 요청과 함께 요청된 데이터 좌표 마커찍기
         googleMap.setOnCameraIdleListener {
 
+            //옮기고 나서 포커싱이아니라 옮기기전 포커싱이 저장됨
+
             //지도에서 마커 초기화
             googleMap.clear()
+            callback()
 
-            //뷰모델에서 받아온 가게데이터 마커로 표시
-            val position = GoogleMap.cameraPosition.target
-            overViewModel.saveCameraTarget(position)
-            overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
-
-            //범위원 그리기
-            googleMap.addCircle(CircleOptions()
-                .center(position)
-                .radius(1000.0)
-                .strokeColor(Color.BLACK)
-            )
-
-            //1초 뒤에
-            Handler(Looper.getMainLooper()).postDelayed({
-                try {
-                    if(googleMap.cameraPosition.zoom >= 15){
-                        Log.d("viewModelTest",  overViewModel.distanceStoreData.value!!.Howlong.toString())
-                        for (i in overViewModel.distanceStoreData.value!!.Howlong) {
-                            val storeLatLng =
-                                LatLng(i.storeGEOPoints.latitude, i.storeGEOPoints.longitude)
-                            googleMap.addMarker(
-                                MarkerOptions()
-                                    .position(storeLatLng)
-                                    .title(i.storeId)
-                            )
-                        }
-                    } else {
-                        Toast.makeText(mContext, "카메라를 확대해주세요", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    Log.d("viewModelTest", e.toString())
-                }
-            }, 1500)
         }
 
+    }
+
+    private fun callback() {
+        val position = GoogleMap.cameraPosition.target
+        overViewModel.saveCameraTarget(position)
+        overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
+
+        //범위원 그리기
+//        GoogleMap.addCircle(
+//            CircleOptions()
+//                .center(position)
+//                .radius(1000.0)
+//                .strokeColor(Color.BLACK)
+//        )
+
+        second()
+    }
+
+    private fun second() {
+        try {
+            if (GoogleMap.cameraPosition.zoom >= 15) {
+                Log.d(
+                    "viewModelTest",
+                    overViewModel.distanceStoreData.value!!.Howlong.toString()
+                )
+                for (i in overViewModel.distanceStoreData.value!!.Howlong) {
+                    val storeLatLng =
+                        LatLng(i.storeGEOPoints.latitude, i.storeGEOPoints.longitude)
+                    GoogleMap.addMarker(
+                        MarkerOptions()
+                            .position(storeLatLng)
+                            .title(i.storeId)
+                    )
+                }
+            } else {
+                Toast.makeText(mContext, "카메라를 확대해주세요", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Log.d("viewModelTest", e.toString())
+        }
     }
 
     //퍼미션 체크 및 권한 요청 후 현위치로 이동 함수
@@ -209,7 +231,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             for(storedata in overViewModel.distanceStoreData.value!!.Howlong){
                 val storePostion = LatLng(storedata.storeGEOPoints.latitude, storedata.storeGEOPoints.longitude)
                 if(storePostion == p0.position) {
-                    return storedata.storeMenuPictureUrls.menu[0]
+                    return storedata.docId
                 }
             }
             return "아님"

@@ -37,7 +37,7 @@
             android:name="storename"
             app:argType="string" />
         <argument
-            android:name="imgUri"
+            android:name="dogId"
             app:argType="string" />
         <action
             android:id="@+id/action_detail_menu3_to_menu_image3"
