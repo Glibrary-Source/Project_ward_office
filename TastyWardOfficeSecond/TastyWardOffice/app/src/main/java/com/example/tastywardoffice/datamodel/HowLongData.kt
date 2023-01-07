@@ -8,8 +8,8 @@ data class RequestLocationData (
     @SerializedName("type")
     val type: String,
     @Expose
-    @SerializedName("MyGEOPoint")
-    val MyGEOPoint: List<Double>
+    @SerializedName("storeGEOPoints")
+    val storeGEOPoints: List<Double>
 )
 
 data class DistanceToData(
@@ -17,7 +17,6 @@ data class DistanceToData(
     @SerializedName("Howlong")
     val Howlong : List<LocationItems>
 )
-
 
 data class LocationItems(
     @Expose

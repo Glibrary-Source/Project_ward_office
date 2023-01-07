@@ -158,15 +158,15 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             if (GoogleMap.cameraPosition.zoom >= 15) {
                 Log.d(
                     "viewModelTest",
-                    overViewModel.distanceStoreData.value!!.Howlong.toString()
+                    overViewModel.distanceStoreData.value!!.hits.toString()
                 )
-                for (i in overViewModel.distanceStoreData.value!!.Howlong) {
+                for (i in overViewModel.distanceStoreData.value!!.hits) {
                     val storeLatLng =
-                        LatLng(i.storeGEOPoints.latitude, i.storeGEOPoints.longitude)
+                        LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])
                     GoogleMap.addMarker(
                         MarkerOptions()
                             .position(storeLatLng)
-                            .title(i.storeId)
+                            .title(i.document.district)
                     )
                 }
             } else {
@@ -228,10 +228,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     //마커 정보 클릭시 세부 메뉴로 이동
     override fun onInfoWindowClick(p0: Marker) {
         fun findStoreData(): String {
-            for(storedata in overViewModel.distanceStoreData.value!!.Howlong){
-                val storePostion = LatLng(storedata.storeGEOPoints.latitude, storedata.storeGEOPoints.longitude)
+            for(storedata in overViewModel.distanceStoreData.value!!.hits){
+                val storePostion = LatLng(storedata.document.storeGEOPoints[0], storedata.document.storeGEOPoints[1])
                 if(storePostion == p0.position) {
-                    return storedata.docId
+                    return storedata.document.docId
                 }
             }
             return "아님"

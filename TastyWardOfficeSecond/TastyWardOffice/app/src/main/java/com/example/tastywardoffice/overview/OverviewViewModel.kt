@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tastywardoffice.datamodel.DistanceToData
 import com.example.tastywardoffice.datamodel.RequestLocationData
+import com.example.tastywardoffice.datamodel.TestDataModel
 import com.example.tastywardoffice.network.*
 import com.google.android.gms.maps.model.LatLng
 import retrofit2.Callback
@@ -15,10 +16,12 @@ enum class TastyApiStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel : ViewModel() {
 
-    private val _distanceStoreData = MutableLiveData<DistanceToData>()
+//    private val _distanceStoreData = MutableLiveData<DistanceToData>()
+    private val _distanceStoreData = MutableLiveData<TestDataModel>()
     private val _cameraTarget = MutableLiveData<LatLng>()
 
-    val distanceStoreData: LiveData<DistanceToData> = _distanceStoreData
+//    val distanceStoreData: LiveData<DistanceToData> = _distanceStoreData
+    val distanceStoreData: LiveData<TestDataModel> = _distanceStoreData
     val cameraTarget: LiveData<LatLng> = _cameraTarget
 
     init {
@@ -29,17 +32,17 @@ class OverviewViewModel : ViewModel() {
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf<Double>(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
-        TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<DistanceToData> {
-            override fun onResponse(call: retrofit2.Call<DistanceToData>, response: Response<DistanceToData>) {
+        TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<TestDataModel> {
+            override fun onResponse(call: retrofit2.Call<TestDataModel>, response: Response<TestDataModel>) {
                 if (response.isSuccessful) {
                     Log.d("LocationDB", position.toString())
                     _distanceStoreData.value = response.body()
                 } else {
-                    val result: DistanceToData? = response.body()
+                    val result: TestDataModel? = response.body()
                     Log.d("LocationDB", "onResponse 실패 " + result?.toString())
                 }
             }
-            override fun onFailure(call: retrofit2.Call<DistanceToData>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<TestDataModel>, t: Throwable) {
                 Log.d("LocationDB", "onFailure 에러 " + t.message.toString())
             }
         })

@@ -2,6 +2,7 @@ package com.example.tastywardoffice
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.tastywardoffice.adapter.StoreListAdapter
 import com.example.tastywardoffice.databinding.FragmentRestaurantListBinding
 import com.example.tastywardoffice.datamodel.DistanceToData
+import com.example.tastywardoffice.datamodel.Hits
 import com.example.tastywardoffice.overview.OverviewViewModel
 
 
@@ -40,11 +42,12 @@ class restaurant_list : Fragment() {
 
         binding.photosGrid.setHasFixedSize(true)
 
-        val myDataset : DistanceToData =
+        val myDataset : List<Hits> =
             try{
-            overViewModel.distanceStoreData.value!!
+            overViewModel.distanceStoreData.value!!.hits
             } catch (e: Exception) {
-            DistanceToData(Howlong = listOf())
+                Log.d("Tag")
+//            DistanceToData(Howlong = listOf())
             }
 
         val recyclerView = binding.photosGrid
