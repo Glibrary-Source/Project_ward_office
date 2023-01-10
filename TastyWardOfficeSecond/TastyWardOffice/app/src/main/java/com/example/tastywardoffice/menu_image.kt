@@ -21,8 +21,8 @@ class menu_image : Fragment() {
 
         bindImage(binding.mainMenuImage, arguments?.getString("Url"))
         binding.mainMenuImage.scaleType = ImageView.ScaleType.FIT_XY
-        Log.d("testLog", arguments?.getString("Url").toString() )
 
         return binding.root
     }
+
 }

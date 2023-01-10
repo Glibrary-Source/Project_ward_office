@@ -41,11 +41,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val TAG = "MapFragment"
-    private val multiplePermissionCode = 100
-    private val requiredPermissions = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION
-    )
+    //퍼미션 체크
+//    private val multiplePermissionCode = 100
+//    private val requiredPermissions = arrayOf(
+//        Manifest.permission.ACCESS_FINE_LOCATION,
+//        Manifest.permission.ACCESS_COARSE_LOCATION
+//    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,7 +71,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val binding = FragmentGoogleMapBinding.inflate(inflater)
         mView = binding.mapView
         mView.onCreate(savedInstanceState)
@@ -81,14 +81,14 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         //내위치 찍고 그쪽으로 카메라 이동
         binding.myLocationButton.setOnClickListener {
             checkLocationPermission()
-            GoogleMap.moveCamera(
+            GoogleMap.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
             )
         }
 
-        binding.searchButton.setOnClickListener {
-            binding.searchButton.setBackgroundColor(Color.parseColor("#afe3ff"))
-        }
+//        binding.searchButton.setOnClickListener {
+//            binding.searchButton.setBackgroundColor(Color.parseColor("#afe3ff"))
+//        }
 
         return binding.root
     }
@@ -126,12 +126,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //        val b = bitmapdraw.bitmap
 //        val smallMarker = Bitmap.createScaledBitmap(b, 84, 84, false)
 
-
         //지도이동시 다시 storesdata 요청과 함께 요청된 데이터 좌표 마커찍기
         googleMap.setOnCameraIdleListener {
+
+            //현재 포지션 뷰모델 포지션에 저장
             val position = GoogleMap.cameraPosition.target
             overViewModel.saveCameraTarget(position)
-            //옮기고 나서 포커싱이아니라 옮기기전 포커싱이 저장됨
 
             //지도에서 마커 초기화
             googleMap.clear()
@@ -141,7 +141,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         overViewModel.distanceStoreData.observe(this, Observer {
             second()
         })
-
     }
 
     private fun callback() {
@@ -159,6 +158,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     }
 
+    //불러온 distanceStoreData를 마커로 찍어줌
     private fun second() {
         try {
 //            if (GoogleMap.cameraPosition.zoom >= 15) {
@@ -229,6 +229,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //            Toast.makeText(mContext, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
 //            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
 //        }
+
     }
 
     override fun onInfoWindowClick(p0: Marker) {

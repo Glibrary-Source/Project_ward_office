@@ -1,33 +1,28 @@
 package com.example.tastywardoffice
 
-
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
-import com.example.tastywardoffice.datamodel.Documents
 import com.example.tastywardoffice.datamodel.Filterstore
-import com.example.tastywardoffice.datamodel.LocationItems
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
+
 
 class detail_menu : Fragment() {
 
     val StoreData by navArgs<detail_menuArgs>()
     private val TAG = "detailFG"
-
     lateinit var mContext: Context
-
     private lateinit var overViewModel: OverviewViewModel
+    private var shortAnimationDuration: Int = 0
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,13 +44,48 @@ class detail_menu : Fragment() {
         //detailItemData() 함수를 통해 뷰모델어서 뽑아온 스토어 데이터를 변수에 저장
         val storeDetailData = detailItemData()
 
+
         //각각의 뷰에 맞게 데이터를 입력시킨다
         binding.foodImage.clipToOutline = true
+        binding.navBar.clipToOutline = true
         binding.storeName.text = StoreData.storename
-        binding.locationText.text = locationAddress()[0].getAddressLine(0)
+        binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5)
 
-        binding.firstMenuButton.isChecked = true
+        shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
+
+        //메인 메뉴 이미지옆 화살표 누를때 뷰를 변환시킴
         bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+        binding.firstMenuButton.isChecked = true
+        binding.menuImageLeftButton.setOnClickListener{
+            if(binding.firstMenuButton.isChecked) {
+                binding.thirdMenuButton.isChecked = true
+                bindImage(binding.foodImage, "https://i.picsum.photos/id/425/200/200.jpg?hmac=rC9sY_-TCJnYO9XF-5_pnNdcesi3TZCoWRWhlwSNxcw")
+            }
+            else if(binding.secondMenuButton.isChecked) {
+                binding.firstMenuButton.isChecked = true
+                bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+            }
+            else if(binding.thirdMenuButton.isChecked) {
+                binding.secondMenuButton.isChecked = true
+                bindImage(binding.foodImage, "https://i.picsum.photos/id/929/200/200.jpg?hmac=V-NHF1GoUllni1jU8FFUECP1jZUGTYZRxwTT-OkI9Fw")
+            }
+        }
+        binding.menuImageRightButton.setOnClickListener{
+            if(binding.firstMenuButton.isChecked) {
+                binding.secondMenuButton.isChecked = true
+                bindImage(binding.foodImage, "https://i.picsum.photos/id/929/200/200.jpg?hmac=V-NHF1GoUllni1jU8FFUECP1jZUGTYZRxwTT-OkI9Fw")
+            }
+            else if(binding.secondMenuButton.isChecked) {
+                binding.thirdMenuButton.isChecked = true
+                bindImage(binding.foodImage, "https://i.picsum.photos/id/425/200/200.jpg?hmac=rC9sY_-TCJnYO9XF-5_pnNdcesi3TZCoWRWhlwSNxcw")
+            }
+            else if(binding.thirdMenuButton.isChecked) {
+                binding.firstMenuButton.isChecked = true
+                bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+            }
+        }
+
+        //radio 버튼 변화
         binding.firstMenuButton.setOnClickListener {
             bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
         }
@@ -65,6 +95,8 @@ class detail_menu : Fragment() {
         binding.thirdMenuButton.setOnClickListener {
             bindImage(binding.foodImage, "https://i.picsum.photos/id/425/200/200.jpg?hmac=rC9sY_-TCJnYO9XF-5_pnNdcesi3TZCoWRWhlwSNxcw")
         }
+
+
         //네비게이션 프래그먼트 데이터 전달을 위해 번들 사용
         arguments = Bundle()
 
@@ -103,6 +135,7 @@ class detail_menu : Fragment() {
             ).commit()
         }
 
+
         return binding.root
     }
 
@@ -117,6 +150,7 @@ class detail_menu : Fragment() {
         return passingData[0]
     }
 
+
     //주소 텍스트를 위한 코드
     private fun locationAddress(): List<Address> {
         val geocoder = Geocoder(mContext, Locale.KOREA)
@@ -124,5 +158,5 @@ class detail_menu : Fragment() {
         return address
     }
 
-
 }
+

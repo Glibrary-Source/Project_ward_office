@@ -31,7 +31,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars" >
+            </ImageView>
+
+            <ImageButton
+                android:id="@+id/menu_image_leftButton"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                android:background="@drawable/clickbutton"
+                app:layout_constraintStart_toStartOf="@id/food_image"
+                app:layout_constraintTop_toTopOf="@id/food_image"
+                app:layout_constraintBottom_toBottomOf="@id/food_image"/>
+
+            <ImageButton
+                android:id="@+id/menu_image_rightButton"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:background="@drawable/clickbutton"
+                app:layout_constraintEnd_toEndOf="@id/food_image"
+                app:layout_constraintTop_toTopOf="@id/food_image"
+                app:layout_constraintBottom_toBottomOf="@id/food_image"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -124,7 +145,7 @@
             <FrameLayout
                 android:id="@+id/nav_bar"
                 android:layout_width="366dp"
-                android:layout_height="487dp"
+                android:layout_height="361dp"
                 android:background="@drawable/border_imgview"
                 app:layout_constraintStart_toStartOf="@id/food_image"
                 app:layout_constraintTop_toBottomOf="@id/nav_button" />
