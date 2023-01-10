@@ -29,7 +29,7 @@ interface TastyWardApiService {
     @POST("test1")
     fun getLocationDistanceTo(
         @Body data: RequestLocationData
-    ): Call<TestDataModel>
+    ): Call<FinalStoreDataModel>
 }
 
 object TastyWardApi{

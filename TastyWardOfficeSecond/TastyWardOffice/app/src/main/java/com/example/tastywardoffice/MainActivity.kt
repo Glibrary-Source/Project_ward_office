@@ -10,13 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.tastywardoffice.databinding.ActivityMainBinding
-import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -49,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //프래그먼트 교체 애니메이션
 //    private fun replaceFragment(fragment: Fragment) {
 //        val fragmentManager: FragmentManager = supportFragmentManager
 //        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()

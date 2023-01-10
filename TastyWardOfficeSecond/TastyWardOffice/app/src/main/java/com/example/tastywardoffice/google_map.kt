@@ -15,9 +15,11 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
+import com.example.tastywardoffice.datamodel.Documents
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -114,6 +116,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         //이전에 사용자가 보던 위치
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(overViewModel.cameraTarget.value!!, 15f))
 
+
         //클릭 리스너들
         googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
@@ -126,14 +129,18 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         //지도이동시 다시 storesdata 요청과 함께 요청된 데이터 좌표 마커찍기
         googleMap.setOnCameraIdleListener {
-
+            val position = GoogleMap.cameraPosition.target
+            overViewModel.saveCameraTarget(position)
             //옮기고 나서 포커싱이아니라 옮기기전 포커싱이 저장됨
 
             //지도에서 마커 초기화
             googleMap.clear()
             callback()
-
         }
+
+        overViewModel.distanceStoreData.observe(this, Observer {
+            second()
+        })
 
     }
 
@@ -150,32 +157,31 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //                .strokeColor(Color.BLACK)
 //        )
 
-        second()
     }
 
     private fun second() {
         try {
-            if (GoogleMap.cameraPosition.zoom >= 15) {
+//            if (GoogleMap.cameraPosition.zoom >= 15) {
                 Log.d(
                     "viewModelTest",
-                    overViewModel.distanceStoreData.value!!.hits.toString()
-                )
-                for (i in overViewModel.distanceStoreData.value!!.hits) {
+                    overViewModel.distanceStoreData.value!!.Filterstore.toString()                )
+                for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
                     val storeLatLng =
                         LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])
                     GoogleMap.addMarker(
                         MarkerOptions()
                             .position(storeLatLng)
-                            .title(i.document.district)
+                            .title(i.document.storeId)
                     )
                 }
-            } else {
-                Toast.makeText(mContext, "카메라를 확대해주세요", Toast.LENGTH_SHORT).show()
-            }
+//            } else {
+//                Toast.makeText(mContext, "카메라를 확대해주세요", Toast.LENGTH_SHORT).show()
+//            }
         } catch (e: Exception) {
             Log.d("viewModelTest", e.toString())
         }
     }
+
 
     //퍼미션 체크 및 권한 요청 후 현위치로 이동 함수
     @SuppressLint("MissingPermission")
@@ -225,20 +231,11 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //        }
     }
 
-    //마커 정보 클릭시 세부 메뉴로 이동
     override fun onInfoWindowClick(p0: Marker) {
-        fun findStoreData(): String {
-            for(storedata in overViewModel.distanceStoreData.value!!.hits){
-                val storePostion = LatLng(storedata.document.storeGEOPoints[0], storedata.document.storeGEOPoints[1])
-                if(storePostion == p0.position) {
-                    return storedata.document.docId
-                }
-            }
-            return "아님"
-        }
+        overViewModel.findStoreData(p0)
         val action = google_mapDirections.actionGoogleMapToDetailMenu3(
             p0.title.toString(),
-            findStoreData(),
+            overViewModel.markerStoreData.value!!.docId,
             p0.position
         )
         findNavController().navigate(action)

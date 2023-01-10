@@ -3,19 +3,19 @@ package com.example.tastywardoffice.datamodel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class TestDataModel(
+data class FinalStoreDataModel(
     @Expose
-    @SerializedName("hits")
-    val hits: List<Hits>
+    @SerializedName("Filterstore")
+    val Filterstore: List<Filterstore>
 )
 
-data class Hits(
+data class Filterstore(
     @Expose
     @SerializedName("document")
-    val document: Document
+    val document: Documents
 )
 
-data class Document(
+data class Documents(
     @Expose
     @SerializedName("district")
     val district: String,
@@ -45,7 +45,7 @@ data class Document(
     val storeMenuPictureUrlsStore :List<String>,
     @Expose
     @SerializedName("storeMenus")
-    val storeMenus: List<StoreMenus>,
+    val storeMenus: List<StoreMenus1>,
     @Expose
     @SerializedName("storePriceMax")
     val storePriceMax: Int,
@@ -60,7 +60,7 @@ data class Document(
     val storeTitle: String
 )
 
-data class StoreMenus2(
+data class StoreMenus1(
     @Expose
     @SerializedName("menuPrice")
     val menuPrice: Int,

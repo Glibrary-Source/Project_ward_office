@@ -8,14 +8,14 @@ data class RequestLocationData (
     @SerializedName("type")
     val type: String,
     @Expose
-    @SerializedName("storeGEOPoints")
-    val storeGEOPoints: List<Double>
+    @SerializedName("MyGEOPoint")
+    val MyGEOPoint: List<Double>
 )
 
 data class DistanceToData(
     @Expose
-    @SerializedName("Howlong")
-    val Howlong : List<LocationItems>
+    @SerializedName("document")
+    val document : List<LocationItems>
 )
 
 data class LocationItems(
@@ -26,6 +26,9 @@ data class LocationItems(
     @SerializedName("docId")
     val docId: String,
     @Expose
+    @SerializedName("id")
+    val id: String,
+    @Expose
     @SerializedName("storeCategory")
     val storeCategory: Int,
     @Expose
@@ -33,13 +36,19 @@ data class LocationItems(
     val storeCntLikes: Int,
     @Expose
     @SerializedName("storeGEOPoints")
-    val storeGEOPoints: StoreGEOPoints,
+    val storeGEOPoints: List<Double>,
     @Expose
     @SerializedName("storeId")
     val storeId: String,
     @Expose
-    @SerializedName("storeMenuPictureUrls")
-    val storeMenuPictureUrls :StoreMenuPictureUrls,
+    @SerializedName("storeMenuPictureUrls.menu")
+    val storeMenuPictureUrlsMenu :List<String>,
+    @Expose
+    @SerializedName("storeMenuPictureUrls.store")
+    val storeMenuPictureUrlsStore :List<String>,
+    @Expose
+    @SerializedName("storeMenus")
+    val storeMenus: StoreMenus,
     @Expose
     @SerializedName("storePriceMax")
     val storePriceMax: Int,
@@ -54,13 +63,13 @@ data class LocationItems(
     val storeTitle: String
 )
 
-data class StoreMenuPictureUrls(
+data class StoreMenus(
     @Expose
-    @SerializedName("menu")
-    val menu: List<String>,
+    @SerializedName("menuPrice")
+    val menuPrice: Int,
     @Expose
-    @SerializedName("store")
-    val store: List<String>
+    @SerializedName("menuTitle")
+    val menuTitle: String
 )
 
 data class StoreGEOPoints(
