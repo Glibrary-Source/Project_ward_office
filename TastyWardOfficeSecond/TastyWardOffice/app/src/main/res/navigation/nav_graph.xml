@@ -14,7 +14,11 @@
             app:destination="@id/restaurant_list" />
         <action
             android:id="@+id/action_google_map_to_detail_menu3"
-            app:destination="@id/detail_menu3" />
+            app:destination="@id/detail_menu3"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_right"
+            app:popEnterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/restaurant_list"
@@ -26,7 +30,11 @@
             app:destination="@id/google_map" />
         <action
             android:id="@+id/action_restaurant_list_to_detail_menu3"
-            app:destination="@id/detail_menu3" />
+            app:destination="@id/detail_menu3"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_right"
+            app:popEnterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/detail_menu3"
