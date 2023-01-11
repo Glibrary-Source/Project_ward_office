@@ -21,7 +21,7 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
     private lateinit var mView: MapView
     private val TAG = "MapFragment"
 
-    lateinit var GoogleMap: GoogleMap
+    private lateinit var GoogleMap: GoogleMap
 
     private lateinit var overViewModel: OverviewViewModel
 
@@ -33,7 +33,7 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentDetailGoogleMapBinding.inflate(inflater)
         mView = binding.mapView

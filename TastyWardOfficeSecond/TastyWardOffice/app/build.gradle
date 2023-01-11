@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -19,13 +20,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-//        Properties properties = new Properties()
-//
-//        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//        def googleMapApiKey = properties.getProperty('google_map_key')
-//
-//        buildConfigField "String", "GOOGLE_API_KEY", properties['google_map_key']
-//        manifestPlaceholders["googleMapApi"] = googleMapApiKey
     }
 
     buildTypes {
@@ -94,4 +88,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
+
+    //firebase 관련
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-analytics'
 }

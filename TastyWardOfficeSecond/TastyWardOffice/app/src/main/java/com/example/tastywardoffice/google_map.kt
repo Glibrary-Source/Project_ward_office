@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
@@ -26,9 +25,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private var latiTude = 37.510402
     private var longItude = 126.945915
 
-    lateinit var GoogleMap: GoogleMap
-    lateinit var mContext: Context
-
+    private lateinit var GoogleMap: GoogleMap
+    private lateinit var mContext: Context
     private lateinit var overViewModel: OverviewViewModel
     private lateinit var mView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -92,7 +90,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         mView.onStart()
     }
 
-    @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables")
+    @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
 
@@ -131,24 +129,16 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             callback()
         }
 
-        overViewModel.distanceStoreData.observe(this, Observer {
+        overViewModel.distanceStoreData.observe(this) {
             second()
-        })
+        }
     }
 
+    //서버에서 스토어 데이터를 미리 불러옴
     private fun callback() {
         val position = GoogleMap.cameraPosition.target
         overViewModel.saveCameraTarget(position)
         overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
-
-        //범위원 그리기
-//        GoogleMap.addCircle(
-//            CircleOptions()
-//                .center(position)
-//                .radius(1000.0)
-//                .strokeColor(Color.BLACK)
-//        )
-
     }
 
     //불러온 distanceStoreData를 마커로 찍어줌

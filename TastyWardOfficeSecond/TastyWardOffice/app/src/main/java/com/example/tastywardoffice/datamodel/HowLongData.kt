@@ -71,12 +71,3 @@ data class StoreMenus(
     @SerializedName("menuTitle")
     val menuTitle: String
 )
-
-data class StoreGEOPoints(
-    @Expose
-    @SerializedName("latitude")
-    val latitude: Double,
-    @Expose
-    @SerializedName("longitude")
-    val longitude: Double
-)

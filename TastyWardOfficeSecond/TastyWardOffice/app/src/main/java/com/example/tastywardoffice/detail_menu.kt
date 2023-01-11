@@ -17,9 +17,8 @@ import java.util.*
 
 class detail_menu : Fragment() {
 
-    val StoreData by navArgs<detail_menuArgs>()
-    private val TAG = "detailFG"
-    lateinit var mContext: Context
+    private lateinit var mContext: Context
+    private val StoreData by navArgs<detail_menuArgs>()
     private lateinit var overViewModel: OverviewViewModel
     private var shortAnimationDuration: Int = 0
 
@@ -35,7 +34,7 @@ class detail_menu : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentDetailMenuBinding.inflate(inflater)
 
@@ -150,12 +149,10 @@ class detail_menu : Fragment() {
         return passingData[0]
     }
 
-
     //주소 텍스트를 위한 코드
     private fun locationAddress(): List<Address> {
         val geocoder = Geocoder(mContext, Locale.KOREA)
-        val address = geocoder.getFromLocation(StoreData.latlng.latitude,StoreData.latlng.longitude, 1)
-        return address
+        return geocoder.getFromLocation(StoreData.latlng.latitude, StoreData.latlng.longitude, 1)
     }
 
 }

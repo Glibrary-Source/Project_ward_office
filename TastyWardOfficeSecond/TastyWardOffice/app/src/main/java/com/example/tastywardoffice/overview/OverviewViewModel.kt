@@ -5,15 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tastywardoffice.datamodel.*
-import com.example.tastywardoffice.datamodel.StoreGEOPoints
 import com.example.tastywardoffice.network.*
-import com.google.android.gms.common.config.GservicesValue.value
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import retrofit2.Callback
 import retrofit2.Response
-
-enum class TastyApiStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel : ViewModel() {
 
@@ -30,7 +26,7 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
-        val myLocation = listOf<Double>(position.latitude, position.longitude)
+        val myLocation = listOf(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
         TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<FinalStoreDataModel> {
             override fun onResponse(call: retrofit2.Call<FinalStoreDataModel>, response: Response<FinalStoreDataModel>) {

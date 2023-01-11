@@ -1,21 +1,17 @@
 package com.example.tastywardoffice.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tastywardoffice.R
 import com.example.tastywardoffice.bindImage
-import com.example.tastywardoffice.datamodel.DistanceToData
 import com.example.tastywardoffice.datamodel.FinalStoreDataModel
-import com.example.tastywardoffice.overview.OverviewViewModel
 import com.example.tastywardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
 
@@ -34,6 +30,7 @@ class StoreListAdapter(private val context: Context, private val dataset: FinalS
         return ItemViewHolder(adapterLayout)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.Filterstore[position]
         holder.textView.text = item.document.storeId
