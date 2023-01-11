@@ -16,13 +16,16 @@ class OverviewViewModel : ViewModel() {
     private val _distanceStoreData = MutableLiveData<FinalStoreDataModel>()
     private val _cameraTarget = MutableLiveData<LatLng>()
     private val _markerStoreData = MutableLiveData<Documents>()
+    private val _cameraZoom = MutableLiveData<Float>()
 
     val distanceStoreData: LiveData<FinalStoreDataModel> = _distanceStoreData
     val cameraTarget: LiveData<LatLng> = _cameraTarget
     val markerStoreData: LiveData<Documents> = _markerStoreData
+    val cameraZoom: LiveData<Float> = _cameraZoom
 
     init {
         saveCameraTarget()
+        cameraZoomState()
     }
 
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
@@ -61,6 +64,10 @@ class OverviewViewModel : ViewModel() {
             }
         }
         return distanceStoreData.value!!.Filterstore[0].document
+    }
+
+    fun cameraZoomState(zoom: Float = 15f) {
+        _cameraZoom.value = zoom
     }
 
 

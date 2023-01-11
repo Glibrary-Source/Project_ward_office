@@ -38,37 +38,37 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="358dp"
-        android:layout_height="52dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/border_img"
-        android:gravity="center">
+<!--    <LinearLayout-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_width="358dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:background="@drawable/border_img"-->
+<!--        android:gravity="center">-->
 
-        <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:contentDescription="TODO"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_baseline_search_24" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/search_button"-->
+<!--            android:layout_width="17dp"-->
+<!--            android:layout_height="17dp"-->
+<!--            android:contentDescription="TODO"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:src="@drawable/ic_baseline_search_24" />-->
 
-        <EditText
-            android:id="@+id/search_text"
-            android:layout_width="281dp"
-            android:layout_height="48dp"
-            android:background="@null"
-            android:inputType="text" />
+<!--        <EditText-->
+<!--            android:id="@+id/search_text"-->
+<!--            android:layout_width="281dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:background="@null"-->
+<!--            android:inputType="text" />-->
 
-        <ImageButton
-            android:id="@+id/delete_text"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/ic_baseline_close_24" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/delete_text"-->
+<!--            android:layout_width="17dp"-->
+<!--            android:layout_height="17dp"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:src="@drawable/ic_baseline_close_24" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 </FrameLayout>
 
 

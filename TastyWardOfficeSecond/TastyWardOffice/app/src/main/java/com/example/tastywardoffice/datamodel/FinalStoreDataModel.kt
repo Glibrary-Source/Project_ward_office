@@ -23,9 +23,6 @@ data class Documents(
     @SerializedName("docId")
     val docId: String,
     @Expose
-    @SerializedName("id")
-    val id: String,
-    @Expose
     @SerializedName("storeCategory")
     val storeCategory: Int,
     @Expose

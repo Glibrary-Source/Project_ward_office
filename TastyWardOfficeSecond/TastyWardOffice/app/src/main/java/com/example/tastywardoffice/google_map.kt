@@ -5,9 +5,11 @@ import android.content.Context
 import android.location.*
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -103,10 +105,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
 //        rlp.setMargins(0, 0, 30, 30)
 
-
         //이전에 사용자가 보던 위치
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(overViewModel.cameraTarget.value!!, 15f))
-
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(overViewModel.cameraTarget.value!!, overViewModel.cameraZoom.value!!))
 
         //클릭 리스너들
         googleMap.setOnInfoWindowClickListener(this)
@@ -120,10 +120,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         //지도이동시 다시 storesdata 요청과 함께 요청된 데이터 좌표 마커찍기
         googleMap.setOnCameraIdleListener {
 
-            //현재 포지션 뷰모델 포지션에 저장
-            val position = GoogleMap.cameraPosition.target
-            overViewModel.saveCameraTarget(position)
-
             //지도에서 마커 초기화
             googleMap.clear()
             callback()
@@ -131,12 +127,20 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         overViewModel.distanceStoreData.observe(this) {
             second()
+            if(overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
+                val simpleToast = Toast.makeText(mContext,"이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
+                simpleToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+                simpleToast.show()
+            }
+
         }
+
     }
 
     //서버에서 스토어 데이터를 미리 불러옴
     private fun callback() {
         val position = GoogleMap.cameraPosition.target
+        overViewModel.cameraZoomState(GoogleMap.cameraPosition.zoom)
         overViewModel.saveCameraTarget(position)
         overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
     }
@@ -147,7 +151,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //            if (GoogleMap.cameraPosition.zoom >= 15) {
                 Log.d(
                     "viewModelTest",
-                    overViewModel.distanceStoreData.value!!.Filterstore.toString()                )
+                    overViewModel.distanceStoreData.value!!.Filterstore.size.toString()                )
                 for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
                     val storeLatLng =
                         LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])

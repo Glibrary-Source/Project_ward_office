@@ -53,46 +53,100 @@ class detail_menu : Fragment() {
         shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
 
         //메인 메뉴 이미지옆 화살표 누를때 뷰를 변환시킴
-        bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+        try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[1]) }
+        catch (e: Exception) {
+            binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+        }
         binding.firstMenuButton.isChecked = true
         binding.menuImageLeftButton.setOnClickListener{
             if(binding.firstMenuButton.isChecked) {
                 binding.thirdMenuButton.isChecked = true
-                bindImage(binding.foodImage, "https://i.picsum.photos/id/425/200/200.jpg?hmac=rC9sY_-TCJnYO9XF-5_pnNdcesi3TZCoWRWhlwSNxcw")
+                try{
+                    bindImage(
+                        binding.foodImage,
+                        storeDetailData.document.storeMenuPictureUrlsMenu[3]
+                    )
+                } catch (e: Exception) {
+                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                }
             }
             else if(binding.secondMenuButton.isChecked) {
                 binding.firstMenuButton.isChecked = true
-                bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+                try {
+                    bindImage(
+                        binding.foodImage,
+                        storeDetailData.document.storeMenuPictureUrlsMenu[1]
+                    )
+                } catch (e: Exception) {
+                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                }
             }
             else if(binding.thirdMenuButton.isChecked) {
                 binding.secondMenuButton.isChecked = true
-                bindImage(binding.foodImage, "https://i.picsum.photos/id/929/200/200.jpg?hmac=V-NHF1GoUllni1jU8FFUECP1jZUGTYZRxwTT-OkI9Fw")
+                try{
+                    bindImage(
+                        binding.foodImage,
+                        storeDetailData.document.storeMenuPictureUrlsMenu[2]
+                    )
+                } catch (e: Exception) {
+                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                }
             }
         }
         binding.menuImageRightButton.setOnClickListener{
             if(binding.firstMenuButton.isChecked) {
                 binding.secondMenuButton.isChecked = true
-                bindImage(binding.foodImage, "https://i.picsum.photos/id/929/200/200.jpg?hmac=V-NHF1GoUllni1jU8FFUECP1jZUGTYZRxwTT-OkI9Fw")
+                try{
+                    bindImage(
+                        binding.foodImage,
+                        storeDetailData.document.storeMenuPictureUrlsMenu[2]
+                    )
+                } catch (e: Exception) {
+                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                }
             }
             else if(binding.secondMenuButton.isChecked) {
                 binding.thirdMenuButton.isChecked = true
-                bindImage(binding.foodImage, "https://i.picsum.photos/id/425/200/200.jpg?hmac=rC9sY_-TCJnYO9XF-5_pnNdcesi3TZCoWRWhlwSNxcw")
+                try{
+                    bindImage(
+                        binding.foodImage,
+                        storeDetailData.document.storeMenuPictureUrlsMenu[3]
+                    )
+                }catch (e: Exception) {
+                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                }
             }
             else if(binding.thirdMenuButton.isChecked) {
                 binding.firstMenuButton.isChecked = true
-                bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+                try {
+                    bindImage(
+                        binding.foodImage,
+                        storeDetailData.document.storeMenuPictureUrlsMenu[1]
+                    )
+                } catch (e: Exception) {
+                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                }
             }
         }
 
         //radio 버튼 변화
         binding.firstMenuButton.setOnClickListener {
-            bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[0])
+            try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[1]) }
+            catch (e: Exception) {
+                binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+            }
         }
         binding.secondMenuButton.setOnClickListener {
-            bindImage(binding.foodImage, "https://i.picsum.photos/id/929/200/200.jpg?hmac=V-NHF1GoUllni1jU8FFUECP1jZUGTYZRxwTT-OkI9Fw")
+            try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[2]) }
+            catch (e: Exception) {
+                binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+            }
         }
         binding.thirdMenuButton.setOnClickListener {
-            bindImage(binding.foodImage, "https://i.picsum.photos/id/425/200/200.jpg?hmac=rC9sY_-TCJnYO9XF-5_pnNdcesi3TZCoWRWhlwSNxcw")
+            try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[3]) }
+            catch (e: Exception) {
+                binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
+            }
         }
 
 
