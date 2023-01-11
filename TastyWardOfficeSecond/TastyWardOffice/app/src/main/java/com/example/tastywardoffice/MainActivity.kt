@@ -1,6 +1,5 @@
 package com.example.tastywardoffice
 
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -10,8 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.example.tastywardoffice.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -41,24 +40,30 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         checkLocationPermission()
 
-        binding.bottomNavigation.setupWithNavController(navController)
+        val options = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setEnterAnim(R.anim.enter_from_right)
+            .setExitAnim(R.anim.exit_to_right)
+            .setPopEnterAnim(R.anim.enter_from_right)
+            .setPopExitAnim(R.anim.exit_to_right)
+            .setPopUpTo(navController.graph.startDestination, false)
+            .build()
+
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.google_map -> {
+                    navController.navigate(R.id.google_map, null, options)
+                }
+                R.id.restaurant_list -> {
+                    navController.navigate(R.id.restaurant_list, null, options)
+                }
+            }
+            true
+        }
+
+//        binding.bottomNavigation.setupWithNavController(navController)
 
     }
-
-    //프래그먼트 교체 애니메이션
-//    private fun replaceFragment(fragment: Fragment) {
-//        val fragmentManager: FragmentManager = supportFragmentManager
-//        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.setCustomAnimations(
-//            R.anim.enter_from_right,
-//            R.anim.exit_to_right,
-//            R.anim.enter_from_right,
-//            R.anim.exit_to_right
-//        )
-//        fragmentTransaction.addToBackStack(null)
-//        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-//        fragmentTransaction.commit()
-//    }
 
     @SuppressLint("MissingPermission")
     private fun checkLocationPermission() {
