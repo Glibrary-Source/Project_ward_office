@@ -25,6 +25,9 @@ data class Items(
     @SerializedName("storeCntLikes")
     val storeCntLikes: Int,
     @Expose
+    @SerializedName("docId")
+    val docId: String,
+    @Expose
     @SerializedName("storeGEOPoints")
     val storeGEOPoints: StoreGEOPoints,
     @Expose

@@ -1,6 +1,7 @@
 package com.example.tastywardoffice
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Context
 import android.location.*
 import android.os.Bundle
@@ -14,11 +15,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
+import com.example.tastywardoffice.network.*
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
@@ -59,7 +64,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         Log.d(TAG, "onCreate")
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,10 +82,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
             )
         }
-
-//        binding.searchButton.setOnClickListener {
-//            binding.searchButton.setBackgroundColor(Color.parseColor("#afe3ff"))
-//        }
 
         return binding.root
     }
@@ -129,11 +129,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             second()
             if(overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
                 val simpleToast = Toast.makeText(mContext,"이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
-                simpleToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+                simpleToast.setGravity(Gravity.CENTER, 0, 0)
                 simpleToast.show()
             }
 
         }
+//        totalShopData()
 
     }
 
@@ -221,6 +222,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     override fun onInfoWindowClick(p0: Marker) {
         overViewModel.findStoreData(p0)
+        Log.d("MarkerTest", overViewModel.markerStoreData.value!!.docId)
         val action = google_mapDirections.actionGoogleMapToDetailMenu3(
             p0.title.toString(),
             overViewModel.markerStoreData.value!!.docId,
@@ -271,20 +273,24 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //        TastyWardApi.service.getWholeData(tempData).enqueue(object : Callback<WholeData> {
 //            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
 //                if (response.isSuccessful) {
-//                    Log.d("wholedata", response.body()!!.toString())
-//                    for (i in response.body()!!.stores) {
-//                        GoogleMap.addMarker(
-//                            MarkerOptions()
-//                                .position(
-//                                    LatLng(
-//                                        i.storeGEOPoints.latitude,
-//                                        i.storeGEOPoints.longitude
-//                                    )
-//                                )
-//                                .title(i.storeId)
-//                                .snippet("성공입니다")
-//                        )?.showInfoWindow()
+//                    val storeGeoList = mutableListOf<StoreGEOPoints>()
+//                    for(i in response.body()!!.stores) {
+//                        storeGeoList.add(i.storeGEOPoints)
 //                    }
+//                    val storeGGo = mutableListOf<StoreGEOPoints>()
+//                    for(i in storeGeoList) {
+//                        if(storeGeoList.count{it == i} >= 2) {
+//                            storeGGo.add(i)
+//                        }
+//                    }
+//                    val docId = mutableListOf<String>()
+//                    for(i in response.body()!!.stores) {
+//                        if(storeGGo.contains(i.storeGEOPoints)) {
+//                            docId.add(i.docId)
+//                        }
+//                    }
+//                    Log.d("countTo", docId.toString())
+//
 //                } else {
 //                    val result: WholeData? = response.body()
 //                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
