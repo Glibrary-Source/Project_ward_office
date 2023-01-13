@@ -1,7 +1,6 @@
 package com.example.tastywardoffice
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.Context
 import android.location.*
 import android.os.Bundle
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
+import com.example.tastywardoffice.datamodel.LocationDetailData
 import com.example.tastywardoffice.network.*
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
@@ -134,8 +135,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             }
 
         }
-//        totalShopData()
-
     }
 
     //서버에서 스토어 데이터를 미리 불러옴
@@ -291,6 +290,21 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //                    }
 //                    Log.d("countTo", docId.toString())
 //
+//                    val geocoder = Geocoder(mContext, Locale.KOREA)
+//
+//                    geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1)
+//                    Log.d("storeCheck", geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1).toString())
+//                    for(i in response.body()!!.stores) {
+//                        if(geocoder.getFromLocation(
+//                            i.storeGEOPoints.latitude,
+//                            i.storeGEOPoints.longitude,
+//                            1
+//                        ).size == 0) {
+//                            Log.d("storeCheck", i.docId)
+//                        }
+//                    }
+//
+//
 //                } else {
 //                    val result: WholeData? = response.body()
 //                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
@@ -303,6 +317,22 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //        })
 //    }
 
+//    private fun locationTestApi() {
+//        TastyWardApi2.service.getDetailLocation("37.5258883,126.8942541","AIzaSyBQvcrcZtRZb-fXeYqvVzmiGf3QDLiLoVY","ko").enqueue(object : Callback<LocationDetailData> {
+//            override fun onResponse(call: Call<LocationDetailData>, response: Response<LocationDetailData>) {
+//                if (response.isSuccessful) {
+//                    Log.d("detailLocation", "onResponse 성공 " + response.body()!!.results[0].formatted_address)
+//                } else {
+//                    val result: LocationDetailData? = response.body()
+//                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<LocationDetailData>, t: Throwable) {
+//                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
+//            }
+//        })
+//    }
 
     //데이터 불러오기
 //    private fun aroundShop() {

@@ -25,7 +25,8 @@
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/image_2"
             tools:layout_editor_absoluteX="194dp"
-            tools:layout_editor_absoluteY="15dp" />
+            tools:layout_editor_absoluteY="15dp"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/navbar_title"

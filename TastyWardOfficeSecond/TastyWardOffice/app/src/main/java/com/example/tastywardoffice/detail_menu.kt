@@ -44,11 +44,21 @@ class detail_menu : Fragment() {
         val storeDetailData = detailItemData()
 
 
-        //각각의 뷰에 맞게 데이터를 입력시킨다
+        //각각의 뷰 모양 둥글게
         binding.foodImage.clipToOutline = true
         binding.navBar.clipToOutline = true
+
+        //각각의 뷰에 데이터 입력
         binding.storeName.text = StoreData.storename
-        binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5)
+
+        //상세주소 만약 geocode getlocation 있으면 상세주소 하고 없으면 api 웹에서 요청하자
+        try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
+        catch (e: Exception) {
+            overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
+        }
+        overViewModel.locationDetail.observe(viewLifecycleOwner) {
+            binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
+        }
 
         shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
 
@@ -57,6 +67,7 @@ class detail_menu : Fragment() {
         catch (e: Exception) {
             binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
         }
+
         binding.firstMenuButton.isChecked = true
         binding.menuImageLeftButton.setOnClickListener{
             if(binding.firstMenuButton.isChecked) {

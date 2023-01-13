@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.tastywardoffice.BuildConfig.MAPS_API_KEY
 import com.example.tastywardoffice.datamodel.*
 import com.example.tastywardoffice.network.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -17,12 +19,13 @@ class OverviewViewModel : ViewModel() {
     private val _cameraTarget = MutableLiveData<LatLng>()
     private val _markerStoreData = MutableLiveData<Documents>()
     private val _cameraZoom = MutableLiveData<Float>()
+    private val _locationDetail = MutableLiveData<String>()
 
     val distanceStoreData: LiveData<FinalStoreDataModel> = _distanceStoreData
     val cameraTarget: LiveData<LatLng> = _cameraTarget
     val markerStoreData: LiveData<Documents> = _markerStoreData
     val cameraZoom: LiveData<Float> = _cameraZoom
-
+    val locationDetail: LiveData<String> = _locationDetail
     init {
         saveCameraTarget()
         cameraZoomState()
@@ -70,6 +73,22 @@ class OverviewViewModel : ViewModel() {
         _cameraZoom.value = zoom
     }
 
+    fun locationTestApi(location: String) {
+        val key = MAPS_API_KEY
+        TastyWardApi2.service.getDetailLocation(location,key,"ko").enqueue(object : Callback<LocationDetailData> {
+            override fun onResponse(call: Call<LocationDetailData>, response: Response<LocationDetailData>) {
+                if (response.isSuccessful) {
+                    _locationDetail.value = response.body()!!.results[0].formatted_address
+                } else {
+                    val result: LocationDetailData? = response.body()
+                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
+                }
+            }
+            override fun onFailure(call: Call<LocationDetailData>, t: Throwable) {
+                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
+            }
+        })
+    }
 
 
 }

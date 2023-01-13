@@ -9,4 +9,5 @@
     <string name="map_button">지도</string>
     <string name="review_button">댓글</string>
     <string name="location">테헤란로</string>
+    <string name="locationLoss">세부 주소가 없습니다.</string>
 </resources>
