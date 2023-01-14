@@ -267,55 +267,57 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         super.onDestroy()
     }
 
-//    private fun totalShopData() {
-//        val tempData = RequestType("whole_stores")
-//        TastyWardApi.service.getWholeData(tempData).enqueue(object : Callback<WholeData> {
-//            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
-//                if (response.isSuccessful) {
-//                    val storeGeoList = mutableListOf<StoreGEOPoints>()
-//                    for(i in response.body()!!.stores) {
-//                        storeGeoList.add(i.storeGEOPoints)
-//                    }
-//                    val storeGGo = mutableListOf<StoreGEOPoints>()
-//                    for(i in storeGeoList) {
-//                        if(storeGeoList.count{it == i} >= 2) {
-//                            storeGGo.add(i)
-//                        }
-//                    }
-//                    val docId = mutableListOf<String>()
-//                    for(i in response.body()!!.stores) {
-//                        if(storeGGo.contains(i.storeGEOPoints)) {
-//                            docId.add(i.docId)
-//                        }
-//                    }
-//                    Log.d("countTo", docId.toString())
-//
-//                    val geocoder = Geocoder(mContext, Locale.KOREA)
-//
-//                    geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1)
-//                    Log.d("storeCheck", geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1).toString())
-//                    for(i in response.body()!!.stores) {
-//                        if(geocoder.getFromLocation(
-//                            i.storeGEOPoints.latitude,
-//                            i.storeGEOPoints.longitude,
-//                            1
-//                        ).size == 0) {
-//                            Log.d("storeCheck", i.docId)
-//                        }
-//                    }
-//
-//
-//                } else {
-//                    val result: WholeData? = response.body()
-//                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<WholeData>, t: Throwable) {
-//                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
-//            }
-//        })
-//    }
+    private fun totalShopData() {
+        val tempData = RequestType("whole_stores")
+        TastyWardApi.service.getWholeData(tempData).enqueue(object : Callback<WholeData> {
+            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
+                if (response.isSuccessful) {
+
+                    //겹쳐있는 지오포인트 확인해준다.
+                    val storeGeoList = mutableListOf<StoreGEOPoints>()
+                    for(i in response.body()!!.stores) {
+                        storeGeoList.add(i.storeGEOPoints)
+                    }
+                    val storeGGo = mutableListOf<StoreGEOPoints>()
+                    for(i in storeGeoList) {
+                        if(storeGeoList.count{it == i} >= 2) {
+                            storeGGo.add(i)
+                        }
+                    }
+                    val docId = mutableListOf<String>()
+                    for(i in response.body()!!.stores) {
+                        if(storeGGo.contains(i.storeGEOPoints)) {
+                            docId.add(i.docId)
+                        }
+                    }
+                    Log.d("countTo", docId.toString())
+
+                    //지오포인트 로케이션리스트 비어있는거 확인해줌
+                    val geocoder = Geocoder(mContext, Locale.KOREA)
+                    geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1)
+                    Log.d("storeCheck", geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1).toString())
+                    for(i in response.body()!!.stores) {
+                        if(geocoder.getFromLocation(
+                            i.storeGEOPoints.latitude,
+                            i.storeGEOPoints.longitude,
+                            1
+                        ).size == 0) {
+                            Log.d("storeCheck", i.docId)
+                        }
+                    }
+
+
+                } else {
+                    val result: WholeData? = response.body()
+                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<WholeData>, t: Throwable) {
+                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
+            }
+        })
+    }
 
 //    private fun locationTestApi() {
 //        TastyWardApi2.service.getDetailLocation("37.5258883,126.8942541","AIzaSyBQvcrcZtRZb-fXeYqvVzmiGf3QDLiLoVY","ko").enqueue(object : Callback<LocationDetailData> {
