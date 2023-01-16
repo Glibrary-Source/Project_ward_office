@@ -4,14 +4,19 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.example.tastywardoffice.adapter.DetailMenuAdapter
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
 import com.example.tastywardoffice.datamodel.Filterstore
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
 
 
@@ -20,8 +25,6 @@ class detail_menu : Fragment() {
     private lateinit var mContext: Context
     private val StoreData by navArgs<detail_menuArgs>()
     private lateinit var overViewModel: OverviewViewModel
-    private var shortAnimationDuration: Int = 0
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,22 +39,66 @@ class detail_menu : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        //디테일 메뉴 프래그먼트 바인딩
         val binding = FragmentDetailMenuBinding.inflate(inflater)
 
+        //뷰모델 바인딩
         overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
 
         //detailItemData() 함수를 통해 뷰모델어서 뽑아온 스토어 데이터를 변수에 저장
         val storeDetailData = detailItemData()
 
-
         //각각의 뷰 모양 둥글게
-        binding.foodImage.clipToOutline = true
         binding.navBar.clipToOutline = true
+        binding.viewPager2.clipToOutline = true
 
         //각각의 뷰에 데이터 입력
         binding.storeName.text = StoreData.storename
 
-        //상세주소 만약 geocode getlocation 있으면 상세주소 하고 없으면 api 웹에서 요청하자
+        //뷰페이저 슬라이드 넘기기
+        binding.viewPager2.adapter = DetailMenuAdapter(mContext, storeDetailData.document)
+        binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            var currentState = 0
+            var currentPos = 0
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                //주의 리스트사이즈 0일때
+                var pictureListSize = 4
+                pictureListSize = if(storeDetailData.document.storeMenuPictureUrlsMenu.isEmpty()) {
+                    3
+                } else {
+                    storeDetailData.document.storeMenuPictureUrlsMenu.size
+                }
+                if(currentState == ViewPager2.SCROLL_STATE_DRAGGING && currentPos == position) {
+                    if(currentPos == 0) binding.viewPager2.currentItem = pictureListSize-1
+                    else if(currentPos == pictureListSize-1)binding.viewPager2.currentItem = 0
+                }
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            override fun onPageSelected(position: Int) {
+                currentPos = position
+                super.onPageSelected(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                currentState = state
+                super.onPageScrollStateChanged(state)
+            }
+        })
+
+        //디테일 메뉴 인디케이터 설정
+        val tabLayout = binding.tabLayout
+        TabLayoutMediator(tabLayout, binding.viewPager2) {tab,position ->
+        }.attach()
+
+
+        //상세주소 만약 geocode getlocation 있으면 상세주소 Text뷰에 없으면 api 웹에서 요청하자
         try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
         catch (e: Exception) {
             overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
@@ -59,107 +106,6 @@ class detail_menu : Fragment() {
         overViewModel.locationDetail.observe(viewLifecycleOwner) {
             binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
         }
-
-        shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
-
-        //메인 메뉴 이미지옆 화살표 누를때 뷰를 변환시킴
-        try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[1]) }
-        catch (e: Exception) {
-            binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-        }
-
-        binding.firstMenuButton.isChecked = true
-        binding.menuImageLeftButton.setOnClickListener{
-            if(binding.firstMenuButton.isChecked) {
-                binding.thirdMenuButton.isChecked = true
-                try{
-                    bindImage(
-                        binding.foodImage,
-                        storeDetailData.document.storeMenuPictureUrlsMenu[3]
-                    )
-                } catch (e: Exception) {
-                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                }
-            }
-            else if(binding.secondMenuButton.isChecked) {
-                binding.firstMenuButton.isChecked = true
-                try {
-                    bindImage(
-                        binding.foodImage,
-                        storeDetailData.document.storeMenuPictureUrlsMenu[1]
-                    )
-                } catch (e: Exception) {
-                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                }
-            }
-            else if(binding.thirdMenuButton.isChecked) {
-                binding.secondMenuButton.isChecked = true
-                try{
-                    bindImage(
-                        binding.foodImage,
-                        storeDetailData.document.storeMenuPictureUrlsMenu[2]
-                    )
-                } catch (e: Exception) {
-                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                }
-            }
-        }
-        binding.menuImageRightButton.setOnClickListener{
-            if(binding.firstMenuButton.isChecked) {
-                binding.secondMenuButton.isChecked = true
-                try{
-                    bindImage(
-                        binding.foodImage,
-                        storeDetailData.document.storeMenuPictureUrlsMenu[2]
-                    )
-                } catch (e: Exception) {
-                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                }
-            }
-            else if(binding.secondMenuButton.isChecked) {
-                binding.thirdMenuButton.isChecked = true
-                try{
-                    bindImage(
-                        binding.foodImage,
-                        storeDetailData.document.storeMenuPictureUrlsMenu[3]
-                    )
-                }catch (e: Exception) {
-                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                }
-            }
-            else if(binding.thirdMenuButton.isChecked) {
-                binding.firstMenuButton.isChecked = true
-                try {
-                    bindImage(
-                        binding.foodImage,
-                        storeDetailData.document.storeMenuPictureUrlsMenu[1]
-                    )
-                } catch (e: Exception) {
-                    binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                }
-            }
-        }
-
-        //radio 버튼 변화
-        binding.firstMenuButton.setOnClickListener {
-            try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[1]) }
-            catch (e: Exception) {
-                binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-            }
-        }
-        binding.secondMenuButton.setOnClickListener {
-            try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[2]) }
-            catch (e: Exception) {
-                binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-            }
-        }
-        binding.thirdMenuButton.setOnClickListener {
-            try{ bindImage(binding.foodImage, storeDetailData.document.storeMenuPictureUrlsMenu[3]) }
-            catch (e: Exception) {
-                binding.foodImage.setImageResource(R.drawable.ic_baseline_broken_image_24)
-            }
-        }
-
 
         //네비게이션 프래그먼트 데이터 전달을 위해 번들 사용
         arguments = Bundle()
@@ -198,7 +144,6 @@ class detail_menu : Fragment() {
                 }
             ).commit()
         }
-
 
         return binding.root
     }

@@ -20,64 +20,26 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/food_image"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
                 android:layout_width="366dp"
                 android:layout_height="361dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border_imgview"
-                android:contentDescription="TODO"
-                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" >
-            </ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/menu_image_leftButton"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                android:background="@drawable/clickbutton"
-                app:layout_constraintStart_toStartOf="@id/food_image"
-                app:layout_constraintTop_toTopOf="@id/food_image"
-                app:layout_constraintBottom_toBottomOf="@id/food_image"/>
-
-            <ImageButton
-                android:id="@+id/menu_image_rightButton"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:background="@drawable/clickbutton"
-                app:layout_constraintEnd_toEndOf="@id/food_image"
-                app:layout_constraintTop_toTopOf="@id/food_image"
-                app:layout_constraintBottom_toBottomOf="@id/food_image"/>
-
-            <RadioGroup
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/food_image"
+                app:tabIndicatorColor="@color/white"
+                app:tabBackground="@drawable/tab_selector"
+                app:layout_constraintTop_toBottomOf="@id/viewPager2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <RadioButton
-                    android:id="@+id/first_menu_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-
-                <RadioButton
-                    android:id="@+id/second_menu_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-
-                <RadioButton
-                    android:id="@+id/third_menu_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-
-            </RadioGroup>
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/store_name"
@@ -86,8 +48,8 @@
                 android:layout_marginTop="46dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/food_image"
-                app:layout_constraintTop_toBottomOf="@id/food_image"
+                app:layout_constraintStart_toStartOf="@id/viewPager2"
+                app:layout_constraintTop_toBottomOf="@id/viewPager2"
                 tools:text="돌쇠와 석쇠" />
 
             <TextView
@@ -100,22 +62,14 @@
                 app:layout_constraintTop_toBottomOf="@id/store_name"
                 tools:text="대한민국 서울특별시 동작구 노량진동1동123-43" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="54dp"
-                app:layout_constraintEnd_toEndOf="@id/food_image"
-                app:layout_constraintTop_toBottomOf="@id/food_image"
-                tools:srcCompat="@drawable/bottomnavfirst" />
-
             <LinearLayout
                 android:id="@+id/nav_button"
                 android:layout_width="366dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="130dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/food_image"
-                app:layout_constraintTop_toBottomOf="@id/food_image">
+                app:layout_constraintStart_toStartOf="@id/viewPager2"
+                app:layout_constraintTop_toBottomOf="@id/viewPager2">
 
                 <Button
                     android:id="@+id/menu_button"
@@ -147,7 +101,7 @@
                 android:layout_width="366dp"
                 android:layout_height="361dp"
                 android:background="@drawable/border_imgview"
-                app:layout_constraintStart_toStartOf="@id/food_image"
+                app:layout_constraintStart_toStartOf="@id/viewPager2"
                 app:layout_constraintTop_toBottomOf="@id/nav_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

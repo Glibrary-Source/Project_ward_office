@@ -2,6 +2,8 @@ package com.example.tastywardoffice
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.*
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
@@ -69,6 +72,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val binding = FragmentGoogleMapBinding.inflate(inflater)
         mView = binding.mapView
         mView.onCreate(savedInstanceState)
@@ -80,7 +84,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         binding.myLocationButton.setOnClickListener {
             checkLocationPermission()
             GoogleMap.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(latiTude, longItude),
+                    GoogleMap.cameraPosition.zoom
+                )
             )
         }
 
@@ -107,16 +114,16 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //        rlp.setMargins(0, 0, 30, 30)
 
         //이전에 사용자가 보던 위치
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(overViewModel.cameraTarget.value!!, overViewModel.cameraZoom.value!!))
+        googleMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                overViewModel.cameraTarget.value!!,
+                overViewModel.cameraZoom.value!!
+            )
+        )
 
         //클릭 리스너들
         googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
-
-        //마커 이미지 변경
-//        val bitmapdraw = resources.getDrawable(R.drawable.ic_mark_image, null) as BitmapDrawable
-//        val b = bitmapdraw.bitmap
-//        val smallMarker = Bitmap.createScaledBitmap(b, 84, 84, false)
 
         //지도이동시 다시 storesdata 요청과 함께 요청된 데이터 좌표 마커찍기
         googleMap.setOnCameraIdleListener {
@@ -128,8 +135,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         overViewModel.distanceStoreData.observe(this) {
             second()
-            if(overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
-                val simpleToast = Toast.makeText(mContext,"이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
+            if (overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
+                val simpleToast =
+                    Toast.makeText(mContext, "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
                 simpleToast.setGravity(Gravity.CENTER, 0, 0)
                 simpleToast.show()
             }
@@ -146,24 +154,36 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     }
 
     //불러온 distanceStoreData를 마커로 찍어줌
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun second() {
         try {
-//            if (GoogleMap.cameraPosition.zoom >= 15) {
-                Log.d(
-                    "viewModelTest",
-                    overViewModel.distanceStoreData.value!!.Filterstore.size.toString()                )
-                for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
-                    val storeLatLng =
-                        LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])
-                    GoogleMap.addMarker(
-                        MarkerOptions()
-                            .position(storeLatLng)
-                            .title(i.document.storeId)
-                    )
-                }
-//            } else {
-//                Toast.makeText(mContext, "카메라를 확대해주세요", Toast.LENGTH_SHORT).show()
-//            }
+            Log.d(
+                "viewModelTest",
+                overViewModel.distanceStoreData.value!!.Filterstore.size.toString()
+            )
+            for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
+                val storeLatLng =
+                    LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])
+                val storeDrawable =
+                    when (i.document.storeTitle) {
+                        "일식" -> R.drawable.marker_icons_food_sushi
+                        "중식" -> R.drawable.marker_icons_food_china
+                        "한식" -> R.drawable.marker_icons_food_korean
+                        "분식" -> R.drawable.marker_icons_food_kimbap
+                        "카페" -> R.drawable.marker_icons_food_coffee
+                        else -> R.drawable.marker_icons_food_sushi
+                    }
+                //마커 이미지 변경
+                val bitmapdraw = resources.getDrawable(storeDrawable, null) as BitmapDrawable
+                val b = bitmapdraw.bitmap
+                val smallMarker = Bitmap.createScaledBitmap(b, 84, 84, false)
+                GoogleMap.addMarker(
+                    MarkerOptions()
+                        .position(storeLatLng)
+                        .title(i.document.storeId)
+                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                )
+            }
         } catch (e: Exception) {
             Log.d("viewModelTest", e.toString())
         }
@@ -182,16 +202,16 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //            ) == PackageManager.PERMISSION_GRANTED
 //        ) {
 //            Log.d(TAG, "위치 허가 완료")
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    if (location != null) {
-                        latiTude = location.latitude
-                        longItude = location.longitude
-                        Log.d(TAG, "$latiTude , $longItude")
-                    } else {
-                        Log.d(TAG, "fail")
-                    }
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    latiTude = location.latitude
+                    longItude = location.longitude
+                    Log.d(TAG, "$latiTude , $longItude")
+                } else {
+                    Log.d(TAG, "fail")
                 }
+            }
 //        } else {
 //            val rejectedPermissionList = ArrayList<String>()
 //
@@ -267,57 +287,57 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         super.onDestroy()
     }
 
-    private fun totalShopData() {
-        val tempData = RequestType("whole_stores")
-        TastyWardApi.service.getWholeData(tempData).enqueue(object : Callback<WholeData> {
-            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
-                if (response.isSuccessful) {
-
-                    //겹쳐있는 지오포인트 확인해준다.
-                    val storeGeoList = mutableListOf<StoreGEOPoints>()
-                    for(i in response.body()!!.stores) {
-                        storeGeoList.add(i.storeGEOPoints)
-                    }
-                    val storeGGo = mutableListOf<StoreGEOPoints>()
-                    for(i in storeGeoList) {
-                        if(storeGeoList.count{it == i} >= 2) {
-                            storeGGo.add(i)
-                        }
-                    }
-                    val docId = mutableListOf<String>()
-                    for(i in response.body()!!.stores) {
-                        if(storeGGo.contains(i.storeGEOPoints)) {
-                            docId.add(i.docId)
-                        }
-                    }
-                    Log.d("countTo", docId.toString())
-
-                    //지오포인트 로케이션리스트 비어있는거 확인해줌
-                    val geocoder = Geocoder(mContext, Locale.KOREA)
-                    geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1)
-                    Log.d("storeCheck", geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1).toString())
-                    for(i in response.body()!!.stores) {
-                        if(geocoder.getFromLocation(
-                            i.storeGEOPoints.latitude,
-                            i.storeGEOPoints.longitude,
-                            1
-                        ).size == 0) {
-                            Log.d("storeCheck", i.docId)
-                        }
-                    }
-
-
-                } else {
-                    val result: WholeData? = response.body()
-                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
-                }
-            }
-
-            override fun onFailure(call: Call<WholeData>, t: Throwable) {
-                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
-            }
-        })
-    }
+//    private fun totalShopData() {
+//        val tempData = RequestType("whole_stores")
+//        TastyWardApi.service.getWholeData(tempData).enqueue(object : Callback<WholeData> {
+//            override fun onResponse(call: Call<WholeData>, response: Response<WholeData>) {
+//                if (response.isSuccessful) {
+//
+//                    //겹쳐있는 지오포인트 확인해준다.
+//                    val storeGeoList = mutableListOf<StoreGEOPoints>()
+//                    for(i in response.body()!!.stores) {
+//                        storeGeoList.add(i.storeGEOPoints)
+//                    }
+//                    val storeGGo = mutableListOf<StoreGEOPoints>()
+//                    for(i in storeGeoList) {
+//                        if(storeGeoList.count{it == i} >= 2) {
+//                            storeGGo.add(i)
+//                        }
+//                    }
+//                    val docId = mutableListOf<String>()
+//                    for(i in response.body()!!.stores) {
+//                        if(storeGGo.contains(i.storeGEOPoints)) {
+//                            docId.add(i.docId)
+//                        }
+//                    }
+//                    Log.d("countTo", docId.toString())
+//
+//                    //지오포인트 로케이션리스트 비어있는거 확인해줌
+//                    val geocoder = Geocoder(mContext, Locale.KOREA)
+//                    geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1)
+//                    Log.d("storeCheck", geocoder.getFromLocationName("서울특별시 영등포구 당산동3가 416번지", 1).toString())
+//                    for(i in response.body()!!.stores) {
+//                        if(geocoder.getFromLocation(
+//                            i.storeGEOPoints.latitude,
+//                            i.storeGEOPoints.longitude,
+//                            1
+//                        ).size == 0) {
+//                            Log.d("storeCheck", i.docId)
+//                        }
+//                    }
+//
+//
+//                } else {
+//                    val result: WholeData? = response.body()
+//                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<WholeData>, t: Throwable) {
+//                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
+//            }
+//        })
+//    }
 
 //    private fun locationTestApi() {
 //        TastyWardApi2.service.getDetailLocation("37.5258883,126.8942541","AIzaSyBQvcrcZtRZb-fXeYqvVzmiGf3QDLiLoVY","ko").enqueue(object : Callback<LocationDetailData> {
