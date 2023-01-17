@@ -8,6 +8,9 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     compileSdk 32
 
@@ -23,6 +26,10 @@ android {
     }
 
     buildTypes {
+        //ci/cd 조심
+        debug {
+            buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -44,6 +51,10 @@ android {
     }
 
 }
+
+
+
+
 
 dependencies {
     def lifecycle_version = "2.4.0"

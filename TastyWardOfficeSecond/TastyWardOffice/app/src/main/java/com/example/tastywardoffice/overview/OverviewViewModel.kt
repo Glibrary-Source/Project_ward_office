@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.tastywardoffice.BuildConfig
 import com.example.tastywardoffice.BuildConfig.MAPS_API_KEY
 import com.example.tastywardoffice.datamodel.*
 import com.example.tastywardoffice.network.*
@@ -77,14 +78,18 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun locationTestApi(location: String) {
-        val key = MAPS_API_KEY
+        val key = BuildConfig.MAPS_DETAIL_LOCATION_KEY
         TastyWardApi2.service.getDetailLocation(location,key,"ko").enqueue(object : Callback<LocationDetailData> {
             override fun onResponse(call: Call<LocationDetailData>, response: Response<LocationDetailData>) {
-                if (response.isSuccessful) {
-                    _locationDetail.value = response.body()!!.results[0].formatted_address
-                } else {
-                    val result: LocationDetailData? = response.body()
-                    Log.d("wholedata", "onResponse 실패 " + result?.toString())
+                try{
+                    if (response.isSuccessful) {
+                        _locationDetail.value = response.body()!!.results[0].formatted_address
+                    } else {
+                        val result: LocationDetailData? = response.body()
+                        Log.d("wholedata", "onResponse 실패 " + result?.toString())
+                    }
+                }catch (e: Exception) {
+                    Log.d("detailLocationTest", e.message.toString() + location)
                 }
             }
             override fun onFailure(call: Call<LocationDetailData>, t: Throwable) {

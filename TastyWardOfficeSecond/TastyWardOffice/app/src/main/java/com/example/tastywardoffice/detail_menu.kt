@@ -95,7 +95,6 @@ class detail_menu : Fragment() {
         TabLayoutMediator(tabLayout, binding.viewPager2) {tab,position ->
         }.attach()
 
-
         //상세주소 만약 geocode getlocation 있으면 상세주소 Text뷰에 없으면 api 웹에서 요청하자
         try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
         catch (e: Exception) {
