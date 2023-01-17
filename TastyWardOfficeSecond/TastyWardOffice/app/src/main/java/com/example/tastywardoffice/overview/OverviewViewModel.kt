@@ -20,15 +20,18 @@ class OverviewViewModel : ViewModel() {
     private val _markerStoreData = MutableLiveData<Documents>()
     private val _cameraZoom = MutableLiveData<Float>()
     private val _locationDetail = MutableLiveData<String>()
+    private val _filterState = MutableLiveData<String>()
 
     val distanceStoreData: LiveData<FinalStoreDataModel> = _distanceStoreData
     val cameraTarget: LiveData<LatLng> = _cameraTarget
     val markerStoreData: LiveData<Documents> = _markerStoreData
     val cameraZoom: LiveData<Float> = _cameraZoom
     val locationDetail: LiveData<String> = _locationDetail
+    val filterState: LiveData<String> = _filterState
     init {
         saveCameraTarget()
         cameraZoomState()
+        changeFilterState()
     }
 
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
@@ -88,6 +91,10 @@ class OverviewViewModel : ViewModel() {
                 Log.d("wholedata", "onFailure 에러 " + t.message.toString())
             }
         })
+    }
+
+    fun changeFilterState(filterState : String = "all") {
+        _filterState.value = filterState
     }
 
 

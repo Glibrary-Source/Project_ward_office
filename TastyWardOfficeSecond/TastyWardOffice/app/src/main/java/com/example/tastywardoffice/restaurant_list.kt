@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tastywardoffice.adapter.StoreListAdapter
 import com.example.tastywardoffice.databinding.FragmentRestaurantListBinding
+import com.example.tastywardoffice.datamodel.Filterstore
 import com.example.tastywardoffice.datamodel.FinalStoreDataModel
 import com.example.tastywardoffice.overview.OverviewViewModel
 
@@ -51,8 +52,19 @@ class restaurant_list : Fragment() {
         if(myDataset.Filterstore.isEmpty()) {
             binding.statusImage.setImageResource(R.drawable.emptylist)
         }
+        val filterDocument = mutableListOf<Filterstore>()
+        val filterDataset = FinalStoreDataModel(filterDocument)
 
-        recyclerView.adapter = StoreListAdapter(mContext, myDataset)
+        if(overViewModel.filterState.value != "all"){
+            for (i in myDataset.Filterstore) {
+                if (i.document.storeTitle == overViewModel.filterState.value) {
+                    filterDocument.add(i)
+                }
+            }
+            recyclerView.adapter = StoreListAdapter(mContext, filterDataset)
+        } else {
+            recyclerView.adapter = StoreListAdapter(mContext, myDataset)
+        }
 
         return binding.root
     }

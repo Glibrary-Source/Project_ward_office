@@ -4,12 +4,10 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tastywardoffice.adapter.DetailMenuAdapter
 import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding

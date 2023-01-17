@@ -15,23 +15,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.tastywardoffice.data.WardOfficeGeo
 import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
-import com.example.tastywardoffice.datamodel.LocationDetailData
-import com.example.tastywardoffice.network.*
 import com.example.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
-import kotlin.collections.HashMap
-
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
-    GoogleMap.OnMarkerClickListener {
+    GoogleMap.OnMarkerClickListener, View.OnClickListener {
 
     private var latiTude = 37.510402
     private var longItude = 126.945915
@@ -41,8 +34,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var overViewModel: OverviewViewModel
     private lateinit var mView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var binding: FragmentGoogleMapBinding
 
     private val TAG = "MapFragment"
+    private val locationGeoData = WardOfficeGeo()
     //퍼미션 체크
 //    private val multiplePermissionCode = 100
 //    private val requiredPermissions = arrayOf(
@@ -73,11 +68,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentGoogleMapBinding.inflate(inflater)
+        binding = FragmentGoogleMapBinding.inflate(inflater)
         mView = binding.mapView
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
 
+        //내위치 확인
         checkLocationPermission()
 
         //내위치 찍고 그쪽으로 카메라 이동
@@ -92,12 +88,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         }
 
         return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-        mView.onStart()
     }
 
     @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables", "PotentialBehaviorOverride")
@@ -157,35 +147,91 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun second() {
         try {
-            Log.d(
-                "viewModelTest",
-                overViewModel.distanceStoreData.value!!.Filterstore.size.toString()
-            )
             for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
                 val storeLatLng =
                     LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])
+
+                //마커 이미지 변경
                 val storeDrawable =
                     when (i.document.storeTitle) {
-                        "일식" -> R.drawable.marker_icons_food_sushi
-                        "중식" -> R.drawable.marker_icons_food_china
-                        "한식" -> R.drawable.marker_icons_food_korean
-                        "분식" -> R.drawable.marker_icons_food_kimbap
-                        "카페" -> R.drawable.marker_icons_food_coffee
+                        getString(R.string.japan) -> {
+                            R.drawable.marker_icons_food_sushi
+                        }
+                        getString(R.string.chines) -> R.drawable.marker_icons_food_china
+                        getString(R.string.korean) -> R.drawable.marker_icons_food_korean
+                        getString(R.string.kimbap) -> R.drawable.marker_icons_food_kimbap
+                        getString(R.string.cafe) -> R.drawable.marker_icons_food_coffee
                         else -> R.drawable.marker_icons_food_sushi
                     }
-                //마커 이미지 변경
-                val bitmapdraw = resources.getDrawable(storeDrawable, null) as BitmapDrawable
-                val b = bitmapdraw.bitmap
+                val bitMapDraw =
+                    resources.getDrawable(storeDrawable, null) as BitmapDrawable
+                val b = bitMapDraw.bitmap
                 val smallMarker = Bitmap.createScaledBitmap(b, 84, 84, false)
-                GoogleMap.addMarker(
-                    MarkerOptions()
-                        .position(storeLatLng)
-                        .title(i.document.storeId)
-                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                )
+
+                //지도에 마커 작성
+                when (overViewModel.filterState.value) {
+                    getString(R.string.korean) -> {
+                        if (i.document.storeTitle == getString(R.string.korean)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.japan) -> {
+                        if (i.document.storeTitle == getString(R.string.japan)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.chines) -> {
+                        if (i.document.storeTitle == getString(R.string.chines)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.kimbap) -> {
+                        if (i.document.storeTitle == getString(R.string.kimbap)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.cafe) -> {
+                        if (i.document.storeTitle == getString(R.string.cafe)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    else -> {
+                        GoogleMap.addMarker(
+                            MarkerOptions()
+                                .position(storeLatLng)
+                                .title(i.document.storeId)
+                                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                        )
+                    }
+                }
             }
         } catch (e: Exception) {
-            Log.d("viewModelTest", e.toString())
+            Toast.makeText(mContext, "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -236,7 +282,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 //            Toast.makeText(mContext, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
 //            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
 //        }
-
     }
 
     override fun onInfoWindowClick(p0: Marker) {
@@ -285,6 +330,419 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         mView.onDestroy()
         Log.d(TAG, "onDestroy")
         super.onDestroy()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart")
+        //
+        binding.filterWardOfficeButton.setOnClickListener(this)
+        binding.titleButton.setOnClickListener(this)
+
+        //메뉴 필터
+        binding.filterButtonKorean.setOnClickListener(this)
+        binding.filterButtonJapan.setOnClickListener(this)
+        binding.filterButtonChina.setOnClickListener(this)
+        binding.filterButtonCafe.setOnClickListener(this)
+        binding.filterButtonKimbap.setOnClickListener(this)
+        binding.filterButtonAll.setOnClickListener(this)
+
+        //지역 필터
+        binding.filterButtonGangnam.setOnClickListener(this)
+        binding.filterButtonGandong.setOnClickListener(this)
+        binding.filterButtonGangbuk.setOnClickListener(this)
+        binding.filterButtonGangseo.setOnClickListener(this)
+        binding.filterButtonGwanak.setOnClickListener(this)
+        binding.filterButtonGwangjin.setOnClickListener(this)
+        binding.filterButtonGuro.setOnClickListener(this)
+        binding.filterButtonGeuncheon.setOnClickListener(this)
+        binding.filterButtonNowon.setOnClickListener(this)
+        binding.filterButtonDobong.setOnClickListener(this)
+        binding.filterButtonDdm.setOnClickListener(this)
+        binding.filterButtonDongjak.setOnClickListener(this)
+        binding.filterButtonMapo.setOnClickListener(this)
+        binding.filterButtonSdm.setOnClickListener(this)
+        binding.filterButtonSeocho.setOnClickListener(this)
+        binding.filterButtonSd.setOnClickListener(this)
+        binding.filterButtonSb.setOnClickListener(this)
+        binding.filterButtonSongpa.setOnClickListener(this)
+        binding.filterButtonYangcheon.setOnClickListener(this)
+        binding.filterButtonYdp.setOnClickListener(this)
+        binding.filterButtonYongsan.setOnClickListener(this)
+        binding.filterButtonEp.setOnClickListener(this)
+        binding.filterButtonJongno.setOnClickListener(this)
+        binding.filterButtonJunggu.setOnClickListener(this)
+        binding.filterButtonJungnang.setOnClickListener(this)
+
+        mView.onStart()
+    }
+
+    //필터 클릭리스너
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.filter_button_all -> {
+                overViewModel.changeFilterState(getString(R.string.all))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_korean -> {
+                overViewModel.changeFilterState(getString(R.string.korean))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_china -> {
+                overViewModel.changeFilterState(getString(R.string.chines))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_japan -> {
+                overViewModel.changeFilterState(getString(R.string.japan))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_kimbap -> {
+                overViewModel.changeFilterState(getString(R.string.kimbap))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_cafe -> {
+                overViewModel.changeFilterState(getString(R.string.cafe))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.title_button -> {
+                if (binding.layoutExpand.visibility == View.VISIBLE) {
+                    binding.layoutExpand.visibility = View.GONE
+
+                    //메뉴 클릭시 지역 필터 레이아웃 끄기
+                    binding.layoutExpand2.visibility = View.GONE
+                    binding.layoutExpand3.visibility = View.GONE
+                    binding.total.visibility = View.GONE
+
+                    binding.imgMore1.animate().setDuration(200)
+                } else {
+                    binding.layoutExpand.visibility = View.VISIBLE
+
+                    //메뉴 클릭시 지역 필터 레이아웃 끄기
+                    binding.layoutExpand2.visibility = View.GONE
+                    binding.layoutExpand3.visibility = View.GONE
+                    binding.total.visibility = View.GONE
+
+                    binding.imgMore1.animate().setDuration(200).rotation(0f)
+                }
+            }
+            R.id.filter_ward_office_button -> {
+                if (binding.layoutExpand2.visibility == View.VISIBLE &&
+                    binding.layoutExpand3.visibility == View.VISIBLE &&
+                    binding.total.visibility == View.VISIBLE
+                ) {
+                    binding.layoutExpand2.visibility = View.GONE
+                    binding.layoutExpand3.visibility = View.GONE
+                    binding.total.visibility = View.GONE
+
+                    //지역 클릭시 메뉴 필터 레이아웃 끄기
+                    binding.layoutExpand.visibility = View.GONE
+
+                    binding.imgMore1.animate().setDuration(200)
+                } else {
+                    binding.layoutExpand2.visibility = View.VISIBLE
+                    binding.layoutExpand3.visibility = View.VISIBLE
+                    binding.total.visibility = View.VISIBLE
+
+                    //지역 클릭시 메뉴 필터 레이아웃 끄기
+                    binding.layoutExpand.visibility = View.GONE
+
+                    binding.imgMore1.animate().setDuration(200).rotation(0f)
+                }
+            }
+            R.id.filter_button_gangnam -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.gangnam)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_gandong -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.gangdong)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_gangbuk -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.gangbuk)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_gangseo -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.gangseo)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_gwanak -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.gwanak)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_gwangjin -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.gwangjin)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_guro -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.guro)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_geuncheon -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.geumcheon)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_nowon -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.nowon)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_dobong -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.dobong)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_ddm -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.ddm)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_dongjak -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.dongjak)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_mapo -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.mapo)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_sdm -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.sdm)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_seocho -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.seocho)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_sd -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.sd)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_sb -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.sb)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_songpa -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.songpa)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_yangcheon -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.yangcheon)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_ydp -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.ydp)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_yongsan -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.yongsan)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_ep -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.ep)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_jongno -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.jongno)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_junggu -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.junggu)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            R.id.filter_button_jungnang -> {
+                GoogleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        locationGeoData.getWardGeo(
+                            getString(R.string.jungnang)
+                        ), 15f
+                    )
+                )
+                binding.layoutExpand2.visibility = View.GONE
+                binding.layoutExpand3.visibility = View.GONE
+            }
+            else -> {
+                overViewModel.changeFilterState(getString(R.string.cafe))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+        }
     }
 
 //    private fun totalShopData() {
