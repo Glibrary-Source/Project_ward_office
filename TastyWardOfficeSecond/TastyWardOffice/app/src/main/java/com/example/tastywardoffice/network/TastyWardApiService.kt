@@ -15,7 +15,6 @@ private const val BASE_URL =
 private const val GOOGLEGEO_URL =
     "https://maps.googleapis.com/maps/api/geocode/"
 
-//https://maps.googleapis.com/maps/api/geocode/json?latlng=37.5258883,126.8942541&key=AIzaSyBQvcrcZtRZb-fXeYqvVzmiGf3QDLiLoVY
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
     .baseUrl(BASE_URL)

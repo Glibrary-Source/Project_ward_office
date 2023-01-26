@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val TAG = "MainActivityTest"
     private val multiplePermissionCode = 100
     private val requiredPermissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -61,8 +60,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-//        binding.bottomNavigation.setupWithNavController(navController)
-
     }
 
     @SuppressLint("MissingPermission")
@@ -75,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-                Log.d(TAG, "위치 허가 완료")
+
         } else {
             val rejectedPermissionList = ArrayList<String>()
 
@@ -100,6 +97,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 }
 
 

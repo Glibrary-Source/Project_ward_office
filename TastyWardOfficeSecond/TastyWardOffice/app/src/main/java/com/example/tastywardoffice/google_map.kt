@@ -1,7 +1,10 @@
 package com.example.tastywardoffice
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.*
@@ -12,6 +15,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -36,14 +41,14 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: FragmentGoogleMapBinding
 
-    private val TAG = "MapFragment"
     private val locationGeoData = WardOfficeGeo()
-    //퍼미션 체크
-//    private val multiplePermissionCode = 100
-//    private val requiredPermissions = arrayOf(
-//        Manifest.permission.ACCESS_FINE_LOCATION,
-//        Manifest.permission.ACCESS_COARSE_LOCATION
-//    )
+
+    //    퍼미션 체크
+    private val multiplePermissionCode = 100
+    private val requiredPermissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,7 +56,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         if (context is MainActivity) {
             mContext = context
         }
-        Log.d(TAG, "onAttach")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +64,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
         overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
 
-        Log.d(TAG, "onCreate")
     }
 
     override fun onCreateView(
@@ -94,15 +97,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
 
-        //더 괜찮은 현위치
-//        googleMap.isMyLocationEnabled = true
-//
-//        val locationButton = (mView.findViewById<View>(Integer.parseInt("1"))?.parent as View).findViewById<View>(Integer.parseInt("2"))
-//        val rlp =  locationButton.getLayoutParams() as RelativeLayout.LayoutParams
-//        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
-//        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
-//        rlp.setMargins(0, 0, 30, 30)
-
         //이전에 사용자가 보던 위치
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
@@ -131,7 +125,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 simpleToast.setGravity(Gravity.CENTER, 0, 0)
                 simpleToast.show()
             }
-
         }
     }
 
@@ -239,49 +232,45 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     //퍼미션 체크 및 권한 요청 후 현위치로 이동 함수
     @SuppressLint("MissingPermission")
     private fun checkLocationPermission() {
-//        if (ActivityCompat.checkSelfPermission(
-//                mContext,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                mContext,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ) == PackageManager.PERMISSION_GRANTED
-//        ) {
-//            Log.d(TAG, "위치 허가 완료")
+        if (ActivityCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     latiTude = location.latitude
                     longItude = location.longitude
-                    Log.d(TAG, "$latiTude , $longItude")
-                } else {
-                    Log.d(TAG, "fail")
                 }
             }
-//        } else {
-//            val rejectedPermissionList = ArrayList<String>()
-//
-//            for (permission in requiredPermissions) {
-//                if (ContextCompat.checkSelfPermission(
-//                        mContext,
-//                        permission
-//                    ) != PackageManager.PERMISSION_GRANTED
-//                ) {
-//                    rejectedPermissionList.add(permission)
-//                }
-//            }
-//
-//            if (rejectedPermissionList.isNotEmpty()) {
-//                val array = arrayOfNulls<String>(rejectedPermissionList.size)
-//                ActivityCompat.requestPermissions(
-//                    mContext as Activity,
-//                    rejectedPermissionList.toArray(array),
-//                    multiplePermissionCode
-//                )
-//            }
-//            Toast.makeText(mContext, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
-//            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
-//        }
+        } else {
+            val rejectedPermissionList = ArrayList<String>()
+
+            for (permission in requiredPermissions) {
+                if (ContextCompat.checkSelfPermission(
+                        mContext,
+                        permission
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    rejectedPermissionList.add(permission)
+                }
+            }
+
+            if (rejectedPermissionList.isNotEmpty()) {
+                val array = arrayOfNulls<String>(rejectedPermissionList.size)
+                ActivityCompat.requestPermissions(
+                    mContext as Activity,
+                    rejectedPermissionList.toArray(array),
+                    multiplePermissionCode
+                )
+            }
+            Toast.makeText(mContext, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
+            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
+        }
     }
 
     override fun onInfoWindowClick(p0: Marker) {
@@ -303,39 +292,33 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume")
         mView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause")
         mView.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop")
-
         mView.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        Log.d(TAG, "onLowMemory")
         mView.onLowMemory()
     }
 
     override fun onDestroy() {
         mView.onDestroy()
-        Log.d(TAG, "onDestroy")
         super.onDestroy()
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart")
-        //
+
+        //메뉴, 지역 필터 버튼
         binding.filterWardOfficeButton.setOnClickListener(this)
         binding.titleButton.setOnClickListener(this)
 
@@ -425,7 +408,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     binding.layoutExpand3.visibility = View.GONE
                     binding.total.visibility = View.GONE
 
-                    binding.imgMore1.animate().setDuration(200)
+                    binding.imgMore1.animate().duration = 200
                 } else {
                     binding.layoutExpand.visibility = View.VISIBLE
 
@@ -434,7 +417,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     binding.layoutExpand3.visibility = View.GONE
                     binding.total.visibility = View.GONE
 
-                    binding.imgMore1.animate().setDuration(200).rotation(0f)
+                    binding.imgMore1.animate().duration = 200
                 }
             }
             R.id.filter_ward_office_button -> {
@@ -449,7 +432,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     //지역 클릭시 메뉴 필터 레이아웃 끄기
                     binding.layoutExpand.visibility = View.GONE
 
-                    binding.imgMore1.animate().setDuration(200)
+                    binding.imgMore1.animate().duration = 200
                 } else {
                     binding.layoutExpand2.visibility = View.VISIBLE
                     binding.layoutExpand3.visibility = View.VISIBLE
@@ -458,7 +441,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     //지역 클릭시 메뉴 필터 레이아웃 끄기
                     binding.layoutExpand.visibility = View.GONE
 
-                    binding.imgMore1.animate().setDuration(200).rotation(0f)
+                    binding.imgMore1.animate().duration = 200
                 }
             }
             R.id.filter_button_gangnam -> {

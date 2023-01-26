@@ -29,12 +29,14 @@ class OverviewViewModel : ViewModel() {
     val cameraZoom: LiveData<Float> = _cameraZoom
     val locationDetail: LiveData<String> = _locationDetail
     val filterState: LiveData<String> = _filterState
+
     init {
         saveCameraTarget()
         cameraZoomState()
         changeFilterState()
     }
 
+    //거리별 음식점 마커 불러오는 매서드
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
@@ -54,10 +56,17 @@ class OverviewViewModel : ViewModel() {
         })
     }
 
+    //현재시점 지도 포지션 저장하는 매서드
     fun saveCameraTarget(position: LatLng = LatLng(37.510402, 126.945915)) {
         _cameraTarget.value = position
     }
 
+    //사용자가 사용중이던 지도의 카메라 줌상태를 저장함
+    fun cameraZoomState(zoom: Float = 15f) {
+        _cameraZoom.value = zoom
+    }
+
+    //현재 마커 기준으로 서버에서 받아온 스토어 데이터를 찾아주는 메서드
     fun findStoreData(p0 : Marker): Documents {
         val passingData = distanceStoreData.value!!.Filterstore
         for (storedata in passingData) {
@@ -73,10 +82,7 @@ class OverviewViewModel : ViewModel() {
         return distanceStoreData.value!!.Filterstore[0].document
     }
 
-    fun cameraZoomState(zoom: Float = 15f) {
-        _cameraZoom.value = zoom
-    }
-
+    //위치데이터를 받아올수 있는지 시험하는 매서드
     fun locationTestApi(location: String) {
         val key = BuildConfig.MAPS_DETAIL_LOCATION_KEY
         TastyWardApi2.service.getDetailLocation(location,key,"ko").enqueue(object : Callback<LocationDetailData> {
@@ -98,21 +104,10 @@ class OverviewViewModel : ViewModel() {
         })
     }
 
+    //필터 상태를 저장하는 매서드
     fun changeFilterState(filterState : String = "all") {
         _filterState.value = filterState
     }
 
-
 }
 
-
-//데이터 개수 또는 조건문을 통한 데이터 개수 제한
-//    fun filterMenu() {
-//        val testMutableList = mutableListOf<TastyPhoto>()
-//        for(value in _photos.value!!){
-//            if (value.id.toInt() <= 424909) {
-//                testMutableList.add(value)
-//            }
-//        }
-//        _photos.value = testMutableList
-//    }

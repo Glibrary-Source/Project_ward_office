@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tastywardoffice.R
 import com.example.tastywardoffice.bindImage
 import com.example.tastywardoffice.datamodel.Documents
-import com.example.tastywardoffice.datamodel.FinalStoreDataModel
-import com.example.tastywardoffice.restaurant_listDirections
-
 
 class DetailMenuAdapter(private val context: Context, private val dataset: Documents
 ): RecyclerView.Adapter<DetailMenuAdapter.ItemViewHolder>() {

@@ -44,7 +44,7 @@
             android:layout_margin="0.6dp"
             android:scaleType="centerCrop"
             android:clipToOutline="true"
-            android:background="@drawable/border_list_imgview"
+            android:background="@drawable/border_greed_item_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

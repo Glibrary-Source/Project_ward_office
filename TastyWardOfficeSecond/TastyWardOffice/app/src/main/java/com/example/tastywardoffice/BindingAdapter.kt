@@ -5,7 +5,6 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import coil.load
 
-
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {

@@ -19,10 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class detail_googleMap : Fragment(), OnMapReadyCallback {
 
     private lateinit var mView: MapView
-    private val TAG = "MapFragment"
-
     private lateinit var GoogleMap: GoogleMap
-
     private lateinit var overViewModel: OverviewViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,39 +59,32 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart")
         mView.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume")
         mView.onResume()
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop")
         mView.onStop()
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause")
         mView.onPause()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        Log.d(TAG, "onLowMemory")
         mView.onLowMemory()
     }
 
     override fun onDestroy() {
         mView.onDestroy()
-        Log.d(TAG, "onDestroy")
         super.onDestroy()
     }
-
 
 }
