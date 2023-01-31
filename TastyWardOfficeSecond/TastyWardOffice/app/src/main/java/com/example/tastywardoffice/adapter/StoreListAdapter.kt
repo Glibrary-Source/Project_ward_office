@@ -14,7 +14,6 @@ import com.example.tastywardoffice.bindImage
 import com.example.tastywardoffice.datamodel.FinalStoreDataModel
 import com.example.tastywardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
-import org.w3c.dom.Text
 
 class StoreListAdapter(private val context: Context, private val dataset: FinalStoreDataModel
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
@@ -23,7 +22,6 @@ class StoreListAdapter(private val context: Context, private val dataset: FinalS
         val storeTextView : TextView = view.findViewById(R.id.name_store)
         val menuImage : ImageView = view.findViewById(R.id.menu_image)
         val priceAverage : TextView = view.findViewById(R.id.price_average)
-        val likeTextView : TextView = view.findViewById(R.id.like_count)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -36,7 +34,6 @@ class StoreListAdapter(private val context: Context, private val dataset: FinalS
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.Filterstore[position]
         holder.storeTextView.text = item.document.storeId
-        holder.likeTextView.text = item.document.storeCntLikes.toString()
         bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0])
         holder.priceAverage.text = "${item.document.storePriceMin}원~${item.document.storePriceMax}원"
         holder.menuImage.clipToOutline = true

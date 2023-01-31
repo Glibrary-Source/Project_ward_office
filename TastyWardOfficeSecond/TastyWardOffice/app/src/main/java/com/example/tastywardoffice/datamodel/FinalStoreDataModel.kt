@@ -3,6 +3,15 @@ package com.example.tastywardoffice.datamodel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+data class RequestLocationData (
+    @Expose
+    @SerializedName("type")
+    val type: String,
+    @Expose
+    @SerializedName("MyGEOPoint")
+    val MyGEOPoint: List<Double>
+)
+
 data class FinalStoreDataModel(
     @Expose
     @SerializedName("Filterstore")

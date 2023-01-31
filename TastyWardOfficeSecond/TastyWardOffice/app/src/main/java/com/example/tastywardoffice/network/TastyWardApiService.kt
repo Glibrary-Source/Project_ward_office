@@ -1,7 +1,6 @@
 package com.example.tastywardoffice.network
 
 import com.example.tastywardoffice.datamodel.*
-import com.google.android.gms.maps.model.LatLng
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,6 +11,7 @@ import retrofit2.http.Query
 
 private const val BASE_URL =
     "https://asia-northeast3-delicious-project-e3bed.cloudfunctions.net/"
+
 private const val GOOGLEGEO_URL =
     "https://maps.googleapis.com/maps/api/geocode/"
 
@@ -26,15 +26,6 @@ private val retrofit2 = Retrofit.Builder()
     .build()
 
 interface TastyWardApiService {
-    @POST("test1")
-    fun getStoreData(
-        @Body data: JoinData
-    ): Call<MyDTO>
-
-    @POST("test1")
-    fun getWholeData(
-        @Body data: RequestType
-    ): Call<WholeData>
 
     @POST("test1")
     fun getLocationDistanceTo(
@@ -47,6 +38,7 @@ interface TastyWardApiService {
         @Query("key") key: String,
         @Query("language") language: String
     ): Call<LocationDetailData>
+
 }
 
 object TastyWardApi{

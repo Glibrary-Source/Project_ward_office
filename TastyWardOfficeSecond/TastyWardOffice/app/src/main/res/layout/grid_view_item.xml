@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notoserifkr_bold"
             android:textSize="12sp"
+            tools:text="음식 가격"
             app:layout_constraintStart_toStartOf="@id/name_store"
             app:layout_constraintTop_toBottomOf="@id/name_store" />
 
@@ -50,14 +51,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
             tools:src="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/like_count"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:textSize="12sp"
-            tools:text="hellowWorld"
-            app:layout_constraintStart_toEndOf="@id/name_store"
-            app:layout_constraintTop_toTopOf="@id/name_store"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
