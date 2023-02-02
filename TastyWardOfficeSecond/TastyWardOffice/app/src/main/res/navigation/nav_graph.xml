@@ -6,7 +6,7 @@
     app:startDestination="@id/google_map">
     <fragment
         android:id="@+id/google_map"
-        android:name="com.example.tastywardoffice.google_map"
+        android:name="com.kapitalletter.tastywardoffice.google_map"
         android:label="fragment_google_map"
         tools:layout="@layout/fragment_google_map" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/restaurant_list"
-        android:name="com.example.tastywardoffice.restaurant_list"
+        android:name="com.kapitalletter.tastywardoffice.restaurant_list"
         android:label="fragment_restaurant_list"
         tools:layout="@layout/fragment_restaurant_list" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail_menu3"
-        android:name="com.example.tastywardoffice.detail_menu"
+        android:name="com.kapitalletter.tastywardoffice.detail_menu"
         android:label="fragment_detail_menu"
         tools:layout="@layout/fragment_detail_menu" >
         <argument
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/menu_image3"
-        android:name="com.example.tastywardoffice.menu_image"
+        android:name="com.kapitalletter.tastywardoffice.menu_image"
         android:label="fragment_menu_image"
         tools:layout="@layout/fragment_menu_image" >
         <argument

@@ -1,4 +1,4 @@
-package com.example.tastywardoffice
+package com.kapitalletter.tastywardoffice
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -20,9 +20,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.tastywardoffice.data.WardOfficeGeo
-import com.example.tastywardoffice.databinding.FragmentGoogleMapBinding
-import com.example.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.tastywardoffice.databinding.FragmentGoogleMapBinding
+import com.kapitalletter.tastywardoffice.data.WardOfficeGeo
+import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
@@ -224,7 +224,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 }
             }
         } catch (e: Exception) {
-            Toast.makeText(mContext, "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, overViewModel.distanceStoreData.value.toString() + e.toString() , Toast.LENGTH_SHORT).show()
+
         }
     }
 

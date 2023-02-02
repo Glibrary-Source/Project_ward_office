@@ -1,4 +1,4 @@
-package com.example.tastywardoffice
+package com.kapitalletter.tastywardoffice
 
 import android.content.Context
 import android.os.Bundle
@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tastywardoffice.adapter.StoreListAdapter
-import com.example.tastywardoffice.databinding.FragmentRestaurantListBinding
-import com.example.tastywardoffice.datamodel.Filterstore
-import com.example.tastywardoffice.datamodel.FinalStoreDataModel
-import com.example.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.tastywardoffice.adapter.StoreListAdapter
+import com.kapitalletter.tastywardoffice.databinding.FragmentRestaurantListBinding
+import com.kapitalletter.tastywardoffice.datamodel.Filterstore
+import com.kapitalletter.tastywardoffice.datamodel.FinalStoreDataModel
+import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 
 class restaurant_list : Fragment() {
 

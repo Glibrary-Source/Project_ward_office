@@ -1,13 +1,12 @@
-package com.example.tastywardoffice.overview
+package com.kapitalletter.tastywardoffice.overview
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.tastywardoffice.BuildConfig
-import com.example.tastywardoffice.BuildConfig.MAPS_API_KEY
-import com.example.tastywardoffice.datamodel.*
-import com.example.tastywardoffice.network.*
+import com.kapitalletter.tastywardoffice.BuildConfig
+import com.kapitalletter.tastywardoffice.datamodel.*
+import com.kapitalletter.tastywardoffice.network.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import retrofit2.Call

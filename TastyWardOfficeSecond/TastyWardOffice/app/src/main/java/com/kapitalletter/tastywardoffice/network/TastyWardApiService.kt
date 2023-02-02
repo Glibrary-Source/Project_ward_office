@@ -1,6 +1,6 @@
-package com.example.tastywardoffice.network
+package com.kapitalletter.tastywardoffice.network
 
-import com.example.tastywardoffice.datamodel.*
+import com.kapitalletter.tastywardoffice.datamodel.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

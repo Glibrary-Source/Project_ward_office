@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.gms.google-services'
+//    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -15,11 +15,11 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.tastywardoffice"
+        applicationId "com.kapitalletter.tastywardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 8
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,8 +31,9 @@ android {
             buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
         }
     }
 
@@ -51,9 +52,6 @@ android {
     }
 
 }
-
-
-
 
 
 dependencies {
@@ -101,8 +99,8 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
 
     //firebase 관련
-    implementation platform('com.google.firebase:firebase-bom:31.1.1')
-    implementation 'com.google.firebase:firebase-analytics'
+//    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+//    implementation 'com.google.firebase:firebase-analytics'
 
     //viewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'

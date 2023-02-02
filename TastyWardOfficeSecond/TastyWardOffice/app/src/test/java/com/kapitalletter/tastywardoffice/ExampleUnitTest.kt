@@ -1,4 +1,4 @@
-package com.example.tastywardoffice
+package com.kapitalletter.tastywardoffice
 
 import org.junit.Test
 

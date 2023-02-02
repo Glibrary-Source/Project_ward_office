@@ -1,4 +1,4 @@
-package com.example.tastywardoffice
+package com.kapitalletter.tastywardoffice
 
 import android.content.Context
 import android.location.Address
@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.example.tastywardoffice.adapter.DetailMenuAdapter
-import com.example.tastywardoffice.databinding.FragmentDetailMenuBinding
-import com.example.tastywardoffice.datamodel.Filterstore
-import com.example.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.tastywardoffice.adapter.DetailMenuAdapter
+import com.kapitalletter.tastywardoffice.databinding.FragmentDetailMenuBinding
+import com.kapitalletter.tastywardoffice.datamodel.Filterstore
+import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*

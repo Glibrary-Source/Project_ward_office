@@ -1,4 +1,4 @@
-package com.example.tastywardoffice.adapter
+package com.kapitalletter.tastywardoffice.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tastywardoffice.R
-import com.example.tastywardoffice.bindImage
-import com.example.tastywardoffice.datamodel.FinalStoreDataModel
-import com.example.tastywardoffice.restaurant_listDirections
+import com.kapitalletter.tastywardoffice.R
+import com.kapitalletter.tastywardoffice.bindImage
+import com.kapitalletter.tastywardoffice.datamodel.FinalStoreDataModel
+import com.kapitalletter.tastywardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
 
 class StoreListAdapter(private val context: Context, private val dataset: FinalStoreDataModel

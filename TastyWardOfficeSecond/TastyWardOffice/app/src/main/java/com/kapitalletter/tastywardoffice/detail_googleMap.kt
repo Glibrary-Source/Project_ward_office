@@ -1,4 +1,4 @@
-package com.example.tastywardoffice
+package com.kapitalletter.tastywardoffice
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.tastywardoffice.databinding.FragmentDetailGoogleMapBinding
-import com.example.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.tastywardoffice.databinding.FragmentDetailGoogleMapBinding
+import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
