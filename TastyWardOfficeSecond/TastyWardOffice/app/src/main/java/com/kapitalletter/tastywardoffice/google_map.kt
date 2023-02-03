@@ -147,9 +147,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 //마커 이미지 변경
                 val storeDrawable =
                     when (i.document.storeTitle) {
-                        getString(R.string.japan) -> {
-                            R.drawable.marker_icons_food_sushi
-                        }
+                        getString(R.string.japan) -> R.drawable.marker_icons_food_sushi
                         getString(R.string.chines) -> R.drawable.marker_icons_food_china
                         getString(R.string.korean) -> R.drawable.marker_icons_food_korean
                         getString(R.string.kimbap) -> R.drawable.marker_icons_food_kimbap
