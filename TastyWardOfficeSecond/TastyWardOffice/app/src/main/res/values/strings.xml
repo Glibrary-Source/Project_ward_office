@@ -43,4 +43,7 @@
     <string name="junggu">중구</string>
     <string name="jungnang">중랑구</string>
     <string name="wardLocation">지역</string>
+    <string name="explain">차후 업데이트 예정입니다</string>
+    <string name="internetcheck">인터넷 연결을 확인해주세요</string>
+    <string name="locationcheck">위치권한을 확인해 주세요</string>
 </resources>

@@ -5,6 +5,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -92,8 +93,7 @@ class detail_menu : Fragment() {
 
         //디테일 메뉴 인디케이터 설정
         val tabLayout = binding.tabLayout
-        TabLayoutMediator(tabLayout, binding.viewPager2) {tab,position ->
-        }.attach()
+        TabLayoutMediator(tabLayout, binding.viewPager2) {tab,position -> }.attach()
 
         //상세주소 만약 geocode getlocation 있으면 상세주소 Text뷰에 없으면 api 웹에서 요청하자
         try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
@@ -143,6 +143,10 @@ class detail_menu : Fragment() {
                     }
                 }
             ).commit()
+        }
+
+        binding.reviewButton.setOnClickListener {
+            Toast.makeText(mContext, getString(R.string.explain), Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

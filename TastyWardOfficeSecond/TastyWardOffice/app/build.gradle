@@ -5,7 +5,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-//    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -18,8 +17,8 @@ android {
         applicationId "com.kapitalletter.tastywardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 8
-        versionName "1.1"
+        versionCode 11
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -28,6 +27,9 @@ android {
     buildTypes {
         //ci/cd 조심
         debug {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
         }
         release {
@@ -78,6 +80,7 @@ dependencies {
     //retrofit 관련
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+
     // Retrofit with Moshi Converter
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"

@@ -137,7 +137,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     }
 
     //불러온 distanceStoreData를 마커로 찍어줌
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun second() {
         try {
             for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
@@ -224,8 +224,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 }
             }
         } catch (e: Exception) {
-            Toast.makeText(mContext, overViewModel.distanceStoreData.value.toString() + e.toString() , Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(mContext, getString(R.string.internetcheck) , Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -269,14 +268,13 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     multiplePermissionCode
                 )
             }
-            Toast.makeText(mContext, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, getString(R.string.locationcheck), Toast.LENGTH_SHORT).show()
             CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
         }
     }
 
     override fun onInfoWindowClick(p0: Marker) {
         overViewModel.findStoreData(p0)
-        Log.d("MarkerTest", overViewModel.markerStoreData.value!!.docId)
         val action = google_mapDirections.actionGoogleMapToDetailMenu3(
             p0.title.toString(),
             overViewModel.markerStoreData.value!!.docId,
