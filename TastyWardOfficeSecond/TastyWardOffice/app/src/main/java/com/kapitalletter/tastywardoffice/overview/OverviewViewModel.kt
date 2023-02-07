@@ -91,7 +91,6 @@ class OverviewViewModel : ViewModel() {
                         _locationDetail.value = response.body()!!.results[0].formatted_address
                     } else {
                         val result: LocationDetailData? = response.body()
-                        Log.d("wholedata", "onResponse 실패 " + result?.toString())
                     }
                 }catch (e: Exception) {
                     Log.d("detailLocationTest", e.message.toString() + location)

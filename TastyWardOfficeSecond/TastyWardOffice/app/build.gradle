@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    //firebase 연걸
+//    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -17,7 +19,7 @@ android {
         applicationId "com.kapitalletter.tastywardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 11
+        versionCode 12
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -102,8 +104,8 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
 
     //firebase 관련
-//    implementation platform('com.google.firebase:firebase-bom:31.1.1')
-//    implementation 'com.google.firebase:firebase-analytics'
+//    implementation platform('com.google.firebase:firebase-bom:31.2.0')
+//    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     //viewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
