@@ -10,7 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 private const val BASE_URL =
-    "https://asia-northeast3-delicious-project-e3bed.cloudfunctions.net/"
+    "https://asia-northeast3-project-ward-office.cloudfunctions.net/"
 
 private const val GOOGLEGEO_URL =
     "https://maps.googleapis.com/maps/api/geocode/"
@@ -27,7 +27,7 @@ private val retrofit2 = Retrofit.Builder()
 
 interface TastyWardApiService {
 
-    @POST("test1")
+    @POST("function-ward-office")
     fun getLocationDistanceTo(
         @Body data: RequestLocationData
     ): Call<FinalStoreDataModel>
