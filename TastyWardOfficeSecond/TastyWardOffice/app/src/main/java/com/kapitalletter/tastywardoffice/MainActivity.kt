@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        checkLocationPermission()
+//        checkLocationPermission()
 
         val options = NavOptions.Builder()
             .setLaunchSingleTop(true)
@@ -64,41 +64,41 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("MissingPermission")
-    private fun checkLocationPermission() {
-            if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-
-        } else {
-            val rejectedPermissionList = ArrayList<String>()
-
-            for (permission in requiredPermissions) {
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        permission
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    rejectedPermissionList.add(permission)
-                }
-            }
-
-            if (rejectedPermissionList.isNotEmpty()) {
-                val array = arrayOfNulls<String>(rejectedPermissionList.size)
-                ActivityCompat.requestPermissions(
-                    this,
-                    rejectedPermissionList.toArray(array),
-                    multiplePermissionCode
-                )
-            }
-            Toast.makeText(this, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    @SuppressLint("MissingPermission")
+//    private fun checkLocationPermission() {
+//            if (ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_COARSE_LOCATION
+//            ) == PackageManager.PERMISSION_GRANTED
+//        ) {
+//
+//        } else {
+//            val rejectedPermissionList = ArrayList<String>()
+//
+//            for (permission in requiredPermissions) {
+//                if (ContextCompat.checkSelfPermission(
+//                        this,
+//                        permission
+//                    ) != PackageManager.PERMISSION_GRANTED
+//                ) {
+//                    rejectedPermissionList.add(permission)
+//                }
+//            }
+//
+//            if (rejectedPermissionList.isNotEmpty()) {
+//                val array = arrayOfNulls<String>(rejectedPermissionList.size)
+//                ActivityCompat.requestPermissions(
+//                    this,
+//                    rejectedPermissionList.toArray(array),
+//                    multiplePermissionCode
+//                )
+//            }
+//            Toast.makeText(this, "위치권한을 확인해 주세요", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
 }
 

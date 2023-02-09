@@ -99,9 +99,7 @@ class detail_menu : Fragment() {
         try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
         catch (e: Exception) {
             try{ overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}") }
-            catch (e:Exception) {
-
-            }
+            catch (e:Exception) {}
         }
         overViewModel.locationDetail.observe(viewLifecycleOwner) {
             binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
