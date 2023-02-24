@@ -40,16 +40,17 @@ class OverviewViewModel : ViewModel() {
         val myLocation = listOf(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
         TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<FinalStoreDataModel> {
-            override fun onResponse(call: retrofit2.Call<FinalStoreDataModel>, response: Response<FinalStoreDataModel>) {
+            override fun onResponse(call: Call<FinalStoreDataModel>, response: Response<FinalStoreDataModel>) {
                 if (response.isSuccessful) {
                     Log.d("LocationDB", position.toString())
+                    Log.d("LocationDB", response.body().toString())
                     _distanceStoreData.value = response.body()
                 } else {
                     val result: FinalStoreDataModel? = response.body()
                     Log.d("LocationDB", "onResponse 실패 " + result?.toString())
                 }
             }
-            override fun onFailure(call: retrofit2.Call<FinalStoreDataModel>, t: Throwable) {
+            override fun onFailure(call: Call<FinalStoreDataModel>, t: Throwable) {
                 Log.d("LocationDB", "onFailure 에러 " + t.message.toString())
             }
         })
@@ -89,8 +90,6 @@ class OverviewViewModel : ViewModel() {
                 try{
                     if (response.isSuccessful) {
                         _locationDetail.value = response.body()!!.results[0].formatted_address
-                    } else {
-                        val result: LocationDetailData? = response.body()
                     }
                 }catch (e: Exception) {
                     Log.d("detailLocationTest", e.message.toString() + location)

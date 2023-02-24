@@ -1,13 +1,8 @@
 package com.kapitalletter.tastywardoffice
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.kapitalletter.tastywardoffice.databinding.ActivityMainBinding
@@ -20,11 +15,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val multiplePermissionCode = 100
-    private val requiredPermissions = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION
-    )
+//    private val multiplePermissionCode = 100
+//    private val requiredPermissions = arrayOf(
+//        Manifest.permission.ACCESS_FINE_LOCATION,
+//        Manifest.permission.ACCESS_COARSE_LOCATION
+//    )
 
 
 
@@ -46,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             .setExitAnim(R.anim.exit_to_right)
             .setPopEnterAnim(R.anim.enter_from_right)
             .setPopExitAnim(R.anim.exit_to_right)
-            .setPopUpTo(navController.graph.startDestination, false)
+            .setPopUpTo(navController.graph.startDestinationId, false)
             .build()
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->

@@ -28,7 +28,7 @@ class restaurant_list : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
+        overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -61,9 +61,9 @@ class restaurant_list : Fragment() {
                     filterDocument.add(i)
                 }
             }
-            recyclerView.adapter = StoreListAdapter(mContext, filterDataset)
+            recyclerView.adapter = StoreListAdapter(filterDataset)
         } else {
-            recyclerView.adapter = StoreListAdapter(mContext, myDataset)
+            recyclerView.adapter = StoreListAdapter(myDataset)
         }
 
         return binding.root

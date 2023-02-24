@@ -1,6 +1,5 @@
 package com.kapitalletter.tastywardoffice.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,11 @@ import com.kapitalletter.tastywardoffice.R
 import com.kapitalletter.tastywardoffice.bindImage
 import com.kapitalletter.tastywardoffice.datamodel.Documents
 
-class DetailMenuAdapter(private val context: Context, private val dataset: Documents
+class DetailMenuAdapter(
+    private val dataset: Documents
 ): RecyclerView.Adapter<DetailMenuAdapter.ItemViewHolder>() {
 
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val detailMenu : ImageView = view.findViewById(R.id.detail_menu_image)
     }
 

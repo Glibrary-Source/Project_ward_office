@@ -61,7 +61,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         super.onCreate(savedInstanceState)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
-        overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
+        overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
 
     }
 
@@ -113,7 +113,11 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
             //지도에서 마커 초기화
             googleMap.clear()
-            callback()
+            getOverviewLocationData()
+
+            binding.layoutExpand.visibility = View.GONE
+            binding.layoutExpand2.visibility = View.GONE
+            binding.layoutExpand3.visibility = View.GONE
         }
 
         overViewModel.distanceStoreData.observe(this) {
@@ -128,7 +132,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     }
 
     //서버에서 스토어 데이터를 미리 불러옴
-    private fun callback() {
+    private fun getOverviewLocationData() {
         val position = GoogleMap.cameraPosition.target
         overViewModel.cameraZoomState(GoogleMap.cameraPosition.zoom)
         overViewModel.saveCameraTarget(position)
@@ -146,11 +150,16 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 //마커 이미지 변경
                 val storeDrawable =
                     when (i.document.storeTitle) {
+                        //
                         getString(R.string.japan) -> R.drawable.marker_icons_food_sushi
                         getString(R.string.chines) -> R.drawable.marker_icons_food_china
                         getString(R.string.korean) -> R.drawable.marker_icons_food_korean
                         getString(R.string.kimbap) -> R.drawable.marker_icons_food_kimbap
-                        getString(R.string.cafe) -> R.drawable.marker_icons_food_coffee
+                        getString(R.string.western) -> R.drawable.marker_icons_food_western
+                        getString(R.string.dessert) -> R.drawable.marker_icons_food_coffee
+                        getString(R.string.asian) -> R.drawable.marker_icons_food_asian
+                        getString(R.string.chiken) -> R.drawable.marker_icons_food_chiken
+                        getString(R.string.bar) -> R.drawable.marker_icons_food_bar
                         else -> R.drawable.marker_icons_food_sushi
                     }
                 val bitMapDraw =
@@ -200,8 +209,48 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                             )
                         }
                     }
-                    getString(R.string.cafe) -> {
-                        if (i.document.storeTitle == getString(R.string.cafe)) {
+                    getString(R.string.western) -> {
+                        if (i.document.storeTitle == getString(R.string.western)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.dessert) -> {
+                        if (i.document.storeTitle == getString(R.string.dessert)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.asian) -> {
+                        if (i.document.storeTitle == getString(R.string.asian)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.chiken) -> {
+                        if (i.document.storeTitle == getString(R.string.chiken)) {
+                            GoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(storeLatLng)
+                                    .title(i.document.storeId)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                            )
+                        }
+                    }
+                    getString(R.string.bar) -> {
+                        if (i.document.storeTitle == getString(R.string.bar)) {
                             GoogleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
@@ -322,8 +371,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         binding.filterButtonKorean.setOnClickListener(this)
         binding.filterButtonJapan.setOnClickListener(this)
         binding.filterButtonChina.setOnClickListener(this)
-        binding.filterButtonCafe.setOnClickListener(this)
+        binding.filterButtonDessert.setOnClickListener(this)
         binding.filterButtonKimbap.setOnClickListener(this)
+        binding.filterButtonWestern.setOnClickListener(this)
+        binding.filterButtonAsian.setOnClickListener(this)
+        binding.filterButtonChiken.setOnClickListener(this)
+        binding.filterButtonBar.setOnClickListener(this)
         binding.filterButtonAll.setOnClickListener(this)
 
         //지역 필터
@@ -359,6 +412,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     //필터 클릭리스너
     override fun onClick(p0: View?) {
         when (p0?.id) {
+            //메뉴 필터 클릭리스너
             R.id.filter_button_all -> {
                 overViewModel.changeFilterState(getString(R.string.all))
                 binding.layoutExpand.visibility = View.GONE
@@ -389,12 +443,38 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 GoogleMap.clear()
                 second()
             }
-            R.id.filter_button_cafe -> {
-                overViewModel.changeFilterState(getString(R.string.cafe))
+            R.id.filter_button_western -> {
+                overViewModel.changeFilterState(getString(R.string.western))
                 binding.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
+            R.id.filter_button_dessert -> {
+                overViewModel.changeFilterState(getString(R.string.dessert))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_asian -> {
+                overViewModel.changeFilterState(getString(R.string.asian))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_chiken -> {
+                overViewModel.changeFilterState(getString(R.string.chiken))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+            R.id.filter_button_bar -> {
+                overViewModel.changeFilterState(getString(R.string.bar))
+                binding.layoutExpand.visibility = View.GONE
+                GoogleMap.clear()
+                second()
+            }
+
+            //지역 필터 변환
             R.id.title_button -> {
                 if (binding.layoutExpand.visibility == View.VISIBLE) {
                     binding.layoutExpand.visibility = View.GONE
@@ -715,8 +795,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.layoutExpand2.visibility = View.GONE
                 binding.layoutExpand3.visibility = View.GONE
             }
+            //디저트만 남기고 삭제
             else -> {
-                overViewModel.changeFilterState(getString(R.string.cafe))
+                overViewModel.changeFilterState(getString(R.string.dessert))
                 binding.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()

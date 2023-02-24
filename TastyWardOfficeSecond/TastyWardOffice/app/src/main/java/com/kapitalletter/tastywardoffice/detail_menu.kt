@@ -22,7 +22,7 @@ import java.util.*
 class detail_menu : Fragment() {
 
     private lateinit var mContext: Context
-    private val StoreData by navArgs<detail_menuArgs>()
+    private val storeData by navArgs<detail_menuArgs>()
     private lateinit var overViewModel: OverviewViewModel
 
     override fun onAttach(context: Context) {
@@ -42,7 +42,7 @@ class detail_menu : Fragment() {
         val binding = FragmentDetailMenuBinding.inflate(inflater)
 
         //뷰모델 바인딩
-        overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
+        overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
 
         //detailItemData() 함수를 통해 뷰모델어서 뽑아온 스토어 데이터를 변수에 저장
         val storeDetailData = detailItemData()
@@ -52,10 +52,10 @@ class detail_menu : Fragment() {
         binding.viewPager2.clipToOutline = true
 
         //각각의 뷰에 데이터 입력
-        binding.storeName.text = StoreData.storename
+        binding.storeName.text = storeData.storename
 
         //뷰페이저 슬라이드 넘기기
-        binding.viewPager2.adapter = DetailMenuAdapter(mContext, storeDetailData.document)
+        binding.viewPager2.adapter = DetailMenuAdapter(storeDetailData.document)
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             var currentState = 0
@@ -67,8 +67,7 @@ class detail_menu : Fragment() {
                 positionOffsetPixels: Int
             ) {
                 //주의 리스트사이즈 0일때
-                var pictureListSize = 4
-                pictureListSize = if(storeDetailData.document.storeMenuPictureUrlsMenu.isEmpty()) {
+                val pictureListSize: Int = if(storeDetailData.document.storeMenuPictureUrlsMenu.isEmpty()) {
                     3
                 } else {
                     storeDetailData.document.storeMenuPictureUrlsMenu.size
@@ -154,7 +153,7 @@ class detail_menu : Fragment() {
     private fun detailItemData() : Filterstore {
         val passingData = overViewModel.distanceStoreData.value!!.Filterstore
         for(storedata in passingData){
-            if(storedata.document.docId == StoreData.dogId) {
+            if(storedata.document.docId == storeData.dogId) {
                 return storedata
             }
         }
@@ -164,7 +163,7 @@ class detail_menu : Fragment() {
     //주소 텍스트를 위한 코드
     private fun locationAddress(): List<Address> {
         val geocoder = Geocoder(mContext, Locale.KOREA)
-        return geocoder.getFromLocation(StoreData.latlng.latitude, StoreData.latlng.longitude, 1)
+        return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)
     }
 
 }

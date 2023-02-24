@@ -24,7 +24,7 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overViewModel = ViewModelProvider(requireActivity()).get(OverviewViewModel::class.java)
+        overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
     }
 
     override fun onCreateView(

@@ -25,7 +25,7 @@
                 android:layout_width="366dp"
                 android:layout_height="361dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/border_imgview"
+                android:background="@drawable/border_detailmenu_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="@color/white"
-                app:tabBackground="@drawable/tab_selector"
+                app:tabBackground="@drawable/selecter_viewpager"
                 app:layout_constraintTop_toBottomOf="@id/viewPager2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,30 +68,45 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="130dp"
                 android:orientation="horizontal"
+                android:weightSum="3"
                 app:layout_constraintStart_toStartOf="@id/viewPager2"
                 app:layout_constraintTop_toBottomOf="@id/viewPager2">
 
                 <Button
                     android:id="@+id/menu_button"
-                    android:layout_width="122dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="48dp"
                     android:text="@string/menu_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/border_button_pressed"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/map_button"
-                    android:layout_width="122dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="48dp"
                     android:text="@string/map_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/border_button_pressed"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/review_button"
-                    android:layout_width="122dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="48dp"
                     android:text="@string/review_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/border_button_pressed"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -100,7 +115,7 @@
                 android:id="@+id/nav_bar"
                 android:layout_width="366dp"
                 android:layout_height="361dp"
-                android:background="@drawable/border_imgview"
+                android:background="@drawable/border_detailmenu_image"
                 app:layout_constraintStart_toStartOf="@id/viewPager2"
                 app:layout_constraintTop_toBottomOf="@id/nav_button" />
 

@@ -13,7 +13,11 @@
     <string name="chines">중식</string>
     <string name="korean">한식</string>
     <string name="kimbap">분식</string>
-    <string name="cafe">카페</string>
+    <string name="western">양식</string>
+    <string name="dessert">디저트</string>
+    <string name="asian">아시안</string>
+    <string name="chiken">치킨</string>
+    <string name="bar">주점</string>
     <string name="all">all</string>
     <string name="buttonAll">전체</string>
     <string name="menu">메뉴</string>

@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".google_map">
 
+    <!--필터 메뉴-->
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
         tools:layout="@layout/fragment_google_map" />
-<!--필터 메뉴-->
+
     <LinearLayout
         android:id="@+id/imgMore2"
         android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
             <Button
                 android:id="@+id/filter_ward_office_button"
                 android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:textSize="14sp"
                 android:text="@string/wardLocation"
                 android:textStyle="bold"
@@ -56,7 +57,7 @@
 
                 <Button
                     android:id="@+id/filter_button_gangnam"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -65,7 +66,7 @@
 
                 <Button
                     android:id="@+id/filter_button_gandong"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -73,7 +74,7 @@
                     android:text="@string/gangdong"/>
                 <Button
                     android:id="@+id/filter_button_gangbuk"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -81,7 +82,7 @@
                     android:text="@string/gangbuk"/>
                 <Button
                     android:id="@+id/filter_button_gangseo"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -89,7 +90,7 @@
                     android:text="@string/gangseo"/>
                 <Button
                     android:id="@+id/filter_button_gwanak"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -97,7 +98,7 @@
                     android:text="@string/gwanak"/>
                 <Button
                     android:id="@+id/filter_button_gwangjin"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -106,7 +107,7 @@
 
                 <Button
                     android:id="@+id/filter_button_guro"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -114,7 +115,7 @@
                     android:text="@string/guro"/>
                 <Button
                     android:id="@+id/filter_button_geuncheon"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -122,7 +123,7 @@
                     android:text="@string/geumcheon"/>
                 <Button
                     android:id="@+id/filter_button_nowon"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -130,7 +131,7 @@
                     android:text="@string/nowon"/>
                 <Button
                     android:id="@+id/filter_button_dobong"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -138,7 +139,7 @@
                     android:text="@string/dobong"/>
                 <Button
                     android:id="@+id/filter_button_ddm"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -146,7 +147,7 @@
                     android:text="@string/ddm"/>
                 <Button
                     android:id="@+id/filter_button_dongjak"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -154,7 +155,7 @@
                     android:text="@string/dongjak"/>
                 <Button
                     android:id="@+id/filter_button_mapo"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/border_list_imgview"
@@ -173,7 +174,7 @@
 
                 <Button
                     android:id="@+id/filter_button_sdm"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -182,7 +183,7 @@
                     android:text="@string/sdm"/>
                 <Button
                     android:id="@+id/filter_button_seocho"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -191,7 +192,7 @@
                     android:text="@string/seocho"/>
                 <Button
                     android:id="@+id/filter_button_sd"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -201,7 +202,7 @@
                     android:layout_gravity="right"/>
                 <Button
                     android:id="@+id/filter_button_sb"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -210,7 +211,7 @@
                     android:text="@string/sb"/>
                 <Button
                     android:id="@+id/filter_button_songpa"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -220,7 +221,7 @@
 
                 <Button
                     android:id="@+id/filter_button_yangcheon"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -229,7 +230,7 @@
                     android:text="@string/yangcheon"/>
                 <Button
                     android:id="@+id/filter_button_ydp"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -238,7 +239,7 @@
                     android:text="@string/ydp"/>
                 <Button
                     android:id="@+id/filter_button_yongsan"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -247,7 +248,7 @@
                     android:text="@string/yongsan"/>
                 <Button
                     android:id="@+id/filter_button_ep"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -256,7 +257,7 @@
                     android:text="@string/ep"/>
                 <Button
                     android:id="@+id/filter_button_jongno"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -265,7 +266,7 @@
                     android:text="@string/jongno"/>
                 <Button
                     android:id="@+id/filter_button_junggu"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -274,7 +275,7 @@
                     android:text="@string/junggu"/>
                 <Button
                     android:id="@+id/filter_button_jungnang"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
@@ -283,9 +284,7 @@
                     android:text="@string/jungnang"/>
 
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -305,7 +304,7 @@
             <Button
                 android:id="@+id/title_button"
                 android:layout_width="60dp"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:textSize="14sp"
                 android:text="@string/menu"
                 android:textStyle="bold"
@@ -324,7 +323,7 @@
 
             <Button
                 android:id="@+id/filter_button_all"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_list_imgview"
@@ -333,7 +332,7 @@
 
             <Button
                 android:id="@+id/filter_button_japan"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_list_imgview"
@@ -341,7 +340,7 @@
                 android:text="@string/japan"/>
             <Button
                 android:id="@+id/filter_button_korean"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_list_imgview"
@@ -349,7 +348,7 @@
                 android:text="@string/korean"/>
             <Button
                 android:id="@+id/filter_button_china"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_list_imgview"
@@ -357,20 +356,52 @@
                 android:text="@string/chines"/>
             <Button
                 android:id="@+id/filter_button_kimbap"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/kimbap"/>
             <Button
-                android:id="@+id/filter_button_cafe"
-                android:layout_width="60dp"
+                android:id="@+id/filter_button_western"
+                android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
-                android:text="@string/cafe"/>
+                android:text="@string/western"/>
+            <Button
+                android:id="@+id/filter_button_dessert"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border_list_imgview"
+                android:textStyle="bold"
+                android:text="@string/dessert"/>
+            <Button
+                android:id="@+id/filter_button_asian"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border_list_imgview"
+                android:textStyle="bold"
+                android:text="@string/asian"/>
+            <Button
+                android:id="@+id/filter_button_chiken"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border_list_imgview"
+                android:textStyle="bold"
+                android:text="@string/chiken"/>
+            <Button
+                android:id="@+id/filter_button_bar"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border_list_imgview"
+                android:textStyle="bold"
+                android:text="@string/bar"/>
         </LinearLayout>
     </LinearLayout>
 <!--필터 메뉴-->
@@ -390,11 +421,11 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/border_img"
             android:clickable="true"
-            android:contentDescription="TODO"
             android:focusable="true"
             android:src="@drawable/ic_baseline_my_location_24"
             app:fabSize="mini"
-            app:tint="@color/quantum_lightblue" />
+            app:tint="@color/quantum_lightblue"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </FrameLayout>
 

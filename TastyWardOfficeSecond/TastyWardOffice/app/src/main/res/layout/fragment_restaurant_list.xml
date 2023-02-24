@@ -5,31 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="12"
     tools:context=".restaurant_list">
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photos_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="10"
+        tools:listitem="@layout/grid_view_item" />
+
+    <ImageView
+        android:id="@+id/status_image"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="12"
-        android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/search_bar">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/photos_grid"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="7"
-            tools:listitem="@layout/grid_view_item" />
-
-        <ImageView
-            android:id="@+id/status_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:ignore="ContentDescription" />
-    </FrameLayout>
 </LinearLayout>
 

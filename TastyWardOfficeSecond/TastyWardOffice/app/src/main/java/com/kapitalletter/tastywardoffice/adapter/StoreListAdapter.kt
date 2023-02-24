@@ -1,7 +1,6 @@
 package com.kapitalletter.tastywardoffice.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,11 @@ import com.kapitalletter.tastywardoffice.datamodel.FinalStoreDataModel
 import com.kapitalletter.tastywardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
 
-class StoreListAdapter(private val context: Context, private val dataset: FinalStoreDataModel
+class StoreListAdapter(
+    private val dataset: FinalStoreDataModel
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
 
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val storeTextView : TextView = view.findViewById(R.id.name_store)
         val menuImage : ImageView = view.findViewById(R.id.menu_image)
         val priceAverage : TextView = view.findViewById(R.id.price_average)
