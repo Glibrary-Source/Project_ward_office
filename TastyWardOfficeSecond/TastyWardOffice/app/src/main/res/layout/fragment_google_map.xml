@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/filter_ward_office_button"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="48dp"
                 android:textSize="14sp"
                 android:text="@string/wardLocation"
@@ -295,7 +295,7 @@
         android:background="@android:color/transparent"
         android:animateLayoutChanges="true"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="75dp">
+        android:layout_marginStart="85dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parent1"
@@ -303,7 +303,7 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/title_button"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="48dp"
                 android:textSize="14sp"
                 android:text="@string/menu"

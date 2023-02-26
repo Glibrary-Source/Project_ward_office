@@ -4,6 +4,7 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -92,17 +93,22 @@ class detail_menu : Fragment() {
 
         //디테일 메뉴 인디케이터 설정
         val tabLayout = binding.tabLayout
-        TabLayoutMediator(tabLayout, binding.viewPager2) {tab,position -> }.attach()
+        TabLayoutMediator(tabLayout, binding.viewPager2) { _, _ -> }.attach()
 
         //상세주소 만약 geocode getlocation 있으면 상세주소 Text뷰에 없으면 api 웹에서 요청하자
-        try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
+        try{
+            binding.locationText.text = locationAddress()?.get(0)?.getAddressLine(0)!!.substring(5)
+        }
         catch (e: Exception) {
-            try{ overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}") }
+            try{
+                overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
+                overViewModel.locationDetail.observe(viewLifecycleOwner) {
+                    binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
+                }
+            }
             catch (e:Exception) {}
         }
-        overViewModel.locationDetail.observe(viewLifecycleOwner) {
-            binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
-        }
+
 
         //네비게이션 프래그먼트 데이터 전달을 위해 번들 사용
         arguments = Bundle()
@@ -161,7 +167,7 @@ class detail_menu : Fragment() {
     }
 
     //주소 텍스트를 위한 코드
-    private fun locationAddress(): List<Address> {
+    private fun locationAddress(): List<Address>? {
         val geocoder = Geocoder(mContext, Locale.KOREA)
         return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)
     }

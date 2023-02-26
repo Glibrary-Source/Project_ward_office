@@ -49,6 +49,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -89,12 +90,20 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             )
         }
 
+
         return binding.root
     }
 
     @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
+
+        //구글 지도 한국으로 범위 고정
+        val builder = LatLngBounds.Builder()
+        builder.include(LatLng(33.1422, 124.0384)) // Southwest corner of South Korea
+        builder.include(LatLng(38.6120, 131.2361)) // Northeast corner of South Korea
+        val bounds = builder.build()
+        GoogleMap.setLatLngBoundsForCameraTarget(bounds)
 
         //이전에 사용자가 보던 위치
         googleMap.moveCamera(

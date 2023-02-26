@@ -26,6 +26,9 @@ class DetailMenuAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.storeMenuPictureUrlsMenu[position]
         bindImage(holder.detailMenu, item)
+        holder.detailMenu.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {
