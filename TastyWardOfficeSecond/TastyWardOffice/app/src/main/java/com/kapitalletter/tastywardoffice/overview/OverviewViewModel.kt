@@ -12,6 +12,9 @@ import com.google.android.gms.maps.model.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class OverviewViewModel : ViewModel() {
 
@@ -82,7 +85,7 @@ class OverviewViewModel : ViewModel() {
         return distanceStoreData.value!!.Filterstore[0].document
     }
 
-    //위치데이터를 받아올수 있는지 시험하는 매서드
+    //위치데이터를 받아올수 있는지 시험하는 매서드 일단은 보류하자
     fun locationTestApi(location: String) {
         val key = BuildConfig.MAPS_DETAIL_LOCATION_KEY
         TastyWardApi2.service.getDetailLocation(location,key,"ko").enqueue(object : Callback<LocationDetailData> {

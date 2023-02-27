@@ -27,10 +27,17 @@ android {
     buildTypes {
         //ci/cd 조심
         debug {
+<<<<<<< HEAD
 //            debuggable true
 //            minifyEnabled true
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
+=======
+            debuggable true
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
+>>>>>>> e3ba02937a39b1c705f5c97dc53a3167fa972412
         }
         release {
             minifyEnabled true
@@ -71,7 +78,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     //snackbar 관련
-    implementation 'com.google.android.material:material:1.8.0-alpha03'
+    implementation 'com.google.android.material:material:1.9.0-alpha02'
 
     //nav_graph 관련
     def nav_version = "2.5.3"
@@ -96,6 +103,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
+
+    //admob 관련
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
 
     //firebase 관련
 //    implementation platform('com.google.firebase:firebase-bom:31.2.0')

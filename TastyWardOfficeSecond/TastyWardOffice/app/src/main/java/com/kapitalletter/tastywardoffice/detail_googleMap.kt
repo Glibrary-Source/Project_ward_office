@@ -1,7 +1,6 @@
 package com.kapitalletter.tastywardoffice
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 
 class detail_googleMap : Fragment(), OnMapReadyCallback {
@@ -43,17 +42,19 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
 
-        val current = arguments?.getParcelable<LatLng>("LatLng")
-        Log.d("TestPar", current.toString())
+        val current = MyGlobals.instance?.detailLatLng
         googleMap.addMarker(
-            arguments?.getParcelable<LatLng>("LatLng")?.let {
-                MarkerOptions()
-                    .position(it)
-                    .title(arguments?.getString("storeName"))
-            }!!
+            MarkerOptions()
+                .position(current!!)
+                .title(MyGlobals.instance?.detailStoreId)
         )!!.showInfoWindow()
+        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16f))
 
-        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current!!,16f))
+        val builder = LatLngBounds.Builder()
+        builder.include(current) // Southwest corner of South Korea
+        builder.include(current) // Northeast corner of South Korea
+        val bounds = builder.build()
+        GoogleMap.setLatLngBoundsForCameraTarget(bounds)
 
     }
 

@@ -16,6 +16,8 @@ import com.kapitalletter.tastywardoffice.datamodel.Filterstore
 import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 
@@ -92,17 +94,24 @@ class detail_menu : Fragment() {
 
         //디테일 메뉴 인디케이터 설정
         val tabLayout = binding.tabLayout
-        TabLayoutMediator(tabLayout, binding.viewPager2) {tab,position -> }.attach()
+        TabLayoutMediator(tabLayout, binding.viewPager2) { _, _ -> }.attach()
 
         //상세주소 만약 geocode getlocation 있으면 상세주소 Text뷰에 없으면 api 웹에서 요청하자
-        try{ binding.locationText.text = locationAddress()[0].getAddressLine(0).substring(5) }
+        try{
+            binding.locationText.text = locationAddress()?.get(0)?.getAddressLine(0)!!.substring(5)
+        }
         catch (e: Exception) {
-            try{ overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}") }
-            catch (e:Exception) {}
+            binding.locationText.text = ""
+//            try{
+//                overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
+//
+//                overViewModel.locationDetail.observe(viewLifecycleOwner) {
+//                    binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
+//                }
+//            }
+//            catch (e:Exception) {}
         }
-        overViewModel.locationDetail.observe(viewLifecycleOwner) {
-            binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
-        }
+
 
         //네비게이션 프래그먼트 데이터 전달을 위해 번들 사용
         arguments = Bundle()
@@ -134,10 +143,8 @@ class detail_menu : Fragment() {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
                 detail_googleMap().apply {
-                    arguments = Bundle().apply {
-                        putParcelable("LatLng", LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1]))
-                        putString("storeName", storeDetailData.document.storeId)
-                    }
+                    MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
+                    MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
                 }
             ).commit()
         }
@@ -161,7 +168,7 @@ class detail_menu : Fragment() {
     }
 
     //주소 텍스트를 위한 코드
-    private fun locationAddress(): List<Address> {
+    private fun locationAddress(): List<Address>? {
         val geocoder = Geocoder(mContext, Locale.KOREA)
         return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)!!
     }

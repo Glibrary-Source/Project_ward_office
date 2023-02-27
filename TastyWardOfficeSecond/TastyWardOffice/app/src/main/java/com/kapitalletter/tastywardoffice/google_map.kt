@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.*
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +48,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
+    //toast 즉각반응을 위해 전역변수로 설정
+    private var toast: Toast? = null
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -65,6 +68,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,7 +82,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         //내위치 확인
         checkLocationPermission()
 
-        //내위치 찍고 그쪽으로 카메라 이동
+        //내위치 찍고 그쪽으로 카메라 이동하고 마커는 파란색으로 점찍기
         binding.myLocationButton.setOnClickListener {
             checkLocationPermission()
             GoogleMap.animateCamera(
@@ -87,7 +91,20 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     GoogleMap.cameraPosition.zoom
                 )
             )
+
+            val currentDrawable =
+                resources.getDrawable(R.drawable.marker_icons_blue_dot, null) as BitmapDrawable
+            val img = currentDrawable.bitmap
+            val currentLocationMarker = Bitmap.createScaledBitmap(img, 40, 40, false)
+
+            GoogleMap.addMarker(
+                MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
+                    .position(LatLng(latiTude, longItude))
+                    .title("현위치")
+            )?.showInfoWindow()
         }
+
 
         return binding.root
     }
@@ -95,6 +112,13 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
+
+        //구글 지도 한국으로 범위 고정
+        val builder = LatLngBounds.Builder()
+        builder.include(LatLng(33.1422, 124.0384)) // Southwest corner of South Korea
+        builder.include(LatLng(38.6120, 131.2361)) // Northeast corner of South Korea
+        val bounds = builder.build()
+        GoogleMap.setLatLngBoundsForCameraTarget(bounds)
 
         //이전에 사용자가 보던 위치
         googleMap.moveCamera(
@@ -115,18 +139,20 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             googleMap.clear()
             getOverviewLocationData()
 
+            //지도 이동하면 메뉴 필터를 꺼버림
             binding.layoutExpand.visibility = View.GONE
             binding.layoutExpand2.visibility = View.GONE
             binding.layoutExpand3.visibility = View.GONE
         }
 
+        //distance데이터에 옵저버 설치해서 데이터 바뀔때마다 second() 함수를 불러와서 마커를 찍음
         overViewModel.distanceStoreData.observe(this) {
             second()
             if (overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
-                val simpleToast =
-                    Toast.makeText(mContext, "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
-                simpleToast.setGravity(Gravity.CENTER, 0, 0)
-                simpleToast.show()
+                //이전 toast 캔슬
+                toast?.cancel()
+                toast = Toast.makeText(mContext, "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
+                toast?.show()
             }
         }
     }
@@ -320,13 +346,17 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     }
 
     override fun onInfoWindowClick(p0: Marker) {
-        overViewModel.findStoreData(p0)
-        val action = google_mapDirections.actionGoogleMapToDetailMenu3(
-            p0.title.toString(),
-            overViewModel.markerStoreData.value!!.docId,
-            p0.position
-        )
-        findNavController().navigate(action)
+        try{
+            overViewModel.findStoreData(p0)
+            val action = google_mapDirections.actionGoogleMapToDetailMenu3(
+                p0.title.toString(),
+                overViewModel.markerStoreData.value!!.docId,
+                p0.position
+            )
+            findNavController().navigate(action)
+        } catch (e: Exception) {
+
+        }
     }
 
     //마커 클릭시 그쪽으로 확대 멈춤

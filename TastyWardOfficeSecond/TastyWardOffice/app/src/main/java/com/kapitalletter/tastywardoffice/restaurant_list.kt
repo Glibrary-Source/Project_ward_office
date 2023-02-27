@@ -2,6 +2,7 @@ package com.kapitalletter.tastywardoffice
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class restaurant_list : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
+
     }
 
     override fun onCreateView(
@@ -50,6 +52,7 @@ class restaurant_list : Fragment() {
         val recyclerView = binding.photosGrid
 
         if(myDataset.Filterstore.isEmpty()) {
+            Log.d("testRestaurant", myDataset.Filterstore.toString())
             binding.statusImage.setImageResource(R.drawable.emptylist)
         }
         val filterDocument = mutableListOf<Filterstore>()
