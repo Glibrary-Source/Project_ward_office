@@ -5,15 +5,13 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    //firebase 연걸
-//    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.kapitalletter.tastywardoffice"
@@ -30,9 +28,9 @@ android {
         //ci/cd 조심
         debug {
 //            debuggable true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
         }
         release {
             minifyEnabled true
@@ -63,7 +61,7 @@ dependencies {
     // Coil
     implementation "io.coil-kt:coil:1.1.1"
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.libraries.places:places:2.7.0'

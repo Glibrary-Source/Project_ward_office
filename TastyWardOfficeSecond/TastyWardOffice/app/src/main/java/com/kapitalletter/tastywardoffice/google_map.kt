@@ -42,7 +42,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     private val locationGeoData = WardOfficeGeo()
 
-    //    퍼미션 체크
+    //퍼미션 체크
     private val multiplePermissionCode = 100
     private val requiredPermissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,

@@ -163,7 +163,7 @@ class detail_menu : Fragment() {
     //주소 텍스트를 위한 코드
     private fun locationAddress(): List<Address> {
         val geocoder = Geocoder(mContext, Locale.KOREA)
-        return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)
+        return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)!!
     }
 
 }
