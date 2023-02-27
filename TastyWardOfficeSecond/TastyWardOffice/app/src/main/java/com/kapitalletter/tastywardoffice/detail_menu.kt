@@ -4,7 +4,6 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -17,6 +16,8 @@ import com.kapitalletter.tastywardoffice.datamodel.Filterstore
 import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 
@@ -100,13 +101,15 @@ class detail_menu : Fragment() {
             binding.locationText.text = locationAddress()?.get(0)?.getAddressLine(0)!!.substring(5)
         }
         catch (e: Exception) {
-            try{
-                overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
-                overViewModel.locationDetail.observe(viewLifecycleOwner) {
-                    binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
-                }
-            }
-            catch (e:Exception) {}
+            binding.locationText.text = ""
+//            try{
+//                overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
+//
+//                overViewModel.locationDetail.observe(viewLifecycleOwner) {
+//                    binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
+//                }
+//            }
+//            catch (e:Exception) {}
         }
 
 
@@ -140,10 +143,8 @@ class detail_menu : Fragment() {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
                 detail_googleMap().apply {
-                    arguments = Bundle().apply {
-                        putParcelable("LatLng", LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1]))
-                        putString("storeName", storeDetailData.document.storeId)
-                    }
+                    MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
+                    MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
                 }
             ).commit()
         }

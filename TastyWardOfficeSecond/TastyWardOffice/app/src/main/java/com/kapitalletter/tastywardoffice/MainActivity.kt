@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 //        Manifest.permission.ACCESS_COARSE_LOCATION
 //    )
 
-    lateinit var mAdView : AdView
+    private lateinit var mAdView : AdView
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
 
     }
 
