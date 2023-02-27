@@ -101,7 +101,7 @@ class detail_menu : Fragment() {
             binding.locationText.text = locationAddress()?.get(0)?.getAddressLine(0)!!.substring(5)
         }
         catch (e: Exception) {
-            binding.locationText.text = ""
+            binding.locationText.text = "상세주소 없음"
 //            try{
 //                overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
 //
