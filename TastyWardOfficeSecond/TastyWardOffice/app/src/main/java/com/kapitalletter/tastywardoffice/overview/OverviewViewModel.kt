@@ -1,10 +1,9 @@
 package com.kapitalletter.tastywardoffice.overview
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kapitalletter.tastywardoffice.BuildConfig
 import com.kapitalletter.tastywardoffice.datamodel.*
 import com.kapitalletter.tastywardoffice.network.*
 import com.google.android.gms.maps.model.LatLng
@@ -12,9 +11,6 @@ import com.google.android.gms.maps.model.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 class OverviewViewModel : ViewModel() {
 
@@ -22,14 +18,12 @@ class OverviewViewModel : ViewModel() {
     private val _cameraTarget = MutableLiveData<LatLng>()
     private val _markerStoreData = MutableLiveData<Documents>()
     private val _cameraZoom = MutableLiveData<Float>()
-    private val _locationDetail = MutableLiveData<String>()
     private val _filterState = MutableLiveData<String>()
 
     val distanceStoreData: LiveData<FinalStoreDataModel> = _distanceStoreData
     val cameraTarget: LiveData<LatLng> = _cameraTarget
     val markerStoreData: LiveData<Documents> = _markerStoreData
     val cameraZoom: LiveData<Float> = _cameraZoom
-    val locationDetail: LiveData<String> = _locationDetail
     val filterState: LiveData<String> = _filterState
 
     init {
@@ -45,16 +39,13 @@ class OverviewViewModel : ViewModel() {
         TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<FinalStoreDataModel> {
             override fun onResponse(call: Call<FinalStoreDataModel>, response: Response<FinalStoreDataModel>) {
                 if (response.isSuccessful) {
-                    Log.d("LocationDB", position.toString())
-                    Log.d("LocationDB", response.body().toString())
                     _distanceStoreData.value = response.body()
                 } else {
                     val result: FinalStoreDataModel? = response.body()
-                    Log.d("LocationDB", "onResponse 실패 " + result?.toString())
                 }
             }
             override fun onFailure(call: Call<FinalStoreDataModel>, t: Throwable) {
-                Log.d("LocationDB", "onFailure 에러 " + t.message.toString())
+
             }
         })
     }
@@ -83,25 +74,6 @@ class OverviewViewModel : ViewModel() {
             }
         }
         return distanceStoreData.value!!.Filterstore[0].document
-    }
-
-    //위치데이터를 받아올수 있는지 시험하는 매서드 일단은 보류하자
-    fun locationTestApi(location: String) {
-        val key = BuildConfig.MAPS_DETAIL_LOCATION_KEY
-        TastyWardApi2.service.getDetailLocation(location,key,"ko").enqueue(object : Callback<LocationDetailData> {
-            override fun onResponse(call: Call<LocationDetailData>, response: Response<LocationDetailData>) {
-                try{
-                    if (response.isSuccessful) {
-                        _locationDetail.value = response.body()!!.results[0].formatted_address
-                    }
-                }catch (e: Exception) {
-                    Log.d("detailLocationTest", e.message.toString() + location)
-                }
-            }
-            override fun onFailure(call: Call<LocationDetailData>, t: Throwable) {
-                Log.d("wholedata", "onFailure 에러 " + t.message.toString())
-            }
-        })
     }
 
     //필터 상태를 저장하는 매서드

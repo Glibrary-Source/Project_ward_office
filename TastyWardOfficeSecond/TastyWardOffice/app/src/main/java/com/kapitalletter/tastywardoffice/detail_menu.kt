@@ -16,8 +16,6 @@ import com.kapitalletter.tastywardoffice.datamodel.Filterstore
 import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 

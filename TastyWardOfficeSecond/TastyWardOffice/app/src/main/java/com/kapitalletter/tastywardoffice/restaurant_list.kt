@@ -2,7 +2,6 @@ package com.kapitalletter.tastywardoffice
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +51,6 @@ class restaurant_list : Fragment() {
         val recyclerView = binding.photosGrid
 
         if(myDataset.Filterstore.isEmpty()) {
-            Log.d("testRestaurant", myDataset.Filterstore.toString())
             binding.statusImage.setImageResource(R.drawable.emptylist)
         }
         val filterDocument = mutableListOf<Filterstore>()
