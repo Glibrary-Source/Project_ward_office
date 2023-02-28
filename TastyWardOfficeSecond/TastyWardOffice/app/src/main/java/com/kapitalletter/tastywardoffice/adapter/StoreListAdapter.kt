@@ -18,10 +18,15 @@ class StoreListAdapter(
     private val dataset: FinalStoreDataModel
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
 
+    init {
+        notifyDataSetChanged()
+    }
+
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val storeTextView : TextView = view.findViewById(R.id.name_store)
         val menuImage : ImageView = view.findViewById(R.id.menu_image)
         val priceAverage : TextView = view.findViewById(R.id.price_average)
+        val rankText : TextView = view.findViewById(R.id.img_rank)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -35,6 +40,36 @@ class StoreListAdapter(
         val item = dataset.Filterstore[position]
         holder.storeTextView.text = item.document.storeId
         bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0])
+
+        //좋아요 수에따른 구분
+        if(item.document.storeCntLikes >= 300) {
+            holder.rankText.text = "1급"
+        }
+        else if(item.document.storeCntLikes >= 250){
+            holder.rankText.text = "2급"
+        }
+        else if(item.document.storeCntLikes >= 200){
+            holder.rankText.text = "3급"
+        }
+        else if(item.document.storeCntLikes >= 150 ){
+            holder.rankText.text = "4급"
+        }
+        else if(item.document.storeCntLikes >= 100){
+            holder.rankText.text = "5급"
+        }
+        else if(item.document.storeCntLikes >= 50){
+            holder.rankText.text = "6급"
+        }
+        else if(item.document.storeCntLikes >= 40){
+            holder.rankText.text = "7급"
+        }
+        else if(item.document.storeCntLikes >= 10){
+            holder.rankText.text = "8급"
+        }
+        else{
+            holder.rankText.text = "9급"
+        }
+
         holder.priceAverage.text = "${item.document.storePriceMin}원~${item.document.storePriceMax}원"
         holder.menuImage.clipToOutline = true
         holder.itemView.setOnClickListener {
@@ -45,6 +80,7 @@ class StoreListAdapter(
             )
             holder.itemView.findNavController().navigate(action)
         }
+
     }
 
     override fun getItemCount(): Int {

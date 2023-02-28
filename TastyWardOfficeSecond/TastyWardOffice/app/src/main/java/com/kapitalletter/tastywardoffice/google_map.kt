@@ -9,10 +9,12 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.*
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -41,6 +43,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     private val locationGeoData = WardOfficeGeo()
 
+    private lateinit var callback: OnBackPressedCallback
+    var backPressTime: Long = 0
+
     //퍼미션 체크
     private val multiplePermissionCode = 100
     private val requiredPermissions = arrayOf(
@@ -58,6 +63,22 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         if (context is MainActivity) {
             mContext = context
         }
+
+
+        //뒤로가기 버튼 두번눌러야 종료
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(backPressTime + 3000 > System.currentTimeMillis()) {
+                    requireActivity().finish()
+                } else {
+                    Toast.makeText(mContext, "한번 더 뒤로가기 버튼을 누르면 종료됩니다", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                backPressTime = System.currentTimeMillis()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -163,6 +184,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         overViewModel.cameraZoomState(GoogleMap.cameraPosition.zoom)
         overViewModel.saveCameraTarget(position)
         overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
+
     }
 
     //불러온 distanceStoreData를 마커로 찍어줌
@@ -296,7 +318,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 }
             }
         } catch (e: Exception) {
-            Toast.makeText(mContext, getString(R.string.internetcheck) , Toast.LENGTH_SHORT).show()
+
         }
     }
 
@@ -834,4 +856,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             }
         }
     }
+
+
+    //뒤로가기 버튼 두번 눌러야 종료
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
+
 }

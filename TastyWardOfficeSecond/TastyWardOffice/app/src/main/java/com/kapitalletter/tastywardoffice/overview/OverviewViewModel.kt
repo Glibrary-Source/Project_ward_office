@@ -20,11 +20,11 @@ class OverviewViewModel : ViewModel() {
     private val _cameraZoom = MutableLiveData<Float>()
     private val _filterState = MutableLiveData<String>()
 
-    val distanceStoreData: LiveData<FinalStoreDataModel> = _distanceStoreData
-    val cameraTarget: LiveData<LatLng> = _cameraTarget
-    val markerStoreData: LiveData<Documents> = _markerStoreData
-    val cameraZoom: LiveData<Float> = _cameraZoom
-    val filterState: LiveData<String> = _filterState
+    val distanceStoreData: LiveData<FinalStoreDataModel> get() = _distanceStoreData
+    val cameraTarget: LiveData<LatLng> get() = _cameraTarget
+    val markerStoreData: LiveData<Documents> get() = _markerStoreData
+    val cameraZoom: LiveData<Float> get() = _cameraZoom
+    val filterState: LiveData<String> get() = _filterState
 
     init {
         saveCameraTarget()
@@ -40,8 +40,6 @@ class OverviewViewModel : ViewModel() {
             override fun onResponse(call: Call<FinalStoreDataModel>, response: Response<FinalStoreDataModel>) {
                 if (response.isSuccessful) {
                     _distanceStoreData.value = response.body()
-                } else {
-                    val result: FinalStoreDataModel? = response.body()
                 }
             }
             override fun onFailure(call: Call<FinalStoreDataModel>, t: Throwable) {
@@ -80,6 +78,5 @@ class OverviewViewModel : ViewModel() {
     fun changeFilterState(filterState : String = "all") {
         _filterState.value = filterState
     }
-
 }
 
