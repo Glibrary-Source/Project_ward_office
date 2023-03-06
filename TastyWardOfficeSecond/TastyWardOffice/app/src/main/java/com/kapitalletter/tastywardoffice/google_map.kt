@@ -20,13 +20,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.kapitalletter.tastywardoffice.databinding.FragmentGoogleMapBinding
-import com.kapitalletter.tastywardoffice.data.WardOfficeGeo
-import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.kapitalletter.tastywardoffice.data.WardOfficeGeo
+import com.kapitalletter.tastywardoffice.databinding.FragmentGoogleMapBinding
+import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
+
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
     GoogleMap.OnMarkerClickListener, View.OnClickListener {
@@ -46,6 +48,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var callback: OnBackPressedCallback
     var backPressTime: Long = 0
 
+
     //퍼미션 체크
     private val multiplePermissionCode = 100
     private val requiredPermissions = arrayOf(
@@ -64,7 +67,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             mContext = context
         }
 
-
         //뒤로가기 버튼 두번눌러야 종료
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -78,8 +80,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +89,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
 
+        //광고
+        MobileAds.initialize(requireContext()) {}
+
+
     }
+
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
@@ -125,7 +132,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     .title("현위치")
             )?.showInfoWindow()
         }
-
 
         return binding.root
     }
@@ -184,7 +190,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         overViewModel.cameraZoomState(GoogleMap.cameraPosition.zoom)
         overViewModel.saveCameraTarget(position)
         overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
-
     }
 
     //불러온 distanceStoreData를 마커로 찍어줌
@@ -225,6 +230,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                                     .title(i.document.storeId)
                                     .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
                             )
+
                         }
                     }
                     getString(R.string.japan) -> {
@@ -369,6 +375,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     override fun onInfoWindowClick(p0: Marker) {
         try{
+            if(MyGlobals.instance?.adMobCount!! % 5 == 0){
+                MyGlobals.instance?.fullAD!!.show(mContext as Activity)
+            }
             overViewModel.findStoreData(p0)
             val action = google_mapDirections.actionGoogleMapToDetailMenu3(
                 p0.title.toString(),
@@ -377,6 +386,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             )
             findNavController().navigate(action)
         } catch (e: Exception) {
+            Log.d("what?", e.message.toString())
 
         }
     }

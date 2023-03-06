@@ -1,12 +1,16 @@
 package com.kapitalletter.tastywardoffice
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.kapitalletter.tastywardoffice.adapter.StoreListAdapter
 import com.kapitalletter.tastywardoffice.databinding.FragmentRestaurantListBinding
 import com.kapitalletter.tastywardoffice.datamodel.Filterstore
@@ -29,6 +33,8 @@ class restaurant_list : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
+
+        MobileAds.initialize(mContext) {}
 
     }
 
@@ -62,9 +68,9 @@ class restaurant_list : Fragment() {
                     filterDocument.add(i)
                 }
             }
-            recyclerView.adapter = StoreListAdapter(filterDataset)
+            recyclerView.adapter = StoreListAdapter(filterDataset, mContext)
         } else {
-            recyclerView.adapter = StoreListAdapter(myDataset)
+            recyclerView.adapter = StoreListAdapter(myDataset, mContext)
         }
 
         return binding.root

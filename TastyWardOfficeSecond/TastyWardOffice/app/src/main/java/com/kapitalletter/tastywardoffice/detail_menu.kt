@@ -33,6 +33,12 @@ class detail_menu : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        MyGlobals.instance?.adMobCount = MyGlobals.instance?.adMobCount!! + 1
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -100,14 +106,6 @@ class detail_menu : Fragment() {
         }
         catch (e: Exception) {
             binding.locationText.text = ""
-//            try{
-//                overViewModel.locationTestApi("${storeDetailData.document.storeGEOPoints[0]},${storeDetailData.document.storeGEOPoints[1]}")
-//
-//                overViewModel.locationDetail.observe(viewLifecycleOwner) {
-//                    binding.locationText.text = overViewModel.locationDetail.value!!.substring(5)
-//                }
-//            }
-//            catch (e:Exception) {}
         }
 
 
@@ -157,9 +155,9 @@ class detail_menu : Fragment() {
     //뷰모델 데이터에서 일치하는 독아이디의 document 데이터를 가져옴
     private fun detailItemData() : Filterstore {
         val passingData = overViewModel.distanceStoreData.value!!.Filterstore
-        for(storedata in passingData){
-            if(storedata.document.docId == storeData.dogId) {
-                return storedata
+        for(storeData in passingData){
+            if(storeData.document.docId == this.storeData.dogId) {
+                return storeData
             }
         }
         return passingData[0]

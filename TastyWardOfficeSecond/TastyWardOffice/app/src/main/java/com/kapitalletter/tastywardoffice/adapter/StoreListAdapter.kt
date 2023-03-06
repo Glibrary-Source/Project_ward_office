@@ -1,6 +1,8 @@
 package com.kapitalletter.tastywardoffice.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +15,13 @@ import com.kapitalletter.tastywardoffice.bindImage
 import com.kapitalletter.tastywardoffice.datamodel.FinalStoreDataModel
 import com.kapitalletter.tastywardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
+import com.kapitalletter.tastywardoffice.MyGlobals
 
 class StoreListAdapter(
-    private val dataset: FinalStoreDataModel
+    private val dataset: FinalStoreDataModel,
+    private val context: Context
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
+
 
     init {
         notifyDataSetChanged()
@@ -79,6 +84,12 @@ class StoreListAdapter(
                 latlng = LatLng(item.document.storeGEOPoints[0], item.document.storeGEOPoints[1])
             )
             holder.itemView.findNavController().navigate(action)
+
+            //Gobal adMobCount 가 5이상일때 광고 표시함
+            if(MyGlobals.instance?.adMobCount!! % 5 == 0){
+                MyGlobals.instance?.fullAD!!.show(context as Activity)
+            }
+
         }
 
     }

@@ -48,17 +48,6 @@ class OverviewViewModel : ViewModel() {
         })
     }
 
-    //현재시점 지도 포지션 저장하는 매서드
-    fun saveCameraTarget(position: LatLng = LatLng(37.510402, 126.945915)) {
-        _cameraTarget.value = position
-    }
-
-    //사용자가 사용중이던 지도의 카메라 줌상태를 저장함
-    fun cameraZoomState(zoom: Float = 15f) {
-        _cameraZoom.value = zoom
-    }
-
-    //현재 마커 기준으로 서버에서 받아온 스토어 데이터를 찾아주는 메서드
     fun findStoreData(p0 : Marker): Documents {
         val passingData = distanceStoreData.value!!.Filterstore
         for (storedata in passingData) {
@@ -72,6 +61,17 @@ class OverviewViewModel : ViewModel() {
             }
         }
         return distanceStoreData.value!!.Filterstore[0].document
+    }
+
+
+    //현재시점 지도 포지션 저장하는 매서드
+    fun saveCameraTarget(position: LatLng = LatLng(37.510402, 126.945915)) {
+        _cameraTarget.value = position
+    }
+
+    //사용자가 사용중이던 지도의 카메라 줌상태를 저장함
+    fun cameraZoomState(zoom: Float = 15f) {
+        _cameraZoom.value = zoom
     }
 
     //필터 상태를 저장하는 매서드

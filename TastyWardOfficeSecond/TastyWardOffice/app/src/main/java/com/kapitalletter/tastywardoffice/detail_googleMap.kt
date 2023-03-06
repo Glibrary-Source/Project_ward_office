@@ -56,6 +56,8 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
         val bounds = builder.build()
         GoogleMap.setLatLngBoundsForCameraTarget(bounds)
 
+
+
     }
 
     override fun onStart() {
