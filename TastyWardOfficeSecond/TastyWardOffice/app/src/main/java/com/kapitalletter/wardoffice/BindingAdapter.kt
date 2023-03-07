@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 import android.widget.ImageView
 import androidx.core.net.toUri

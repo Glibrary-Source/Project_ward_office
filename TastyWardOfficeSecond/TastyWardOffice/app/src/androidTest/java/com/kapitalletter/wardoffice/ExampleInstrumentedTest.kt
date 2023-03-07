@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

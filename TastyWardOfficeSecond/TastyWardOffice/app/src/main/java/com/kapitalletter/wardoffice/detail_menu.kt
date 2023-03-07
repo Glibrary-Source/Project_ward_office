@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 import android.content.Context
 import android.location.Address
@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.kapitalletter.tastywardoffice.adapter.DetailMenuAdapter
-import com.kapitalletter.tastywardoffice.databinding.FragmentDetailMenuBinding
-import com.kapitalletter.tastywardoffice.datamodel.Filterstore
-import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.adapter.DetailMenuAdapter
+import com.kapitalletter.wardoffice.databinding.FragmentDetailMenuBinding
+import com.kapitalletter.wardoffice.datamodel.Filterstore
+import com.kapitalletter.wardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
@@ -44,23 +44,17 @@ class detail_menu : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        //디테일 메뉴 프래그먼트 바인딩
         val binding = FragmentDetailMenuBinding.inflate(inflater)
 
-        //뷰모델 바인딩
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
 
-        //detailItemData() 함수를 통해 뷰모델어서 뽑아온 스토어 데이터를 변수에 저장
         val storeDetailData = detailItemData()
 
-        //각각의 뷰 모양 둥글게
         binding.navBar.clipToOutline = true
         binding.viewPager2.clipToOutline = true
 
-        //각각의 뷰에 데이터 입력
         binding.storeName.text = storeData.storename
 
-        //뷰페이저 슬라이드 넘기기
         binding.viewPager2.adapter = DetailMenuAdapter(storeDetailData.document)
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
@@ -72,7 +66,6 @@ class detail_menu : Fragment() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                //주의 리스트사이즈 0일때
                 val pictureListSize: Int = if(storeDetailData.document.storeMenuPictureUrlsMenu.isEmpty()) {
                     3
                 } else {
@@ -96,11 +89,9 @@ class detail_menu : Fragment() {
             }
         })
 
-        //디테일 메뉴 인디케이터 설정
         val tabLayout = binding.tabLayout
         TabLayoutMediator(tabLayout, binding.viewPager2) { _, _ -> }.attach()
 
-        //상세주소 만약 geocode getlocation 있으면 상세주소 Text뷰에 없으면 api 웹에서 요청하자
         try{
             binding.locationText.text = locationAddress()?.get(0)?.getAddressLine(0)!!.substring(5)
         }
@@ -108,11 +99,8 @@ class detail_menu : Fragment() {
             binding.locationText.text = ""
         }
 
-
-        //네비게이션 프래그먼트 데이터 전달을 위해 번들 사용
         arguments = Bundle()
 
-        //뷰를 처음 불러올때 메뉴부터 불러오기
         parentFragmentManager.beginTransaction().replace(
             R.id.nav_bar,
             menu_image().apply {
@@ -122,7 +110,6 @@ class detail_menu : Fragment() {
             }
         ).commit()
 
-        //메뉴 네비게이션바 클릭시 화면 전환
         binding.menuButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
@@ -134,7 +121,6 @@ class detail_menu : Fragment() {
             ).commit()
         }
 
-        //지도 네비게이션바 클릭시 화면 전환
         binding.mapButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
@@ -152,7 +138,6 @@ class detail_menu : Fragment() {
         return binding.root
     }
 
-    //뷰모델 데이터에서 일치하는 독아이디의 document 데이터를 가져옴
     private fun detailItemData() : Filterstore {
         val passingData = overViewModel.distanceStoreData.value!!.Filterstore
         for(storeData in passingData){
@@ -163,7 +148,6 @@ class detail_menu : Fragment() {
         return passingData[0]
     }
 
-    //주소 텍스트를 위한 코드
     private fun locationAddress(): List<Address>? {
         val geocoder = Geocoder(mContext, Locale.KOREA)
         return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)!!

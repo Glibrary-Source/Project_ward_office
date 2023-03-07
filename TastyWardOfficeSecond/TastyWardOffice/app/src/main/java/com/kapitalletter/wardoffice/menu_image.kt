@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.kapitalletter.tastywardoffice.databinding.FragmentMenuImageBinding
+import com.kapitalletter.wardoffice.databinding.FragmentMenuImageBinding
 
 
 class menu_image : Fragment() {

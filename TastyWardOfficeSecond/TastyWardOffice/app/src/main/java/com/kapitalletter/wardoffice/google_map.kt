@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -25,9 +25,9 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import com.kapitalletter.tastywardoffice.data.WardOfficeGeo
-import com.kapitalletter.tastywardoffice.databinding.FragmentGoogleMapBinding
-import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.data.WardOfficeGeo
+import com.kapitalletter.wardoffice.databinding.FragmentGoogleMapBinding
+import com.kapitalletter.wardoffice.overview.OverviewViewModel
 
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
@@ -48,15 +48,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var callback: OnBackPressedCallback
     var backPressTime: Long = 0
 
-
-    //퍼미션 체크
     private val multiplePermissionCode = 100
     private val requiredPermissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    //toast 즉각반응을 위해 전역변수로 설정
     private var toast: Toast? = null
 
 
@@ -67,7 +64,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             mContext = context
         }
 
-        //뒤로가기 버튼 두번눌러야 종료
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if(backPressTime + 3000 > System.currentTimeMillis()) {
@@ -89,7 +85,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
 
-        //광고
         MobileAds.initialize(requireContext()) {}
 
 
@@ -107,10 +102,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
 
-        //내위치 확인
         checkLocationPermission()
 
-        //내위치 찍고 그쪽으로 카메라 이동하고 마커는 파란색으로 점찍기
         binding.myLocationButton.setOnClickListener {
             try{
 
@@ -121,18 +114,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         GoogleMap.cameraPosition.zoom
                     )
                 )
-
-//                val currentDrawable =
-//                    resources.getDrawable(R.drawable.marker_icons_blue_dot, null) as BitmapDrawable
-//                val img = currentDrawable.bitmap
-//                val currentLocationMarker = Bitmap.createScaledBitmap(img, 40, 40, false)
-//
-//                GoogleMap.addMarker(
-//                    MarkerOptions()
-//                        .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
-//                        .position(LatLng(latiTude, longItude))
-//                        .title("현위치")
-//                )?.showInfoWindow()
 
             } catch (e: Exception) {
                 Toast.makeText(mContext, "위치 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
@@ -146,14 +127,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
 
-        //구글 지도 한국으로 범위 고정
         val builder = LatLngBounds.Builder()
-        builder.include(LatLng(33.1422, 124.0384)) // Southwest corner of South Korea
-        builder.include(LatLng(38.6120, 131.2361)) // Northeast corner of South Korea
+        builder.include(LatLng(33.1422, 124.0384))
+        builder.include(LatLng(38.6120, 131.2361))
         val bounds = builder.build()
         GoogleMap.setLatLngBoundsForCameraTarget(bounds)
 
-        //이전에 사용자가 보던 위치
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 overViewModel.cameraTarget.value!!,
@@ -161,22 +140,18 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             )
         )
 
-        //클릭 리스너들
         googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
 
-        //지도이동시 다시 storesdata 요청과 함께 요청된 데이터 좌표 마커찍기
         googleMap.setOnCameraIdleListener {
 
-            //지도에서 마커 초기화
             googleMap.clear()
             getOverviewLocationData()
 
-            //현위치 파란점으로 표시
             val currentDrawable =
-                resources.getDrawable(R.drawable.marker_icons_blue_dot, null) as BitmapDrawable
+                resources.getDrawable(R.drawable.marker_icons_mylocation, null) as BitmapDrawable
             val img = currentDrawable.bitmap
-            val currentLocationMarker = Bitmap.createScaledBitmap(img, 40, 40, false)
+            val currentLocationMarker = Bitmap.createScaledBitmap(img, 80, 80, false)
 
             GoogleMap.addMarker(
                 MarkerOptions()
@@ -185,17 +160,15 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     .title("현위치")
             )
 
-            //지도 이동하면 메뉴 필터를 꺼버림
+
             binding.layoutExpand.visibility = View.GONE
             binding.layoutExpand2.visibility = View.GONE
             binding.layoutExpand3.visibility = View.GONE
         }
 
-        //distance데이터에 옵저버 설치해서 데이터 바뀔때마다 second() 함수를 불러와서 마커를 찍음
         overViewModel.distanceStoreData.observe(this) {
             second()
             if (overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
-                //이전 toast 캔슬
                 toast?.cancel()
                 toast = Toast.makeText(mContext, "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
                 toast?.show()
@@ -203,7 +176,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         }
     }
 
-    //서버에서 스토어 데이터를 미리 불러옴
     private fun getOverviewLocationData() {
         val position = GoogleMap.cameraPosition.target
         overViewModel.cameraZoomState(GoogleMap.cameraPosition.zoom)
@@ -211,7 +183,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
     }
 
-    //불러온 distanceStoreData를 마커로 찍어줌
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun second() {
         try {
@@ -219,10 +190,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 val storeLatLng =
                     LatLng(i.document.storeGEOPoints[0], i.document.storeGEOPoints[1])
 
-                //마커 이미지 변경
                 val storeDrawable =
                     when (i.document.storeTitle) {
-                        //
                         getString(R.string.japan) -> R.drawable.marker_icons_food_sushi
                         getString(R.string.chines) -> R.drawable.marker_icons_food_china
                         getString(R.string.korean) -> R.drawable.marker_icons_food_korean
@@ -239,7 +208,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 val b = bitMapDraw.bitmap
                 val smallMarker = Bitmap.createScaledBitmap(b, 84, 84, false)
 
-                //지도에 마커 작성
                 when (overViewModel.filterState.value) {
                     getString(R.string.korean) -> {
                         if (i.document.storeTitle == getString(R.string.korean)) {
@@ -348,7 +316,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     }
 
 
-    //퍼미션 체크 및 권한 요청 후 현위치로 이동 함수
     @SuppressLint("MissingPermission")
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
@@ -410,7 +377,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         }
     }
 
-    //마커 클릭시 그쪽으로 확대 멈춤
     override fun onMarkerClick(p0: Marker): Boolean {
         p0.showInfoWindow()
         return true
@@ -444,11 +410,11 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onStart() {
         super.onStart()
 
-        //메뉴, 지역 필터 버튼
+
         binding.filterWardOfficeButton.setOnClickListener(this)
         binding.titleButton.setOnClickListener(this)
 
-        //메뉴 필터
+
         binding.filterButtonKorean.setOnClickListener(this)
         binding.filterButtonJapan.setOnClickListener(this)
         binding.filterButtonChina.setOnClickListener(this)
@@ -460,7 +426,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         binding.filterButtonBar.setOnClickListener(this)
         binding.filterButtonAll.setOnClickListener(this)
 
-        //지역 필터
+
         binding.filterButtonGangnam.setOnClickListener(this)
         binding.filterButtonGandong.setOnClickListener(this)
         binding.filterButtonGangbuk.setOnClickListener(this)
@@ -490,10 +456,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         mView.onStart()
     }
 
-    //필터 클릭리스너
+
     override fun onClick(p0: View?) {
         when (p0?.id) {
-            //메뉴 필터 클릭리스너
+
             R.id.filter_button_all -> {
                 overViewModel.changeFilterState(getString(R.string.all))
                 binding.layoutExpand.visibility = View.GONE
@@ -555,12 +521,12 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 second()
             }
 
-            //지역 필터 변환
+
             R.id.title_button -> {
                 if (binding.layoutExpand.visibility == View.VISIBLE) {
                     binding.layoutExpand.visibility = View.GONE
 
-                    //메뉴 클릭시 지역 필터 레이아웃 끄기
+
                     binding.layoutExpand2.visibility = View.GONE
                     binding.layoutExpand3.visibility = View.GONE
                     binding.total.visibility = View.GONE
@@ -569,7 +535,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 } else {
                     binding.layoutExpand.visibility = View.VISIBLE
 
-                    //메뉴 클릭시 지역 필터 레이아웃 끄기
+
                     binding.layoutExpand2.visibility = View.GONE
                     binding.layoutExpand3.visibility = View.GONE
                     binding.total.visibility = View.GONE
@@ -586,7 +552,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     binding.layoutExpand3.visibility = View.GONE
                     binding.total.visibility = View.GONE
 
-                    //지역 클릭시 메뉴 필터 레이아웃 끄기
+
                     binding.layoutExpand.visibility = View.GONE
 
                     binding.imgMore1.animate().duration = 200
@@ -595,7 +561,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     binding.layoutExpand3.visibility = View.VISIBLE
                     binding.total.visibility = View.VISIBLE
 
-                    //지역 클릭시 메뉴 필터 레이아웃 끄기
+
                     binding.layoutExpand.visibility = View.GONE
 
                     binding.imgMore1.animate().duration = 200
@@ -876,7 +842,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.layoutExpand2.visibility = View.GONE
                 binding.layoutExpand3.visibility = View.GONE
             }
-            //디저트만 남기고 삭제
+
             else -> {
                 overViewModel.changeFilterState(getString(R.string.dessert))
                 binding.layoutExpand.visibility = View.GONE
@@ -886,8 +852,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         }
     }
 
-
-    //뒤로가기 버튼 두번 눌러야 종료
     override fun onDetach() {
         super.onDetach()
         callback.remove()

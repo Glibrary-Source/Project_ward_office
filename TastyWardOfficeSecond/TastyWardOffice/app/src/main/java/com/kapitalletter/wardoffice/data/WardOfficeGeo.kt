@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice.data
+package com.kapitalletter.wardoffice.data
 
 import com.google.android.gms.maps.model.LatLng
 

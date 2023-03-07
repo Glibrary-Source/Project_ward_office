@@ -1,21 +1,18 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.kapitalletter.tastywardoffice.adapter.StoreListAdapter
-import com.kapitalletter.tastywardoffice.databinding.FragmentRestaurantListBinding
-import com.kapitalletter.tastywardoffice.datamodel.Filterstore
-import com.kapitalletter.tastywardoffice.datamodel.FinalStoreDataModel
-import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.adapter.StoreListAdapter
+import com.kapitalletter.wardoffice.databinding.FragmentRestaurantListBinding
+import com.kapitalletter.wardoffice.datamodel.Filterstore
+import com.kapitalletter.wardoffice.datamodel.FinalStoreDataModel
+import com.kapitalletter.wardoffice.overview.OverviewViewModel
 
 class restaurant_list : Fragment() {
 

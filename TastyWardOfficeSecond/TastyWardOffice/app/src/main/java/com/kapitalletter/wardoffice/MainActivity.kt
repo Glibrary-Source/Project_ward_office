@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.kapitalletter.tastywardoffice.databinding.ActivityMainBinding
+import com.kapitalletter.wardoffice.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        //전면광고 + 배너광고용
         MobileAds.initialize(this) {}
         mAdView = binding.adView
         adRequest = AdRequest.Builder().build()
@@ -50,12 +49,10 @@ class MainActivity : AppCompatActivity() {
 
         getAD()
 
-        //하단 네비바 관련 코드
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        //네비바 액션 효과
         val options = NavOptions.Builder()
             .setLaunchSingleTop(true)
             .setEnterAnim(R.anim.enter_from_right)
@@ -65,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             .setPopUpTo(navController.graph.startDestinationId, false)
             .build()
 
-        //네비바 선택시 화면전환
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.google_map -> {
@@ -80,11 +76,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //광고 서버에서 불러오기
     private fun getAD() {
         InterstitialAd.load(
             this,
-            "ca-app-pub-3940256099942544/1033173712",
+            "ca-app-pub-6701701941192034/1024816172",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(p0: LoadAdError) {

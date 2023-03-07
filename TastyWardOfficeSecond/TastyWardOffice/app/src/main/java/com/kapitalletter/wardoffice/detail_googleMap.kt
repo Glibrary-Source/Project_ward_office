@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice
+package com.kapitalletter.wardoffice
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.kapitalletter.tastywardoffice.databinding.FragmentDetailGoogleMapBinding
-import com.kapitalletter.tastywardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.databinding.FragmentDetailGoogleMapBinding
+import com.kapitalletter.wardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -51,8 +51,8 @@ class detail_googleMap : Fragment(), OnMapReadyCallback {
         GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 16f))
 
         val builder = LatLngBounds.Builder()
-        builder.include(current) // Southwest corner of South Korea
-        builder.include(current) // Northeast corner of South Korea
+        builder.include(current)
+        builder.include(current)
         val bounds = builder.build()
         GoogleMap.setLatLngBoundsForCameraTarget(bounds)
 

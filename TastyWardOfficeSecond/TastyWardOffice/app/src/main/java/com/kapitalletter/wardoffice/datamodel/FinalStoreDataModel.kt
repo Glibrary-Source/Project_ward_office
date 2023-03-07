@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice.datamodel
+package com.kapitalletter.wardoffice.datamodel
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

@@ -1,11 +1,11 @@
-package com.kapitalletter.tastywardoffice.overview
+package com.kapitalletter.wardoffice.overview
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kapitalletter.tastywardoffice.datamodel.*
-import com.kapitalletter.tastywardoffice.network.*
+import com.kapitalletter.wardoffice.datamodel.*
+import com.kapitalletter.wardoffice.network.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import retrofit2.Call
@@ -32,7 +32,6 @@ class OverviewViewModel : ViewModel() {
         changeFilterState()
     }
 
-    //거리별 음식점 마커 불러오는 매서드
     fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
@@ -63,18 +62,14 @@ class OverviewViewModel : ViewModel() {
         return distanceStoreData.value!!.Filterstore[0].document
     }
 
-
-    //현재시점 지도 포지션 저장하는 매서드
     fun saveCameraTarget(position: LatLng = LatLng(37.510402, 126.945915)) {
         _cameraTarget.value = position
     }
 
-    //사용자가 사용중이던 지도의 카메라 줌상태를 저장함
     fun cameraZoomState(zoom: Float = 15f) {
         _cameraZoom.value = zoom
     }
 
-    //필터 상태를 저장하는 매서드
     fun changeFilterState(filterState : String = "all") {
         _filterState.value = filterState
     }

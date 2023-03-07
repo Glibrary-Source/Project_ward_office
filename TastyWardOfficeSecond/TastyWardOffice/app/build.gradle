@@ -15,11 +15,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.kapitalletter.tastywardoffice"
+        applicationId "com.kapitalletter.wardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 15
-        versionName "1.0"
+        versionCode 1
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -28,9 +28,9 @@ android {
     buildTypes {
         //ci/cd 조심
         debug {
-            debuggable true
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
         }
         release {

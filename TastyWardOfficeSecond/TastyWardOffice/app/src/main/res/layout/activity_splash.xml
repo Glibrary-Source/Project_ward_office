@@ -23,6 +23,7 @@
                     android:layout_height="66dp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_marginStart="28dp"
                     app:srcCompat="@drawable/image_2"
                     tools:ignore="ContentDescription" />
 

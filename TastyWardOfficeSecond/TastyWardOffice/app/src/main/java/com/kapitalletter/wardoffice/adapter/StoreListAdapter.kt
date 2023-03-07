@@ -1,4 +1,4 @@
-package com.kapitalletter.tastywardoffice.adapter
+package com.kapitalletter.wardoffice.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,12 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.kapitalletter.tastywardoffice.R
-import com.kapitalletter.tastywardoffice.bindImage
-import com.kapitalletter.tastywardoffice.datamodel.FinalStoreDataModel
-import com.kapitalletter.tastywardoffice.restaurant_listDirections
+import com.kapitalletter.wardoffice.R
+import com.kapitalletter.wardoffice.bindImage
+import com.kapitalletter.wardoffice.datamodel.FinalStoreDataModel
+import com.kapitalletter.wardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
-import com.kapitalletter.tastywardoffice.MyGlobals
+import com.kapitalletter.wardoffice.MyGlobals
 
 class StoreListAdapter(
     private val dataset: FinalStoreDataModel,
@@ -85,10 +85,11 @@ class StoreListAdapter(
             )
             holder.itemView.findNavController().navigate(action)
 
-            //Gobal adMobCount 가 5이상일때 광고 표시함
-            if(MyGlobals.instance?.adMobCount!! % 5 == 0){
-                MyGlobals.instance?.fullAD!!.show(context as Activity)
-            }
+            try{
+                if (MyGlobals.instance?.adMobCount!! % 5 == 0) {
+                    MyGlobals.instance?.fullAD!!.show(context as Activity)
+                }
+            }catch (e:Exception) {}
 
         }
 

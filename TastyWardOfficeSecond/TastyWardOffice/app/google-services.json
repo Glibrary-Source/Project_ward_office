@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1039827215896:android:1ba1e01e836e3b81f9056d",
+        "mobilesdk_app_id": "1:1039827215896:android:a64db7295b36e18ef9056d",
         "android_client_info": {
-          "package_name": "com.kapitalletter.tastywardoffice"
+          "package_name": "com.kapitalletter.wardoffice"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1039827215896-etivit01mr56i7kd7e130mp8llovs1l7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kapitalletter.wardoffice",
+            "certificate_hash": "81085ced6952cc4860036b0070940c7b32330902"
+          }
+        },
         {
           "client_id": "1039827215896-540nal06o0kkugd6s5e7j0s69s60hd2p.apps.googleusercontent.com",
           "client_type": 3

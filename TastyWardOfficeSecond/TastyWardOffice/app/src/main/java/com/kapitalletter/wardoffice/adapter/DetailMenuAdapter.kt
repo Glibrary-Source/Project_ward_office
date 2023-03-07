@@ -1,13 +1,13 @@
-package com.kapitalletter.tastywardoffice.adapter
+package com.kapitalletter.wardoffice.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.kapitalletter.tastywardoffice.R
-import com.kapitalletter.tastywardoffice.bindImage
-import com.kapitalletter.tastywardoffice.datamodel.Documents
+import com.kapitalletter.wardoffice.R
+import com.kapitalletter.wardoffice.bindImage
+import com.kapitalletter.wardoffice.datamodel.Documents
 
 class DetailMenuAdapter(
     private val dataset: Documents
