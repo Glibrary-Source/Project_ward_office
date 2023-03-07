@@ -30,20 +30,19 @@
                 android:layout_height="26dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/image_2"
-                tools:layout_editor_absoluteX="194dp"
-                tools:layout_editor_absoluteY="15dp"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/navbar_title"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/notoserifkr_bold"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
                 android:text="@string/title_name"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
@@ -73,7 +72,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_gravity="bottom"
             app:itemIconSize="20dp"
@@ -93,7 +92,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6758764449876389/2899019098">
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
     </com.google.android.gms.ads.AdView>
 
 </LinearLayout>

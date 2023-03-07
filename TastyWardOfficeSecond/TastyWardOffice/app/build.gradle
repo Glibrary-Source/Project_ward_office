@@ -18,7 +18,7 @@ android {
         applicationId "com.kapitalletter.tastywardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 14
+        versionCode 15
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

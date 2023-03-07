@@ -50,13 +50,13 @@ class OverviewViewModel : ViewModel() {
 
     fun findStoreData(p0 : Marker): Documents {
         val passingData = distanceStoreData.value!!.Filterstore
-        for (storedata in passingData) {
+        for (storeData in passingData) {
             val storePostion = LatLng(
-                storedata.document.storeGEOPoints[0],
-                storedata.document.storeGEOPoints[1]
+                storeData.document.storeGEOPoints[0],
+                storeData.document.storeGEOPoints[1]
             )
             if (storePostion == p0.position) {
-                _markerStoreData.value = storedata.document
+                _markerStoreData.value = storeData.document
                 return _markerStoreData.value!!
             }
         }

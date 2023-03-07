@@ -112,25 +112,31 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         //내위치 찍고 그쪽으로 카메라 이동하고 마커는 파란색으로 점찍기
         binding.myLocationButton.setOnClickListener {
-            checkLocationPermission()
-            GoogleMap.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    LatLng(latiTude, longItude),
-                    GoogleMap.cameraPosition.zoom
+            try{
+
+                checkLocationPermission()
+                GoogleMap.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        LatLng(latiTude, longItude),
+                        GoogleMap.cameraPosition.zoom
+                    )
                 )
-            )
 
-            val currentDrawable =
-                resources.getDrawable(R.drawable.marker_icons_blue_dot, null) as BitmapDrawable
-            val img = currentDrawable.bitmap
-            val currentLocationMarker = Bitmap.createScaledBitmap(img, 40, 40, false)
+//                val currentDrawable =
+//                    resources.getDrawable(R.drawable.marker_icons_blue_dot, null) as BitmapDrawable
+//                val img = currentDrawable.bitmap
+//                val currentLocationMarker = Bitmap.createScaledBitmap(img, 40, 40, false)
+//
+//                GoogleMap.addMarker(
+//                    MarkerOptions()
+//                        .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
+//                        .position(LatLng(latiTude, longItude))
+//                        .title("현위치")
+//                )?.showInfoWindow()
 
-            GoogleMap.addMarker(
-                MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
-                    .position(LatLng(latiTude, longItude))
-                    .title("현위치")
-            )?.showInfoWindow()
+            } catch (e: Exception) {
+                Toast.makeText(mContext, "위치 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
@@ -165,6 +171,19 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             //지도에서 마커 초기화
             googleMap.clear()
             getOverviewLocationData()
+
+            //현위치 파란점으로 표시
+            val currentDrawable =
+                resources.getDrawable(R.drawable.marker_icons_blue_dot, null) as BitmapDrawable
+            val img = currentDrawable.bitmap
+            val currentLocationMarker = Bitmap.createScaledBitmap(img, 40, 40, false)
+
+            GoogleMap.addMarker(
+                MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
+                    .position(LatLng(latiTude, longItude))
+                    .title("현위치")
+            )
 
             //지도 이동하면 메뉴 필터를 꺼버림
             binding.layoutExpand.visibility = View.GONE
