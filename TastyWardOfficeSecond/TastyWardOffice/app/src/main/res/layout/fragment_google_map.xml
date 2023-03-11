@@ -15,6 +15,9 @@
         tools:layout="@layout/fragment_google_map" />
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
         android:id="@+id/imgMore2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +35,7 @@
                 android:id="@+id/filter_ward_office_button"
                 android:layout_width="70dp"
                 android:layout_height="48dp"
-                android:textSize="14sp"
+                android:textSize="20dp"
                 android:text="@string/wardLocation"
                 android:textStyle="bold"
                 android:background="@drawable/border_imgview"
@@ -60,6 +63,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/gangnam"/>
@@ -69,6 +73,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/gangdong"/>
@@ -77,6 +82,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/gangbuk"/>
@@ -85,6 +91,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/gangseo"/>
@@ -93,6 +100,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/gwanak"/>
@@ -101,6 +109,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/gwangjin"/>
@@ -110,6 +119,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/guro"/>
@@ -118,6 +128,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/geumcheon"/>
@@ -126,6 +137,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/nowon"/>
@@ -134,6 +146,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/dobong"/>
@@ -142,6 +155,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/ddm"/>
@@ -150,6 +164,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/dongjak"/>
@@ -158,6 +173,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/mapo"/>
@@ -178,6 +194,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/sdm"/>
@@ -187,6 +204,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/seocho"/>
@@ -196,6 +214,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/sd"
@@ -206,6 +225,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/sb"/>
@@ -215,6 +235,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/songpa"/>
@@ -225,6 +246,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/yangcheon"/>
@@ -234,6 +256,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/ydp"/>
@@ -243,6 +266,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/yongsan"/>
@@ -252,6 +276,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/ep"/>
@@ -261,6 +286,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/jongno"/>
@@ -270,6 +296,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/junggu"/>
@@ -279,6 +306,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:textSize="18dp"
                     android:background="@drawable/border_list_imgview"
                     android:textStyle="bold"
                     android:text="@string/jungnang"/>
@@ -305,7 +333,7 @@
                 android:id="@+id/title_button"
                 android:layout_width="70dp"
                 android:layout_height="48dp"
-                android:textSize="14sp"
+                android:textSize="20dp"
                 android:text="@string/menu"
                 android:textStyle="bold"
                 android:background="@drawable/border_imgview"
@@ -326,6 +354,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/buttonAll"/>
@@ -335,6 +364,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/japan"/>
@@ -343,6 +373,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/korean"/>
@@ -351,6 +382,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/chines"/>
@@ -359,6 +391,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/kimbap"/>
@@ -367,6 +400,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/western"/>
@@ -375,6 +409,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/dessert"/>
@@ -383,6 +418,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/asian"/>
@@ -391,6 +427,7 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/chiken"/>
@@ -399,12 +436,15 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
+                android:textSize="18dp"
                 android:background="@drawable/border_list_imgview"
                 android:textStyle="bold"
                 android:text="@string/bar"/>
         </LinearLayout>
     </LinearLayout>
-<!--필터 메뉴-->
+    <!--필터 메뉴-->
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

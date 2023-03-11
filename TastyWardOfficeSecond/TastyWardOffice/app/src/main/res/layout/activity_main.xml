@@ -26,9 +26,10 @@
 
             <ImageView
                 android:id="@+id/navbar_img"
-                android:layout_width="24dp"
-                android:layout_height="26dp"
+                android:layout_width="24sp"
+                android:layout_height="26sp"
                 android:layout_gravity="center"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/image_2"
                 tools:ignore="ContentDescription" />
 
