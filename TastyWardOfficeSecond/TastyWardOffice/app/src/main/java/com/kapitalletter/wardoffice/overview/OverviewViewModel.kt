@@ -66,7 +66,7 @@ class OverviewViewModel : ViewModel() {
         _cameraTarget.value = position
     }
 
-    fun cameraZoomState(zoom: Float = 15f) {
+    fun cameraZoomState(zoom: Float = 17f) {
         _cameraZoom.value = zoom
     }
 
