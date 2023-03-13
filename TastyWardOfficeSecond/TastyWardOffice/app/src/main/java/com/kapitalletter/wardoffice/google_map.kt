@@ -105,8 +105,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         checkLocationPermission()
 
         binding.myLocationButton.setOnClickListener {
-            try{
 
+            try{
                 checkLocationPermission()
                 GoogleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
@@ -118,6 +118,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             } catch (e: Exception) {
                 Toast.makeText(mContext, "위치 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
+
         }
 
         return binding.root
@@ -146,6 +147,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         googleMap.setOnCameraIdleListener {
 
             googleMap.clear()
+
             getOverviewLocationData()
 
             val currentDrawable =
@@ -159,7 +161,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     .position(LatLng(latiTude, longItude))
                     .title("현위치")
             )
-
 
             binding.layoutExpand.visibility = View.GONE
             binding.layoutExpand2.visibility = View.GONE
@@ -372,7 +373,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             )
             findNavController().navigate(action)
         } catch (e: Exception) {
-            Log.d("what?", e.message.toString())
 
         }
     }

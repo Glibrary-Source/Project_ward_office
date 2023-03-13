@@ -56,6 +56,7 @@ class restaurant_list : Fragment() {
         if(myDataset.Filterstore.isEmpty()) {
             binding.statusImage.setImageResource(R.drawable.emptylist)
         }
+
         val filterDocument = mutableListOf<Filterstore>()
         val filterDataset = FinalStoreDataModel(filterDocument)
 
