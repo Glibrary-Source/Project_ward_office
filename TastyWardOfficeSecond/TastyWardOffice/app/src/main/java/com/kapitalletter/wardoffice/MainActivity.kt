@@ -2,6 +2,7 @@ package com.kapitalletter.wardoffice
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -79,14 +80,16 @@ class MainActivity : AppCompatActivity() {
     private fun getAD() {
         InterstitialAd.load(
             this,
-            "ca-app-pub-6701701941192034/1024816172",
+            "ca-app-pub-3940256099942544/1033173712",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(p0: LoadAdError) {
+                    Log.d("adtest", p0.toString())
                     mInterstitialAd = null
                 }
 
                 override fun onAdLoaded(p0: InterstitialAd) {
+                    Log.d("adtest", p0.toString())
                     mInterstitialAd = p0
                     MyGlobals.instance?.fullAD = mInterstitialAd
                 }

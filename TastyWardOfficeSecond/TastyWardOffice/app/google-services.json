@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1039827215896-2vldav4aaqbu2l5ivj31ec3pd3ek4m46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kapitalletter.wardoffice",
+            "certificate_hash": "26fc5b4688bee57f04a6aa88d5b535160c73719f"
+          }
+        },
+        {
+          "client_id": "1039827215896-47uji8c5hrsmnqh6bbh4ihvvehp6as33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kapitalletter.wardoffice",
+            "certificate_hash": "fcbfff99450154333a9019e2b6bcb55803971b1f"
+          }
+        },
+        {
           "client_id": "1039827215896-etivit01mr56i7kd7e130mp8llovs1l7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

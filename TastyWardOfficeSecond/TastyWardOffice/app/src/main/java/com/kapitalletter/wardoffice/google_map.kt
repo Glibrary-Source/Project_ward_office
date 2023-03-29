@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.location.*
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +55,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     private var toast: Toast? = null
 
+//    private val markerMutableList: MutableList<Marker?> = mutableListOf()
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -98,6 +99,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     ): View {
 
         binding = FragmentGoogleMapBinding.inflate(inflater)
+
         mView = binding.mapView
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
@@ -302,12 +304,14 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         }
                     }
                     else -> {
+
                         GoogleMap.addMarker(
                             MarkerOptions()
                                 .position(storeLatLng)
                                 .title(i.document.storeId)
                                 .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
                         )
+
                     }
                 }
             }
@@ -356,7 +360,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 )
             }
             Toast.makeText(mContext, getString(R.string.locationcheck), Toast.LENGTH_SHORT).show()
-            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 15f)
+            CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 17f)
         }
     }
 
@@ -572,7 +576,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangnam)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -583,7 +587,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangdong)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -594,7 +598,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangbuk)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -605,7 +609,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangseo)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -616,7 +620,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gwanak)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -627,7 +631,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gwangjin)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -638,7 +642,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.guro)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -649,7 +653,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.geumcheon)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -660,7 +664,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.nowon)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -671,7 +675,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.dobong)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -682,7 +686,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.ddm)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -693,7 +697,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.dongjak)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -704,7 +708,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.mapo)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -715,7 +719,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.sdm)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -726,7 +730,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.seocho)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -737,7 +741,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.sd)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -748,7 +752,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.sb)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -759,7 +763,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.songpa)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -770,7 +774,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.yangcheon)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -781,7 +785,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.ydp)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -792,7 +796,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.yongsan)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -803,7 +807,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.ep)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -814,7 +818,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.jongno)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -825,7 +829,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.junggu)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE
@@ -836,7 +840,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.jungnang)
-                        ), 15f
+                        ), 17f
                     )
                 )
                 binding.layoutExpand2.visibility = View.GONE

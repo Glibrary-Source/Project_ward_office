@@ -3,6 +3,7 @@ package com.kapitalletter.wardoffice.adapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -91,7 +92,9 @@ class StoreListAdapter(
                 if (MyGlobals.instance?.adMobCount!! % 5 == 0) {
                     MyGlobals.instance?.fullAD!!.show(context as Activity)
                 }
-            }catch (e:Exception) {}
+            } catch (e:Exception) {
+
+            }
 
         }
 

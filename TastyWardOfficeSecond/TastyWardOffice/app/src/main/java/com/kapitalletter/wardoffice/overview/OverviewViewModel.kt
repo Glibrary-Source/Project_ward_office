@@ -1,6 +1,5 @@
 package com.kapitalletter.wardoffice.overview
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -66,7 +65,7 @@ class OverviewViewModel : ViewModel() {
         _cameraTarget.value = position
     }
 
-    fun cameraZoomState(zoom: Float = 15f) {
+    fun cameraZoomState(zoom: Float = 17f) {
         _cameraZoom.value = zoom
     }
 
