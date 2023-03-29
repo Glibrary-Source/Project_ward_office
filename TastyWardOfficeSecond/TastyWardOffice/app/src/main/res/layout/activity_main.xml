@@ -18,34 +18,40 @@
         android:theme="?attr/actionBarTheme"
         tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/navbar_img"
-            android:layout_width="24dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/image_2"
-            tools:layout_editor_absoluteX="194dp"
-            tools:layout_editor_absoluteY="15dp"
-            tools:ignore="ContentDescription" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center" >
 
-        <TextView
-            android:id="@+id/navbar_title"
-            android:layout_width="85dp"
-            android:layout_height="40dp"
-            android:fontFamily="@font/notoserifkr_bold"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:text="@string/title_name"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/navbar_img"
+                android:layout_width="24sp"
+                android:layout_height="26sp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/image_2"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/navbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notoserifkr_bold"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/title_name"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="11">
+        android:layout_weight="10">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -59,16 +65,36 @@
 
     </FrameLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_gravity="bottom"
+            app:itemIconSize="20dp"
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_menu" />
+
+    </FrameLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/white"
-        app:itemIconSize="20dp"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/bottom_menu" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>
 

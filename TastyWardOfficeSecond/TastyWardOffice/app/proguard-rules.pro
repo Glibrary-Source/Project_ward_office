@@ -68,5 +68,5 @@
 # is used.
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 
--keep class com.kapitalletter.tastywardoffice.datamodel.** {*; }
--keep class com.kapitalletter.tastywardoffice.network.** {*; }
+-keep class com.kapitalletter.wardoffice.datamodel.** {*; }
+-keep class com.kapitalletter.wardoffice.network.** {*; }

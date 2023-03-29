@@ -10,7 +10,7 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="MissingConstraints"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
         tools:layout="@layout/fragment_detail_google_map" />
 
 </FrameLayout>

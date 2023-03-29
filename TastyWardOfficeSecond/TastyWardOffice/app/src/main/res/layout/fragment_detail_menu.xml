@@ -25,7 +25,7 @@
                 android:layout_width="366dp"
                 android:layout_height="361dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/border_imgview"
+                android:background="@drawable/border_detailmenu_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="@color/white"
-                app:tabBackground="@drawable/tab_selector"
+                app:tabBackground="@drawable/selecter_viewpager"
                 app:layout_constraintTop_toBottomOf="@id/viewPager2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +43,8 @@
 
             <TextView
                 android:id="@+id/store_name"
-                android:layout_width="184dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="46dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -66,32 +66,50 @@
                 android:id="@+id/nav_button"
                 android:layout_width="366dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="130dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/viewPager2"
-                app:layout_constraintTop_toBottomOf="@id/viewPager2">
+                android:weightSum="3"
+                app:layout_constraintStart_toStartOf="@id/location_text"
+                app:layout_constraintTop_toBottomOf="@id/location_text">
 
                 <Button
                     android:id="@+id/menu_button"
-                    android:layout_width="122dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:text="@string/menu_button"
+                    android:gravity="center"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/border_button_pressed"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/map_button"
-                    android:layout_width="122dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:text="@string/map_button"
+                    android:gravity="center"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/border_button_pressed"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/review_button"
-                    android:layout_width="122dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:text="@string/review_button"
+                    android:gravity="center"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@drawable/border_button_pressed"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -100,7 +118,8 @@
                 android:id="@+id/nav_bar"
                 android:layout_width="366dp"
                 android:layout_height="361dp"
-                android:background="@drawable/border_imgview"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/border_detailmenu_image"
                 app:layout_constraintStart_toStartOf="@id/viewPager2"
                 app:layout_constraintTop_toBottomOf="@id/nav_button" />
 

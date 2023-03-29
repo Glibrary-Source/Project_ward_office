@@ -5,29 +5,27 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    //firebase 연걸
-//    id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
-        applicationId "com.kapitalletter.tastywardoffice"
+        applicationId "com.kapitalletter.wardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 12
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
     buildTypes {
-        //ci/cd 조심
         debug {
             debuggable true
 //            minifyEnabled true
@@ -59,54 +57,53 @@ android {
 
 
 dependencies {
-    def lifecycle_version = "2.4.0"
-    def nav_version = "2.3.1"
 
+    implementation "io.coil-kt:coil:1.1.1"
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.libraries.places:places:2.7.0'
     implementation 'androidx.test:core-ktx:1.5.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
-    //snackbar 관련
-    implementation 'com.google.android.material:material:1.8.0-alpha03'
+    implementation 'com.google.android.material:material:1.9.0-alpha02'
 
-    //nav_graph 관련
+
+    def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    //lifecycle 관련
+
+    def lifecycle_version = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
-    //retrofit 관련
+
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
 
-    // Retrofit with Moshi Converter
+
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    // Coil
-    implementation "io.coil-kt:coil:1.1.1"
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    //map 관련
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
 
-    //firebase 관련
-//    implementation platform('com.google.firebase:firebase-bom:31.2.0')
-//    implementation 'com.google.firebase:firebase-analytics-ktx'
 
-    //viewPager2
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
+
+
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }

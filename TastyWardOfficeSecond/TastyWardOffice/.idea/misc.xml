@@ -20,28 +20,33 @@
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/loading_img.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/round_image.xml" value="0.1285" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_greed_item_image.xml" value="0.3205" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_button.xml" value="0.1325" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_button_pressed.xml" value="0.1" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_detailmenu_image.xml" value="0.1165" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_greed_item_image.xml" value="0.2" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_img.xml" value="0.1" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_imgview.xml" value="0.1085" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_imgview.xml" value="0.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_list_imgview.xml" value="0.1085" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/clickbutton.xml" value="0.122" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/default_dot.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.122" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/ic_baseline_my_location_24.xml" value="0.115" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/ic_zoom_photo.xml" value="0.3475" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/selected_dot.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/tab_dot.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/tab_selector.xml" value="0.142" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/font/font.xml" value="0.1037037037037037" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout-v28/fragment_google_map.xml" value="0.3123100303951368" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout-v31/grid_view_item.xml" value="0.2803951367781155" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_main.xml" value="0.29873417721518986" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/detail_menu_item.xml" value="0.3239614994934144" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_google_map.xml" value="0.3123100303951368" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_menu.xml" value="0.33" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.25" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_menu_image.xml" value="0.33" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.4264957264957265" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_menu_image.xml" value="0.2669826224328594" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.25" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/grid_view_item.xml" value="0.33" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/ic_marker_phone.xml" value="0.2848731884057971" />
