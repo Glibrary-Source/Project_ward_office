@@ -69,4 +69,9 @@
             android:name="storename"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/loginPage"
+        android:name="com.kapitalletter.wardoffice.LoginPage"
+        android:label="fragment_login_page"
+        tools:layout="@layout/fragment_login_page" />
 </navigation>

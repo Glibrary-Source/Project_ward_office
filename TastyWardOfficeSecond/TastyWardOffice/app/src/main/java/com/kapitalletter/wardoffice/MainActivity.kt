@@ -1,6 +1,7 @@
 package com.kapitalletter.wardoffice
 
 import android.annotation.SuppressLint
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
 import com.kapitalletter.wardoffice.databinding.ActivityMainBinding
 
 
@@ -73,6 +75,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+
+        binding.btnLogin.setOnClickListener {
+            navController.navigate(R.id.loginPage, null, options)
         }
 
     }

@@ -55,9 +55,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     private var toast: Toast? = null
 
-//    private val markerMutableList: MutableList<Marker?> = mutableListOf()
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -304,7 +301,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         }
                     }
                     else -> {
-
                         GoogleMap.addMarker(
                             MarkerOptions()
                                 .position(storeLatLng)

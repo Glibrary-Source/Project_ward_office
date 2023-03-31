@@ -12,6 +12,24 @@ data class RequestLocationData (
     val MyGEOPoint: List<Double>
 )
 
+data class CreateReview (
+    @Expose
+    @SerializedName("type")
+    val type: String,
+    @Expose
+    @SerializedName("store_Id")
+    val store_Id: String,
+    @Expose
+    @SerializedName("reviewContext")
+    val reviewContext: String,
+    @Expose
+    @SerializedName("reviewerNickname")
+    val reviewerNickname: String,
+    @Expose
+    @SerializedName("reviewerUid")
+    val reviewerUid: String,
+)
+
 data class FinalStoreDataModel(
     @Expose
     @SerializedName("Filterstore")

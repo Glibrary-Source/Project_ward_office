@@ -1,12 +1,13 @@
 package com.kapitalletter.wardoffice.overview
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kapitalletter.wardoffice.datamodel.*
-import com.kapitalletter.wardoffice.network.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.kapitalletter.wardoffice.datamodel.*
+import com.kapitalletter.wardoffice.network.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,6 +72,33 @@ class OverviewViewModel : ViewModel() {
 
     fun changeFilterState(filterState : String = "all") {
         _filterState.value = filterState
+    }
+
+    //리뷰 작성
+    fun createReview(
+        store_id: String,
+        reviewContext:String,
+        reviewerNickname: String,
+        reviewerUid: String ) {
+
+        val createReview = CreateReview(
+            "store_review",
+            store_id,
+            reviewContext,
+            reviewerNickname,
+            reviewerUid
+        )
+        TastyWardApi.service.createReview(createReview)
+            .enqueue(object : Callback<CreateReview> {
+            override fun onResponse(call: Call<CreateReview>, response: Response<CreateReview>) {
+                if (response.isSuccessful) {
+                    Log.d("testPost", response.body().toString())
+                }
+            }
+            override fun onFailure(call: Call<CreateReview>, t: Throwable) {
+                Log.d("testPost", t.toString())
+            }
+        })
     }
 }
 

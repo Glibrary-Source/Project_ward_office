@@ -22,6 +22,11 @@ interface TastyWardApiService {
         @Body data: RequestLocationData
     ): Call<FinalStoreDataModel>
 
+    @POST("function-ward-office")
+    fun createReview(
+        @Body data: CreateReview
+    ): Call<CreateReview>
+
 }
 
 object TastyWardApi{

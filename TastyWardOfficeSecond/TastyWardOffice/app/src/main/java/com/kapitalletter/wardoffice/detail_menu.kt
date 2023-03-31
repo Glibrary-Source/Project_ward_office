@@ -16,6 +16,7 @@ import com.kapitalletter.wardoffice.datamodel.Filterstore
 import com.kapitalletter.wardoffice.overview.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 
@@ -24,6 +25,8 @@ class detail_menu : Fragment() {
     private lateinit var mContext: Context
     private val storeData by navArgs<detail_menuArgs>()
     private lateinit var overViewModel: OverviewViewModel
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,6 +40,8 @@ class detail_menu : Fragment() {
         super.onCreate(savedInstanceState)
 
         MyGlobals.instance?.adMobCount = MyGlobals.instance?.adMobCount!! + 1
+
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -132,7 +137,10 @@ class detail_menu : Fragment() {
         }
 
         binding.reviewButton.setOnClickListener {
-            Toast.makeText(mContext, getString(R.string.explain), Toast.LENGTH_SHORT).show()
+            parentFragmentManager.beginTransaction().replace(
+                R.id.nav_bar,
+                Review()
+            ).commit()
         }
 
         return binding.root
