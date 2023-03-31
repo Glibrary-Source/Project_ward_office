@@ -57,6 +57,7 @@ class LoginPage : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
+            auth.signOut()
             googleSignInClient.signOut()
             Toast.makeText(requireContext(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
         }

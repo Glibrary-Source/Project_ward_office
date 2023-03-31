@@ -1,10 +1,10 @@
 package com.kapitalletter.wardoffice
 
 import android.annotation.SuppressLint
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.*
@@ -12,7 +12,6 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.auth.FirebaseAuth
 import com.kapitalletter.wardoffice.databinding.ActivityMainBinding
 
 
@@ -81,6 +80,8 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.loginPage, null, options)
         }
 
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        Log.d("testFragment", fragment!!.id.toString())
     }
 
     private fun getAD() {

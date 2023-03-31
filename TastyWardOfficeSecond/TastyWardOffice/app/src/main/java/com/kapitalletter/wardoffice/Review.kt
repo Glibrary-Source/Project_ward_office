@@ -38,6 +38,10 @@ class Review : Fragment() {
         val storeDocId = arguments?.getString("docId").toString()
 
         binding.btnCreate.setOnClickListener {
+            try{Log.d("testAuth", auth.currentUser.toString())}
+            catch (e: Exception) {
+                Log.d("testAuth", e.message.toString())
+            }
             if(auth.currentUser != null){
                 if(!uidList.contains(auth.currentUser!!.uid)) {
                     overViewModel.createReview(
@@ -48,11 +52,10 @@ class Review : Fragment() {
                     )
                     binding.editReviewContext.text.clear()
                     binding.editNickname.text.clear()
-                    Toast.makeText(requireContext(), "리뷰를 작성 되었습니다", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "리뷰가 작성 되었습니다", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(requireContext(), "리뷰를 이미 작성하셨습니다", Toast.LENGTH_SHORT).show()
                 }
-
             } else {
                 Toast.makeText(requireContext(), "로그인이 필요합니다", Toast.LENGTH_SHORT).show()
             }
