@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -56,9 +57,8 @@ class LoginPage : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            auth.signOut()
-
             googleSignInClient.signOut()
+            Toast.makeText(requireContext(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
@@ -86,11 +86,9 @@ class LoginPage : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success ${auth.currentUser!!.email},${auth.currentUser!!.displayName}, ${auth.currentUser!!.photoUrl}")
-                    val user = auth.currentUser
+                    Toast.makeText(requireContext(), "로그인 성공", Toast.LENGTH_SHORT).show()
                 } else {
                     // Sign in failed, display a message to the user
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
     }

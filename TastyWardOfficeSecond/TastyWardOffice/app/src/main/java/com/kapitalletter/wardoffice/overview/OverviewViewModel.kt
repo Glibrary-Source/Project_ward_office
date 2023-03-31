@@ -19,12 +19,14 @@ class OverviewViewModel : ViewModel() {
     private val _markerStoreData = MutableLiveData<Documents>()
     private val _cameraZoom = MutableLiveData<Float>()
     private val _filterState = MutableLiveData<String>()
+    private val _reviewData = MutableLiveData<ReviewData>()
 
     val distanceStoreData: LiveData<FinalStoreDataModel> get() = _distanceStoreData
     val cameraTarget: LiveData<LatLng> get() = _cameraTarget
     val markerStoreData: LiveData<Documents> get() = _markerStoreData
     val cameraZoom: LiveData<Float> get() = _cameraZoom
     val filterState: LiveData<String> get() = _filterState
+    val reviewData: LiveData<ReviewData> get() = _reviewData
 
     init {
         saveCameraTarget()
@@ -99,6 +101,21 @@ class OverviewViewModel : ViewModel() {
                 Log.d("testPost", t.toString())
             }
         })
+    }
+
+    fun readReview(docId: String) {
+        val request = ReadReview("read_review", docId)
+        TastyWardApi.service.readReview(request)
+            .enqueue(object : Callback<ReviewData> {
+                override fun onResponse(call: Call<ReviewData>, response: Response<ReviewData>) {
+                    if (response.isSuccessful) {
+                        _reviewData.value = response.body()
+                    }
+                }
+                override fun onFailure(call: Call<ReviewData>, t: Throwable) {
+                    Log.d("testPost", t.toString())
+                }
+            })
     }
 }
 

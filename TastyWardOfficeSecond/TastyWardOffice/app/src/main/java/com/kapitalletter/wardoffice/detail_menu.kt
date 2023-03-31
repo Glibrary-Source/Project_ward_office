@@ -139,7 +139,11 @@ class detail_menu : Fragment() {
         binding.reviewButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
-                Review()
+                Review().apply {
+                    arguments = Bundle().apply {
+                        putString("docId", storeDetailData.document.docId)
+                    }
+                }
             ).commit()
         }
 
