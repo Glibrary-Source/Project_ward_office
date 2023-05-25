@@ -13,6 +13,8 @@ class DetailMenuAdapter(
     private val dataset: Documents
 ): RecyclerView.Adapter<DetailMenuAdapter.ItemViewHolder>() {
 
+    private var isEnlarged = false
+
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val detailMenu : ImageView = view.findViewById(R.id.detail_menu_image)
     }
@@ -25,7 +27,20 @@ class DetailMenuAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.storeMenuPictureUrlsMenu[position]
-        try{ bindImage(holder.detailMenu, item) }
+        try{
+            bindImage(holder.detailMenu, item)
+            holder.detailMenu.setOnClickListener {
+                if(isEnlarged) {
+                    it.scaleX = 1f
+                    it.scaleY = 1f
+                    isEnlarged = false
+                } else {
+                    it.scaleX = 1.5f
+                    it.scaleY = 1.5f
+                    isEnlarged = true
+                }
+            }
+        }
         catch (e:Exception) {holder.detailMenu.setImageResource(R.drawable.blank_img)}
     }
 

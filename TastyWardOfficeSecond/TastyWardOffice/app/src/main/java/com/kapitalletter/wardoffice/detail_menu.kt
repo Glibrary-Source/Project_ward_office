@@ -5,7 +5,6 @@ import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -20,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 
-class detail_menu : Fragment() {
+class detail_menu : Fragment(){
 
     private lateinit var mContext: Context
     private val storeData by navArgs<detail_menuArgs>()
@@ -164,6 +163,7 @@ class detail_menu : Fragment() {
         val geocoder = Geocoder(mContext, Locale.KOREA)
         return geocoder.getFromLocation(storeData.latlng.latitude, storeData.latlng.longitude, 1)!!
     }
+
 
 }
 

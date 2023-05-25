@@ -27,6 +27,9 @@ import com.google.android.gms.maps.model.*
 import com.kapitalletter.wardoffice.data.WardOfficeGeo
 import com.kapitalletter.wardoffice.databinding.FragmentGoogleMapBinding
 import com.kapitalletter.wardoffice.overview.OverviewViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
@@ -64,7 +67,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(backPressTime + 3000 > System.currentTimeMillis()) {
+                if (backPressTime + 3000 > System.currentTimeMillis()) {
                     requireActivity().finish()
                 } else {
                     Toast.makeText(mContext, "한번 더 뒤로가기 버튼을 누르면 종료됩니다", Toast.LENGTH_SHORT)
@@ -82,9 +85,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
-
-        MobileAds.initialize(requireContext()) {}
-
 
     }
 
@@ -104,8 +104,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         checkLocationPermission()
 
         binding.myLocationButton.setOnClickListener {
-
-            try{
+            try {
                 checkLocationPermission()
                 GoogleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
@@ -113,11 +112,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         GoogleMap.cameraPosition.zoom
                     )
                 )
-
             } catch (e: Exception) {
                 Toast.makeText(mContext, "위치 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         return binding.root
@@ -146,7 +143,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         googleMap.setOnCameraIdleListener {
 
             googleMap.clear()
-
             getOverviewLocationData()
 
             val currentDrawable =
@@ -185,6 +181,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun second() {
+
         try {
             for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
                 val storeLatLng =
@@ -327,13 +324,13 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    latiTude = location.latitude
-                    longItude = location.longitude
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        latiTude = location.latitude
+                        longItude = location.longitude
+                    }
                 }
-            }
         } else {
             val rejectedPermissionList = ArrayList<String>()
 
@@ -361,8 +358,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     }
 
     override fun onInfoWindowClick(p0: Marker) {
-        try{
-            if(MyGlobals.instance?.adMobCount!! % 5 == 0){
+        try {
+            if (MyGlobals.instance?.adMobCount!! % 5 == 0) {
                 MyGlobals.instance?.fullAD!!.show(mContext as Activity)
             }
             overViewModel.findStoreData(p0)

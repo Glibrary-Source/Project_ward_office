@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.*
@@ -80,10 +79,9 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.loginPage, null, options)
         }
 
-        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-        Log.d("testFragment", fragment!!.id.toString())
     }
 
+    //전면광고 생성
     private fun getAD() {
         InterstitialAd.load(
             this,

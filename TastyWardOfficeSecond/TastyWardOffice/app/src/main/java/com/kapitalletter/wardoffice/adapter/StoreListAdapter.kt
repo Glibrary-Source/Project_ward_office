@@ -46,7 +46,7 @@ class StoreListAdapter(
         val item = dataset.Filterstore[position]
         holder.storeTextView.text = item.document.storeId
 
-        try{bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0])}
+        try{ bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0]) }
         catch (e: Exception) {holder.menuImage.setImageResource(R.drawable.blank_img)}
 
         //좋아요 수에따른 구분
