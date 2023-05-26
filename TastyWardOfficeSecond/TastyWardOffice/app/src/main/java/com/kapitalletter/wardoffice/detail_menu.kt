@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.kapitalletter.wardoffice.adapter.DetailMenuAdapter
@@ -126,24 +128,43 @@ class detail_menu : Fragment(){
         }
 
         binding.mapButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(
+            val t = parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
                 detail_googleMap().apply {
                     MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
                     MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
                 }
-            ).commit()
+            )
+            t.addToBackStack(null)
+            t.commit()
+//            parentFragmentManager.beginTransaction().replace(
+//                R.id.nav_bar,
+//                detail_googleMap().apply {
+//                    MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
+//                    MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
+//                }
+//            ).commit()
         }
 
         binding.reviewButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(
-                R.id.nav_bar,
-                Review().apply {
-                    arguments = Bundle().apply {
-                        putString("docId", storeDetailData.document.docId)
-                    }
-                }
-            ).commit()
+            val options = NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .setEnterAnim(R.anim.enter_from_right)
+                .setExitAnim(R.anim.exit_to_right)
+                .setPopEnterAnim(R.anim.enter_from_right)
+                .setPopExitAnim(R.anim.exit_to_right)
+                .setPopUpTo(findNavController().graph.startDestinationId, false)
+                .build()
+            val action = detail_menuDirections.actionDetailMenu3ToFragmentStoreReview()
+            findNavController().navigate(action, options)
+//            parentFragmentManager.beginTransaction().replace(
+//                R.id.nav_bar,
+//                Review().apply {
+//                    arguments = Bundle().apply {
+//                        putString("docId", storeDetailData.document.docId)
+//                    }
+//                }
+//            ).commit()
         }
 
         return binding.root

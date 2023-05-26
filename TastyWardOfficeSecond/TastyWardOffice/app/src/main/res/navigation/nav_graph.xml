@@ -48,30 +48,23 @@
             android:name="dogId"
             app:argType="string" />
         <action
-            android:id="@+id/action_detail_menu3_to_menu_image3"
-            app:destination="@id/menu_image3" />
-        <action
             android:id="@+id/action_detail_menu3_to_google_map"
             app:destination="@id/google_map" />
         <argument
             android:name="latlng"
             app:argType="com.google.android.gms.maps.model.LatLng" />
-    </fragment>
-    <fragment
-        android:id="@+id/menu_image3"
-        android:name="com.kapitalletter.wardoffice.menu_image"
-        android:label="fragment_menu_image"
-        tools:layout="@layout/fragment_menu_image" >
-        <argument
-            android:name="imgUri"
-            app:argType="string" />
-        <argument
-            android:name="storename"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_detail_menu3_to_fragmentStoreReview"
+            app:destination="@id/fragmentStoreReview" />
     </fragment>
     <fragment
         android:id="@+id/loginPage"
         android:name="com.kapitalletter.wardoffice.LoginPage"
         android:label="fragment_login_page"
         tools:layout="@layout/fragment_login_page" />
+    <fragment
+        android:id="@+id/fragmentStoreReview"
+        android:name="com.kapitalletter.wardoffice.FragmentStoreReview"
+        android:label="fragment_store_review"
+        tools:layout="@layout/fragment_store_review" />
 </navigation>
