@@ -18,19 +18,21 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/edit_review_context"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="본문"
-                android:textSize="18dp" />
-
-            <EditText
                 android:id="@+id/edit_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:maxLength="8"
                 android:hint="닉네임"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/edit_review_context"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:maxLength="250"
+                android:hint="본문"
                 android:textSize="18dp" />
 
             <Button
