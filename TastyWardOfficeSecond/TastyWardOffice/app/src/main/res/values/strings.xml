@@ -50,4 +50,10 @@
     <string name="explain">추후 업데이트 예정입니다</string>
     <string name="internetcheck">인터넷 연결을 확인해주세요</string>
     <string name="locationcheck">위치권한을 확인해 주세요</string>
+    <string name="fragment_login_signin">구글계정으로 계속</string>
+    <string name="fragment_login_signout">Sign Out</string>
+    <string name="fragment_login_edit_email">Email</string>
+    <string name="fragment_login_edit_password">Password</string>
+    <string name="fragment_login_btn_create_email">회원가입</string>
+    <string name="fragment_login_btn_login">로그인</string>
 </resources>

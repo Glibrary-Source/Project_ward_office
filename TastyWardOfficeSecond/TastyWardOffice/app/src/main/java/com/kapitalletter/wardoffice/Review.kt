@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.kapitalletter.wardoffice.adapter.ReviewAdapter
 import com.kapitalletter.wardoffice.databinding.FragmentReviewBinding
@@ -19,6 +20,7 @@ class Review : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var overViewModel: OverviewViewModel
     private val uidList: MutableList<String> = mutableListOf()
+    private val storeDocId by navArgs<ReviewArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,8 @@ class Review : Fragment() {
 
         binding = FragmentReviewBinding.inflate(inflater)
 
-        val storeDocId = arguments?.getString("docId").toString()
+//        val storeDocId = arguments?.getString("docId").toString()
+        val storeDocId = storeDocId.docId
 
         binding.btnCreate.setOnClickListener {
             try{Log.d("testAuth", auth.currentUser.toString())}

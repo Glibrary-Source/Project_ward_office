@@ -44,10 +44,10 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     private lateinit var mView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: FragmentGoogleMapBinding
+    private lateinit var callback: OnBackPressedCallback
 
     private val locationGeoData = WardOfficeGeo()
 
-    private lateinit var callback: OnBackPressedCallback
     var backPressTime: Long = 0
 
     private val multiplePermissionCode = 100
@@ -181,7 +181,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     private fun second() {
-
         try {
             for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
                 val storeLatLng =

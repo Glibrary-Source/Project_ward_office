@@ -22,7 +22,6 @@ class StoreListAdapter(
     private val context: Context
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
 
-
     init {
         notifyDataSetChanged()
     }

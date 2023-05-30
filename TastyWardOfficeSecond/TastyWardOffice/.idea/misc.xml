@@ -23,6 +23,7 @@
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_button.xml" value="0.1325" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_button_pressed.xml" value="0.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_detailmenu_image.xml" value="0.1165" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_fragment_loginpage_btn.xml" value="0.1315" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_greed_item_image.xml" value="0.2" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_img.xml" value="0.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable/border_imgview.xml" value="0.1" />
@@ -45,8 +46,8 @@
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/detail_menu_item.xml" value="0.2" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_google_map.xml" value="0.3123100303951368" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_menu.xml" value="0.33" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.4264957264957265" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_login_page.xml" value="0.25" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.16" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_login_page.xml" value="0.33" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_menu_image.xml" value="0.2669826224328594" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.25" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_review.xml" value="0.25" />

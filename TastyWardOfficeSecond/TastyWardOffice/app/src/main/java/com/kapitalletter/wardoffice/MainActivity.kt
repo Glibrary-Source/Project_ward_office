@@ -2,7 +2,6 @@ package com.kapitalletter.wardoffice
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -37,15 +36,9 @@ class MainActivity : AppCompatActivity() {
         mAdView.loadAd(adRequest)
 
         mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-            }
-
-            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                mInterstitialAd = null
-            }
+            override fun onAdDismissedFullScreenContent() {}
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {}
+            override fun onAdShowedFullScreenContent() { mInterstitialAd = null }
         }
 
         getAD()
@@ -54,29 +47,47 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        val options = NavOptions.Builder()
+//        val options = NavOptions.Builder()
+//            .setLaunchSingleTop(true)
+//            .setEnterAnim(R.anim.enter_from_right)
+//            .setExitAnim(R.anim.exit_to_right)
+//            .setPopEnterAnim(R.anim.enter_from_right)
+//            .setPopExitAnim(R.anim.exit_to_right)
+//            .setPopUpTo(navController.graph.startDestinationId, false)
+//            .build()
+
+        val optionsSecond = NavOptions.Builder()
             .setLaunchSingleTop(true)
             .setEnterAnim(R.anim.enter_from_right)
             .setExitAnim(R.anim.exit_to_right)
             .setPopEnterAnim(R.anim.enter_from_right)
             .setPopExitAnim(R.anim.exit_to_right)
-            .setPopUpTo(navController.graph.startDestinationId, false)
             .build()
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.google_map -> {
-                    navController.navigate(R.id.google_map, null, options)
-                }
-                R.id.restaurant_list -> {
-                    navController.navigate(R.id.restaurant_list, null, options)
+            val currentDestination = navController.currentDestination?.id
+
+            val isAlreadyActive = when(item.itemId) {
+                R.id.google_map -> currentDestination == R.id.google_map
+                R.id.restaurant_list -> currentDestination == R.id.restaurant_list
+                else -> false
+            }
+
+            if(!isAlreadyActive) {
+                when (item.itemId) {
+                    R.id.google_map -> {
+                        navController.navigate(R.id.google_map, null, optionsSecond)
+                    }
+                    R.id.restaurant_list -> {
+                        navController.navigate(R.id.restaurant_list, null, optionsSecond)
+                    }
                 }
             }
-            true
+            !isAlreadyActive
         }
 
         binding.btnLogin.setOnClickListener {
-            navController.navigate(R.id.loginPage, null, options)
+            navController.navigate(R.id.loginPage, null, optionsSecond)
         }
 
     }
@@ -89,12 +100,10 @@ class MainActivity : AppCompatActivity() {
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(p0: LoadAdError) {
-                    Log.d("adtest", p0.toString())
                     mInterstitialAd = null
                 }
 
                 override fun onAdLoaded(p0: InterstitialAd) {
-                    Log.d("adtest", p0.toString())
                     mInterstitialAd = p0
                     MyGlobals.instance?.fullAD = mInterstitialAd
                 }

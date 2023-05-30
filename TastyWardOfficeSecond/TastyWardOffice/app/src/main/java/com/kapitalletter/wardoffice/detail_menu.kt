@@ -128,35 +128,29 @@ class detail_menu : Fragment(){
         }
 
         binding.mapButton.setOnClickListener {
-            val t = parentFragmentManager.beginTransaction().replace(
+            parentFragmentManager.beginTransaction().replace(
                 R.id.nav_bar,
                 detail_googleMap().apply {
                     MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
                     MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
                 }
-            )
-            t.addToBackStack(null)
-            t.commit()
-//            parentFragmentManager.beginTransaction().replace(
-//                R.id.nav_bar,
-//                detail_googleMap().apply {
-//                    MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
-//                    MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
-//                }
-//            ).commit()
+            ).commit()
         }
 
         binding.reviewButton.setOnClickListener {
+
             val options = NavOptions.Builder()
                 .setLaunchSingleTop(true)
                 .setEnterAnim(R.anim.enter_from_right)
                 .setExitAnim(R.anim.exit_to_right)
                 .setPopEnterAnim(R.anim.enter_from_right)
                 .setPopExitAnim(R.anim.exit_to_right)
-                .setPopUpTo(findNavController().graph.startDestinationId, false)
                 .build()
-            val action = detail_menuDirections.actionDetailMenu3ToFragmentStoreReview()
+
+            val action = detail_menuDirections.actionDetailMenu3ToReview(storeDetailData.document.docId)
             findNavController().navigate(action, options)
+
+            //프래그먼트 안바꾸고 싶을때
 //            parentFragmentManager.beginTransaction().replace(
 //                R.id.nav_bar,
 //                Review().apply {
@@ -165,6 +159,7 @@ class detail_menu : Fragment(){
 //                    }
 //                }
 //            ).commit()
+
         }
 
         return binding.root
