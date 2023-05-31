@@ -12,6 +12,10 @@ class ReviewAdapter(
     private val dataset: ReviewData
 ): RecyclerView.Adapter<ReviewAdapter.ItemViewHolder>() {
 
+    init {
+        notifyDataSetChanged()
+    }
+
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val reviewText: TextView = view.findViewById(R.id.text_review)
         val nickname: TextView = view.findViewById(R.id.text_nickname)
@@ -32,5 +36,4 @@ class ReviewAdapter(
     override fun getItemCount(): Int {
         return dataset.docId.size
     }
-
 }

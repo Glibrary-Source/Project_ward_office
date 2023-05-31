@@ -41,10 +41,8 @@ class Review : Fragment() {
         val storeDocId = storeDocId.docId
 
         binding.btnCreate.setOnClickListener {
-            try{Log.d("testAuth", auth.currentUser.toString())}
-            catch (e: Exception) {
-                Log.d("testAuth", e.message.toString())
-            }
+            try{ Log.d("testAuth", auth.currentUser?.email.toString()) }
+            catch (e: Exception) { Log.d("testAuth", e.message.toString()) }
             if(auth.currentUser != null){
                 if(!uidList.contains(auth.currentUser!!.uid)) {
                     overViewModel.createReview(
@@ -62,7 +60,6 @@ class Review : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "로그인이 필요합니다", Toast.LENGTH_SHORT).show()
             }
-
             overViewModel.readReview(storeDocId)
         }
 

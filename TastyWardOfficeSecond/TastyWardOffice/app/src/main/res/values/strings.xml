@@ -6,7 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_button">메뉴</string>
     <string name="map_button">지도</string>
-    <string name="review_button">댓글</string>
+    <string name="review_button">리뷰</string>
     <string name="location">테헤란로</string>
     <string name="locationLoss">세부 주소가 없습니다.</string>
     <string name="japan">일식</string>
@@ -54,6 +54,7 @@
     <string name="fragment_login_signout">Sign Out</string>
     <string name="fragment_login_edit_email">Email</string>
     <string name="fragment_login_edit_password">Password</string>
-    <string name="fragment_login_btn_create_email">회원가입</string>
+    <string name="fragment_login_btn_create_email">계정생성</string>
     <string name="fragment_login_btn_login">로그인</string>
+    <string name="fragment_review_btn_createreview">리뷰 작성</string>
 </resources>
