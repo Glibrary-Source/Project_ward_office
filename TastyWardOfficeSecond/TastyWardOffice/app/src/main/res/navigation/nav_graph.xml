@@ -61,7 +61,13 @@
         android:id="@+id/loginPage"
         android:name="com.kapitalletter.wardoffice.LoginPage"
         android:label="fragment_login_page"
-        tools:layout="@layout/fragment_login_page" />
+        tools:layout="@layout/fragment_login_page" >
+        <action
+            android:id="@+id/action_loginPage_to_myProfile"
+            app:popUpTo="@id/loginPage"
+            app:popUpToInclusive="true"
+            app:destination="@id/myProfile" />
+    </fragment>
     <fragment
         android:id="@+id/review"
         android:name="com.kapitalletter.wardoffice.Review"
@@ -70,5 +76,16 @@
         <argument
             android:name="docId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/myProfile"
+        android:name="com.kapitalletter.wardoffice.MyProfile"
+        android:label="fragment_my_profile"
+        tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_myProfile_to_loginPage"
+            app:popUpTo="@id/myProfile"
+            app:popUpToInclusive="true"
+            app:destination="@id/loginPage" />
     </fragment>
 </navigation>

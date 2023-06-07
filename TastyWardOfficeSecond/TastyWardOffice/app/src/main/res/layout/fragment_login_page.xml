@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".LoginPage">
 
+
     <LinearLayout
         android:id="@+id/linearLayout27"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout26"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread">
@@ -44,59 +46,88 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintVertical_weight="2"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout28"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout27">
 
-        <EditText
-            android:id="@+id/edit_email"
+        <Button
+            android:id="@+id/btn_google_Signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
             android:background="@drawable/border_button_pressed"
-            android:hint="@string/fragment_login_edit_email"
-            android:inputType="text"
             android:padding="10dp"
-            tools:ignore="TextFields" />
+            android:text="@string/fragment_login_signin" />
 
-        <EditText
-            android:id="@+id/edit_password"
+        <Button
+            android:id="@+id/btn_naver_signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
             android:background="@drawable/border_button_pressed"
-            android:hint="@string/fragment_login_edit_password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:text="@string/fragment_login_naver_signin" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="center"
             android:layout_margin="4dp"
-            android:weightSum="2">
+            android:background="@drawable/border_button_pressed"
+            android:text="@string/fragment_login_signout" />
 
-            <Button
-                android:id="@+id/fragment_login_btn_create"
-                android:text="@string/fragment_login_btn_create_email"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginEnd="3dp"
-                android:background="@drawable/border_button_pressed"
-                android:layout_height="wrap_content"/>
+<!--        <EditText-->
+<!--            android:id="@+id/edit_email"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="4dp"-->
+<!--            android:background="@drawable/border_button_pressed"-->
+<!--            android:hint="@string/fragment_login_edit_email"-->
+<!--            android:inputType="text"-->
+<!--            android:padding="10dp"-->
+<!--            tools:ignore="TextFields" />-->
 
-            <Button
-                android:id="@+id/fragment_login_btn_login"
-                android:text="@string/fragment_login_btn_login"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginStart="3dp"
-                android:background="@drawable/border_button_pressed"
-                android:layout_height="wrap_content" />
+<!--        <EditText-->
+<!--            android:id="@+id/edit_password"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="4dp"-->
+<!--            android:background="@drawable/border_button_pressed"-->
+<!--            android:hint="@string/fragment_login_edit_password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:padding="10dp" />-->
 
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="4dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="2">-->
 
+<!--            <Button-->
+<!--                android:id="@+id/fragment_login_btn_create"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="3dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border_button_pressed"-->
+<!--                android:text="@string/fragment_login_btn_create_email" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/fragment_login_btn_login"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border_button_pressed"-->
+<!--                android:text="@string/fragment_login_btn_login" />-->
+
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 
@@ -110,27 +141,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout26">
 
+<!--        <Button-->
+<!--            android:id="@+id/btn_naver_logout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="4dp"-->
+<!--            android:background="@drawable/border_button_pressed"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="네이버 계정 로그아웃" />-->
 
-        <Button
-            android:id="@+id/btn_google_Signin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="4dp"
-            android:background="@drawable/border_button_pressed"
-            android:padding="10dp"
-            android:text="@string/fragment_login_signin" />
-
-
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="4dp"
-            android:background="@drawable/border_button_pressed"
-            android:text="@string/fragment_login_signout" />
+<!--        <Button-->
+<!--            android:id="@+id/btn_naver_deletetoken"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="4dp"-->
+<!--            android:background="@drawable/border_button_pressed"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="네이버 계정 토큰삭제" />-->
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

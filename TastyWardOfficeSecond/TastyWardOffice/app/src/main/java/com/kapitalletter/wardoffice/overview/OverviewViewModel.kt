@@ -4,10 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.firebase.auth.FirebaseUser
 import com.kapitalletter.wardoffice.datamodel.*
 import com.kapitalletter.wardoffice.network.*
+import com.navercorp.nid.profile.data.NidProfileResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,11 +55,11 @@ class OverviewViewModel : ViewModel() {
     fun findStoreData(p0 : Marker): Documents {
         val passingData = distanceStoreData.value!!.Filterstore
         for (storeData in passingData) {
-            val storePostion = LatLng(
+            val storePosition = LatLng(
                 storeData.document.storeGEOPoints[0],
                 storeData.document.storeGEOPoints[1]
             )
-            if (storePostion == p0.position) {
+            if (storePosition == p0.position) {
                 _markerStoreData.value = storeData.document
                 return _markerStoreData.value!!
             }
@@ -117,5 +120,6 @@ class OverviewViewModel : ViewModel() {
                 }
             })
     }
+
 }
 

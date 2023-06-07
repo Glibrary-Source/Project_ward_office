@@ -2,7 +2,9 @@ package com.kapitalletter.wardoffice
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.*
@@ -10,10 +12,15 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.kapitalletter.wardoffice.databinding.ActivityMainBinding
+import com.kapitalletter.wardoffice.overview.OverviewViewModel
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val checkNumber = 1
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -27,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        val overviewViewModel = ViewModelProvider(this)[OverviewViewModel::class.java]
+//        val auth = FirebaseAuth.getInstance()
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 

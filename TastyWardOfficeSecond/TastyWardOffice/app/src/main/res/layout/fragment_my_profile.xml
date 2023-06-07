@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MyProfile">
+
+
+    <TextView
+        android:id="@+id/text_fragment_myprofil_useremail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="30dp"
+        tools:text="useremail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_fragment_myprofil_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="30dp"
+        tools:text="username"
+        app:layout_constraintTop_toBottomOf="@id/text_fragment_myprofil_useremail"
+        app:layout_constraintStart_toStartOf="@id/text_fragment_myprofil_useremail"/>
+
+    <Button
+        android:id="@+id/btn_fragment_myprofil_logout"
+        android:textSize="30dp"
+        android:text="로그아웃"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_button_pressed"
+        app:layout_constraintTop_toBottomOf="@id/text_fragment_myprofil_username"
+        app:layout_constraintStart_toStartOf="@id/text_fragment_myprofil_useremail"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

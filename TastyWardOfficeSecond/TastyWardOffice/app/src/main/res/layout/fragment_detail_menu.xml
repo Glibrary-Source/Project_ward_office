@@ -114,6 +114,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
             <FrameLayout

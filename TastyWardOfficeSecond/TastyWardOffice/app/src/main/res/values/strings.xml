@@ -50,11 +50,15 @@
     <string name="explain">추후 업데이트 예정입니다</string>
     <string name="internetcheck">인터넷 연결을 확인해주세요</string>
     <string name="locationcheck">위치권한을 확인해 주세요</string>
-    <string name="fragment_login_signin">구글계정으로 계속</string>
-    <string name="fragment_login_signout">Sign Out</string>
+    <string name="fragment_login_signin">구글 로그인</string>
+    <string name="fragment_login_signout">로그아웃</string>
     <string name="fragment_login_edit_email">Email</string>
     <string name="fragment_login_edit_password">Password</string>
     <string name="fragment_login_btn_create_email">계정생성</string>
     <string name="fragment_login_btn_login">로그인</string>
     <string name="fragment_review_btn_createreview">리뷰 작성</string>
+    <string name="social_login_info_naver_client_id">OQVLImu_IwLZNpQkzK6X</string>
+    <string name="social_login_info_naver_client_secret">FIqqMxiEX5</string>
+    <string name="social_login_info_naver_client_name">맛구청 입니다</string>
+    <string name="fragment_login_naver_signin">네이버 로그인</string>
 </resources>

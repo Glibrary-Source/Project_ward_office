@@ -53,7 +53,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/border_detailmenu_image"
             android:layout_gravity="right"
-            android:src="@drawable/ic_baseline_login_24"/>
+            android:src="@drawable/ic_baseline_supervised_user_circle_24"/>
 
     </com.google.android.material.appbar.MaterialToolbar>
 

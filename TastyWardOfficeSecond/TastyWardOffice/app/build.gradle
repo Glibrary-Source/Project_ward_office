@@ -108,4 +108,7 @@ dependencies {
 
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    //naverlogin
+    implementation 'com.navercorp.nid:oauth-jdk8:5.1.0' // jdk 8
+
 }
