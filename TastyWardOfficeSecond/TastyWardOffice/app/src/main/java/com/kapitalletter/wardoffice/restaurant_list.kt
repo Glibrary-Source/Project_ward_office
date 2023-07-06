@@ -13,6 +13,7 @@ import com.kapitalletter.wardoffice.databinding.FragmentRestaurantListBinding
 import com.kapitalletter.wardoffice.datamodel.Filterstore
 import com.kapitalletter.wardoffice.datamodel.FinalStoreDataModel
 import com.kapitalletter.wardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.view.MainActivity
 
 class restaurant_list : Fragment() {
 

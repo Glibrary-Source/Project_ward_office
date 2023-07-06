@@ -24,10 +24,10 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import com.google.firebase.ktx.Firebase
 import com.kapitalletter.wardoffice.data.WardOfficeGeo
 import com.kapitalletter.wardoffice.databinding.FragmentGoogleMapBinding
 import com.kapitalletter.wardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.view.MainActivity
 
 
 class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
@@ -56,11 +56,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     private var toast: Toast? = null
 
-
-
-//    private val markerMutableList: MutableList<Marker?> = mutableListOf()
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -82,7 +77,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -93,7 +87,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
 
     }
-
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
@@ -152,7 +145,6 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         googleMap.setOnCameraIdleListener {
 
             googleMap.clear()
-
             getOverviewLocationData()
 
             val currentDrawable =
@@ -167,9 +159,9 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     .title("현위치")
             )
 
-            binding.layoutExpand.visibility = View.GONE
-            binding.layoutExpand2.visibility = View.GONE
-            binding.layoutExpand3.visibility = View.GONE
+            binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
+            binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+            binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
         }
 
         overViewModel.distanceStoreData.observe(this) {
@@ -418,160 +410,158 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
         super.onStart()
 
 
-        binding.filterWardOfficeButton.setOnClickListener(this)
-        binding.titleButton.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterWardOfficeButton.setOnClickListener(this)
+        binding.includeBtnMenubar.titleButton.setOnClickListener(this)
 
 
-        binding.filterButtonKorean.setOnClickListener(this)
-        binding.filterButtonJapan.setOnClickListener(this)
-        binding.filterButtonChina.setOnClickListener(this)
-        binding.filterButtonDessert.setOnClickListener(this)
-        binding.filterButtonKimbap.setOnClickListener(this)
-        binding.filterButtonWestern.setOnClickListener(this)
-        binding.filterButtonAsian.setOnClickListener(this)
-        binding.filterButtonChiken.setOnClickListener(this)
-        binding.filterButtonBar.setOnClickListener(this)
-        binding.filterButtonAll.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonKorean.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonJapan.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonChina.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonDessert.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonKimbap.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonWestern.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonAsian.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonChiken.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonBar.setOnClickListener(this)
+        binding.includeBtnMenubar.filterButtonAll.setOnClickListener(this)
 
 
-        binding.filterButtonGangnam.setOnClickListener(this)
-        binding.filterButtonGandong.setOnClickListener(this)
-        binding.filterButtonGangbuk.setOnClickListener(this)
-        binding.filterButtonGangseo.setOnClickListener(this)
-        binding.filterButtonGwanak.setOnClickListener(this)
-        binding.filterButtonGwangjin.setOnClickListener(this)
-        binding.filterButtonGuro.setOnClickListener(this)
-        binding.filterButtonGeuncheon.setOnClickListener(this)
-        binding.filterButtonNowon.setOnClickListener(this)
-        binding.filterButtonDobong.setOnClickListener(this)
-        binding.filterButtonDdm.setOnClickListener(this)
-        binding.filterButtonDongjak.setOnClickListener(this)
-        binding.filterButtonMapo.setOnClickListener(this)
-        binding.filterButtonSdm.setOnClickListener(this)
-        binding.filterButtonSeocho.setOnClickListener(this)
-        binding.filterButtonSd.setOnClickListener(this)
-        binding.filterButtonSb.setOnClickListener(this)
-        binding.filterButtonSongpa.setOnClickListener(this)
-        binding.filterButtonYangcheon.setOnClickListener(this)
-        binding.filterButtonYdp.setOnClickListener(this)
-        binding.filterButtonYongsan.setOnClickListener(this)
-        binding.filterButtonEp.setOnClickListener(this)
-        binding.filterButtonJongno.setOnClickListener(this)
-        binding.filterButtonJunggu.setOnClickListener(this)
-        binding.filterButtonJungnang.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGangnam.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGandong.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGangbuk.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGangseo.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGwanak.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGwangjin.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGuro.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonGeuncheon.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonNowon.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonDobong.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonDdm.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonDongjak.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonMapo.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonSdm.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonSeocho.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonSd.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonSb.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonSongpa.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonYangcheon.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonYdp.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonYongsan.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonEp.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonJongno.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonJunggu.setOnClickListener(this)
+        binding.includeBtnFilterbar.filterButtonJungnang.setOnClickListener(this)
 
         mView.onStart()
     }
 
-
     override fun onClick(p0: View?) {
         when (p0?.id) {
-
             R.id.filter_button_all -> {
                 overViewModel.changeFilterState(getString(R.string.all))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_korean -> {
                 overViewModel.changeFilterState(getString(R.string.korean))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_china -> {
                 overViewModel.changeFilterState(getString(R.string.chines))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_japan -> {
                 overViewModel.changeFilterState(getString(R.string.japan))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_kimbap -> {
                 overViewModel.changeFilterState(getString(R.string.kimbap))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_western -> {
                 overViewModel.changeFilterState(getString(R.string.western))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_dessert -> {
                 overViewModel.changeFilterState(getString(R.string.dessert))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_asian -> {
                 overViewModel.changeFilterState(getString(R.string.asian))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_chiken -> {
                 overViewModel.changeFilterState(getString(R.string.chiken))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
             R.id.filter_button_bar -> {
                 overViewModel.changeFilterState(getString(R.string.bar))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
 
 
             R.id.title_button -> {
-                if (binding.layoutExpand.visibility == View.VISIBLE) {
-                    binding.layoutExpand.visibility = View.GONE
+                if (binding.includeBtnMenubar.layoutExpand.visibility == View.VISIBLE) {
+                    binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
 
 
-                    binding.layoutExpand2.visibility = View.GONE
-                    binding.layoutExpand3.visibility = View.GONE
-                    binding.total.visibility = View.GONE
+                    binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                    binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
+                    binding.includeBtnFilterbar.total.visibility = View.GONE
 
-                    binding.imgMore1.animate().duration = 200
+                    binding.includeBtnMenubar.imgMore1.animate().duration = 200
                 } else {
-                    binding.layoutExpand.visibility = View.VISIBLE
+                    binding.includeBtnMenubar.layoutExpand.visibility = View.VISIBLE
 
 
-                    binding.layoutExpand2.visibility = View.GONE
-                    binding.layoutExpand3.visibility = View.GONE
-                    binding.total.visibility = View.GONE
+                    binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                    binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
+                    binding.includeBtnFilterbar.total.visibility = View.GONE
 
-                    binding.imgMore1.animate().duration = 200
+                    binding.includeBtnMenubar.imgMore1.animate().duration = 200
                 }
             }
             R.id.filter_ward_office_button -> {
-                if (binding.layoutExpand2.visibility == View.VISIBLE &&
-                    binding.layoutExpand3.visibility == View.VISIBLE &&
-                    binding.total.visibility == View.VISIBLE
+                if (binding.includeBtnFilterbar.layoutExpand2.visibility == View.VISIBLE &&
+                    binding.includeBtnFilterbar.layoutExpand3.visibility == View.VISIBLE &&
+                    binding.includeBtnFilterbar.total.visibility == View.VISIBLE
                 ) {
-                    binding.layoutExpand2.visibility = View.GONE
-                    binding.layoutExpand3.visibility = View.GONE
-                    binding.total.visibility = View.GONE
+                    binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                    binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
+                    binding.includeBtnFilterbar.total.visibility = View.GONE
 
 
-                    binding.layoutExpand.visibility = View.GONE
+                    binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
 
-                    binding.imgMore1.animate().duration = 200
+                    binding.includeBtnMenubar.imgMore1.animate().duration = 200
                 } else {
-                    binding.layoutExpand2.visibility = View.VISIBLE
-                    binding.layoutExpand3.visibility = View.VISIBLE
-                    binding.total.visibility = View.VISIBLE
+                    binding.includeBtnFilterbar.layoutExpand2.visibility = View.VISIBLE
+                    binding.includeBtnFilterbar.layoutExpand3.visibility = View.VISIBLE
+                    binding.includeBtnFilterbar.total.visibility = View.VISIBLE
 
 
-                    binding.layoutExpand.visibility = View.GONE
+                    binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
 
-                    binding.imgMore1.animate().duration = 200
+                    binding.includeBtnMenubar.imgMore1.animate().duration = 200
                 }
             }
             R.id.filter_button_gangnam -> {
@@ -582,8 +572,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gandong -> {
                 GoogleMap.moveCamera(
@@ -593,8 +583,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gangbuk -> {
                 GoogleMap.moveCamera(
@@ -604,8 +594,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gangseo -> {
                 GoogleMap.moveCamera(
@@ -615,8 +605,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gwanak -> {
                 GoogleMap.moveCamera(
@@ -626,8 +616,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gwangjin -> {
                 GoogleMap.moveCamera(
@@ -637,8 +627,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_guro -> {
                 GoogleMap.moveCamera(
@@ -648,8 +638,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_geuncheon -> {
                 GoogleMap.moveCamera(
@@ -659,8 +649,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_nowon -> {
                 GoogleMap.moveCamera(
@@ -670,8 +660,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_dobong -> {
                 GoogleMap.moveCamera(
@@ -681,8 +671,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_ddm -> {
                 GoogleMap.moveCamera(
@@ -692,8 +682,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_dongjak -> {
                 GoogleMap.moveCamera(
@@ -703,8 +693,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_mapo -> {
                 GoogleMap.moveCamera(
@@ -714,8 +704,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_sdm -> {
                 GoogleMap.moveCamera(
@@ -725,8 +715,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_seocho -> {
                 GoogleMap.moveCamera(
@@ -736,8 +726,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_sd -> {
                 GoogleMap.moveCamera(
@@ -747,8 +737,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_sb -> {
                 GoogleMap.moveCamera(
@@ -758,8 +748,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_songpa -> {
                 GoogleMap.moveCamera(
@@ -769,8 +759,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_yangcheon -> {
                 GoogleMap.moveCamera(
@@ -780,8 +770,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_ydp -> {
                 GoogleMap.moveCamera(
@@ -791,8 +781,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_yongsan -> {
                 GoogleMap.moveCamera(
@@ -802,8 +792,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_ep -> {
                 GoogleMap.moveCamera(
@@ -813,8 +803,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_jongno -> {
                 GoogleMap.moveCamera(
@@ -824,8 +814,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_junggu -> {
                 GoogleMap.moveCamera(
@@ -835,8 +825,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_jungnang -> {
                 GoogleMap.moveCamera(
@@ -846,13 +836,13 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                         ), 17f
                     )
                 )
-                binding.layoutExpand2.visibility = View.GONE
-                binding.layoutExpand3.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
+                binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
 
             else -> {
                 overViewModel.changeFilterState(getString(R.string.dessert))
-                binding.layoutExpand.visibility = View.GONE
+                binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
                 GoogleMap.clear()
                 second()
             }
