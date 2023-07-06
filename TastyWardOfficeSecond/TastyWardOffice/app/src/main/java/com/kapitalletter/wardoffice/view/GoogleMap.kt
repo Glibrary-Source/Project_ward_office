@@ -1,4 +1,4 @@
-package com.kapitalletter.wardoffice
+package com.kapitalletter.wardoffice.view
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -23,21 +23,22 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
+import com.kapitalletter.wardoffice.MyGlobals
+import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.data.WardOfficeGeo
 import com.kapitalletter.wardoffice.databinding.FragmentGoogleMapBinding
 import com.kapitalletter.wardoffice.overview.OverviewViewModel
-import com.kapitalletter.wardoffice.view.MainActivity
 
 
-class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
+class GoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,
     GoogleMap.OnMarkerClickListener, View.OnClickListener {
 
     private var latiTude = 37.510402
     private var longItude = 126.945915
 
-    private lateinit var GoogleMap: GoogleMap
-    private lateinit var mContext: Context
+    private lateinit var googleMap: GoogleMap
     private lateinit var overViewModel: OverviewViewModel
     private lateinit var mView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -59,32 +60,17 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if (context is MainActivity) {
-            mContext = context
-        }
-
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if(backPressTime + 3000 > System.currentTimeMillis()) {
-                    requireActivity().finish()
-                } else {
-                    Toast.makeText(mContext, "한번 더 뒤로가기 버튼을 누르면 종료됩니다", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                backPressTime = System.currentTimeMillis()
-            }
-        }
+        setBackPressCallBack()
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
 
         MobileAds.initialize(requireContext()) {}
-
 
     }
 
@@ -104,17 +90,17 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
         binding.myLocationButton.setOnClickListener {
 
-            try{
+            try {
                 checkLocationPermission()
-                GoogleMap.animateCamera(
+                googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(latiTude, longItude),
-                        GoogleMap.cameraPosition.zoom
+                        googleMap.cameraPosition.zoom
                     )
                 )
 
             } catch (e: Exception) {
-                Toast.makeText(mContext, "위치 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "위치 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -124,13 +110,13 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
 
     @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
-        GoogleMap = googleMap
+        this.googleMap = googleMap
 
         val builder = LatLngBounds.Builder()
         builder.include(LatLng(33.1422, 124.0384))
         builder.include(LatLng(38.6120, 131.2361))
         val bounds = builder.build()
-        GoogleMap.setLatLngBoundsForCameraTarget(bounds)
+        this.googleMap.setLatLngBoundsForCameraTarget(bounds)
 
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
@@ -152,7 +138,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             val img = currentDrawable.bitmap
             val currentLocationMarker = Bitmap.createScaledBitmap(img, 80, 80, false)
 
-            GoogleMap.addMarker(
+            this.googleMap.addMarker(
                 MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
                     .position(LatLng(latiTude, longItude))
@@ -168,15 +154,15 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             second()
             if (overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
                 toast?.cancel()
-                toast = Toast.makeText(mContext, "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
+                toast = Toast.makeText(requireContext(), "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
                 toast?.show()
             }
         }
     }
 
     private fun getOverviewLocationData() {
-        val position = GoogleMap.cameraPosition.target
-        overViewModel.cameraZoomState(GoogleMap.cameraPosition.zoom)
+        val position = googleMap.cameraPosition.target
+        overViewModel.cameraZoomState(googleMap.cameraPosition.zoom)
         overViewModel.saveCameraTarget(position)
         overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
     }
@@ -209,7 +195,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 when (overViewModel.filterState.value) {
                     getString(R.string.korean) -> {
                         if (i.document.storeTitle == getString(R.string.korean)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -220,7 +206,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.japan) -> {
                         if (i.document.storeTitle == getString(R.string.japan)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -230,7 +216,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.chines) -> {
                         if (i.document.storeTitle == getString(R.string.chines)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -240,7 +226,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.kimbap) -> {
                         if (i.document.storeTitle == getString(R.string.kimbap)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -250,7 +236,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.western) -> {
                         if (i.document.storeTitle == getString(R.string.western)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -260,7 +246,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.dessert) -> {
                         if (i.document.storeTitle == getString(R.string.dessert)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -270,7 +256,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.asian) -> {
                         if (i.document.storeTitle == getString(R.string.asian)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -280,7 +266,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.chiken) -> {
                         if (i.document.storeTitle == getString(R.string.chiken)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -290,7 +276,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     getString(R.string.bar) -> {
                         if (i.document.storeTitle == getString(R.string.bar)) {
-                            GoogleMap.addMarker(
+                            googleMap.addMarker(
                                 MarkerOptions()
                                     .position(storeLatLng)
                                     .title(i.document.storeId)
@@ -300,7 +286,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                     }
                     else -> {
 
-                        GoogleMap.addMarker(
+                        googleMap.addMarker(
                             MarkerOptions()
                                 .position(storeLatLng)
                                 .title(i.document.storeId)
@@ -319,26 +305,26 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     @SuppressLint("MissingPermission")
     private fun checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
-                mContext,
+                requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                mContext,
+                requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    latiTude = location.latitude
-                    longItude = location.longitude
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        latiTude = location.latitude
+                        longItude = location.longitude
+                    }
                 }
-            }
         } else {
             val rejectedPermissionList = ArrayList<String>()
 
             for (permission in requiredPermissions) {
                 if (ContextCompat.checkSelfPermission(
-                        mContext,
+                        requireContext(),
                         permission
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
@@ -349,23 +335,23 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             if (rejectedPermissionList.isNotEmpty()) {
                 val array = arrayOfNulls<String>(rejectedPermissionList.size)
                 ActivityCompat.requestPermissions(
-                    mContext as Activity,
+                    requireContext() as Activity,
                     rejectedPermissionList.toArray(array),
                     multiplePermissionCode
                 )
             }
-            Toast.makeText(mContext, getString(R.string.locationcheck), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.locationcheck), Toast.LENGTH_SHORT).show()
             CameraUpdateFactory.newLatLngZoom(LatLng(latiTude, longItude), 17f)
         }
     }
 
     override fun onInfoWindowClick(p0: Marker) {
-        try{
-            if(MyGlobals.instance?.adMobCount!! % 5 == 0){
-                MyGlobals.instance?.fullAD!!.show(mContext as Activity)
+        try {
+            if (MyGlobals.instance?.adMobCount!! % 5 == 0) {
+                MyGlobals.instance?.fullAD!!.show(requireContext() as Activity)
             }
             overViewModel.findStoreData(p0)
-            val action = google_mapDirections.actionGoogleMapToDetailMenu3(
+            val action = GoogleMapDirections.actionGoogleMapToDetailMenu3(
                 p0.title.toString(),
                 overViewModel.markerStoreData.value!!.docId,
                 p0.position
@@ -460,61 +446,61 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             R.id.filter_button_all -> {
                 overViewModel.changeFilterState(getString(R.string.all))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_korean -> {
                 overViewModel.changeFilterState(getString(R.string.korean))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_china -> {
                 overViewModel.changeFilterState(getString(R.string.chines))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_japan -> {
                 overViewModel.changeFilterState(getString(R.string.japan))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_kimbap -> {
                 overViewModel.changeFilterState(getString(R.string.kimbap))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_western -> {
                 overViewModel.changeFilterState(getString(R.string.western))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_dessert -> {
                 overViewModel.changeFilterState(getString(R.string.dessert))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_asian -> {
                 overViewModel.changeFilterState(getString(R.string.asian))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_chiken -> {
                 overViewModel.changeFilterState(getString(R.string.chiken))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
             R.id.filter_button_bar -> {
                 overViewModel.changeFilterState(getString(R.string.bar))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
 
@@ -565,7 +551,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 }
             }
             R.id.filter_button_gangnam -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangnam)
@@ -576,7 +562,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gandong -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangdong)
@@ -587,7 +573,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gangbuk -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangbuk)
@@ -598,7 +584,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gangseo -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gangseo)
@@ -609,7 +595,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gwanak -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gwanak)
@@ -620,7 +606,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_gwangjin -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.gwangjin)
@@ -631,7 +617,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_guro -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.guro)
@@ -642,7 +628,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_geuncheon -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.geumcheon)
@@ -653,7 +639,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_nowon -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.nowon)
@@ -664,7 +650,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_dobong -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.dobong)
@@ -675,7 +661,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_ddm -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.ddm)
@@ -686,7 +672,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_dongjak -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.dongjak)
@@ -697,7 +683,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_mapo -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.mapo)
@@ -708,7 +694,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_sdm -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.sdm)
@@ -719,7 +705,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_seocho -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.seocho)
@@ -730,7 +716,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_sd -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.sd)
@@ -741,7 +727,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_sb -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.sb)
@@ -752,7 +738,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_songpa -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.songpa)
@@ -763,7 +749,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_yangcheon -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.yangcheon)
@@ -774,7 +760,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_ydp -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.ydp)
@@ -785,7 +771,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_yongsan -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.yongsan)
@@ -796,7 +782,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_ep -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.ep)
@@ -807,7 +793,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_jongno -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.jongno)
@@ -818,7 +804,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_junggu -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.junggu)
@@ -829,7 +815,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
                 binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
             }
             R.id.filter_button_jungnang -> {
-                GoogleMap.moveCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         locationGeoData.getWardGeo(
                             getString(R.string.jungnang)
@@ -843,7 +829,7 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
             else -> {
                 overViewModel.changeFilterState(getString(R.string.dessert))
                 binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
-                GoogleMap.clear()
+                googleMap.clear()
                 second()
             }
         }
@@ -852,6 +838,20 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     override fun onDetach() {
         super.onDetach()
         callback.remove()
+    }
+
+    fun setBackPressCallBack() {
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (backPressTime + 3000 > System.currentTimeMillis()) {
+                    requireActivity().finish()
+                } else {
+                    Toast.makeText(requireContext(), "한번 더 뒤로가기 버튼을 누르면 종료됩니다", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                backPressTime = System.currentTimeMillis()
+            }
+        }
     }
 
 }
