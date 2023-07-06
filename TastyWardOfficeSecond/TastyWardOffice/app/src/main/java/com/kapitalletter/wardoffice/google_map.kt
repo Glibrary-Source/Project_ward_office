@@ -24,6 +24,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.firebase.ktx.Firebase
 import com.kapitalletter.wardoffice.data.WardOfficeGeo
 import com.kapitalletter.wardoffice.databinding.FragmentGoogleMapBinding
 import com.kapitalletter.wardoffice.overview.OverviewViewModel
@@ -54,6 +55,8 @@ class google_map : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickLi
     )
 
     private var toast: Toast? = null
+
+
 
 //    private val markerMutableList: MutableList<Marker?> = mutableListOf()
 

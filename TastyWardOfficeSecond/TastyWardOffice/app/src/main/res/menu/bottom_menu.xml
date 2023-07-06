@@ -12,4 +12,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_view_list_24"
         android:title="@string/bottom_navigation_second" />
+
 </menu>
