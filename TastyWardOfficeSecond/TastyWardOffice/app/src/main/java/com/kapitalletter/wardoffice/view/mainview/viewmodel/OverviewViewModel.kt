@@ -1,4 +1,4 @@
-package com.kapitalletter.wardoffice.overview
+package com.kapitalletter.wardoffice.view.mainview.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,12 +26,11 @@ class OverviewViewModel : ViewModel() {
     val filterState: LiveData<String> get() = _filterState
 
     init {
-        saveCameraTarget()
-        cameraZoomState()
+        setCameraTargetAndZoom()
         changeFilterState()
     }
 
-    fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
+    suspend fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
         TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<FinalStoreDataModel> {
@@ -47,25 +46,25 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun findStoreData(p0 : Marker): Documents {
-        val passingData = distanceStoreData.value!!.Filterstore
+        val passingData = distanceStoreData.value!!.filterStore
         for (storeData in passingData) {
-            val storePostion = LatLng(
+            val storePosition = LatLng(
                 storeData.document.storeGEOPoints[0],
                 storeData.document.storeGEOPoints[1]
             )
-            if (storePostion == p0.position) {
+            if (storePosition == p0.position) {
                 _markerStoreData.value = storeData.document
                 return _markerStoreData.value!!
             }
         }
-        return distanceStoreData.value!!.Filterstore[0].document
+        return distanceStoreData.value!!.filterStore[0].document
     }
 
-    fun saveCameraTarget(position: LatLng = LatLng(37.510402, 126.945915)) {
+    fun setCameraTargetAndZoom(
+        position: LatLng = LatLng(37.510402, 126.945915),
+        zoom: Float = 17f
+    ) {
         _cameraTarget.value = position
-    }
-
-    fun cameraZoomState(zoom: Float = 17f) {
         _cameraZoom.value = zoom
     }
 

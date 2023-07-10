@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.kapitalletter.wardoffice.databinding.FragmentDetailGoogleMapBinding
-import com.kapitalletter.wardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView

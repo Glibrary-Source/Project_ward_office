@@ -6,7 +6,7 @@
     app:startDestination="@id/google_map">
     <fragment
         android:id="@+id/google_map"
-        android:name="com.kapitalletter.wardoffice.view.GoogleMap"
+        android:name="com.kapitalletter.wardoffice.view.FragmentGoogleMap"
         android:label="fragment_google_map"
         tools:layout="@layout/fragment_google_map" >
         <action

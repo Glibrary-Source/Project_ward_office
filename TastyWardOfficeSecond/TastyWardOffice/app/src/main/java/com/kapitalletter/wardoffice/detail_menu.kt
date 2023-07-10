@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.kapitalletter.wardoffice.adapter.DetailMenuAdapter
+import com.kapitalletter.wardoffice.view.mainview.adapter.DetailMenuAdapter
 import com.kapitalletter.wardoffice.databinding.FragmentDetailMenuBinding
-import com.kapitalletter.wardoffice.datamodel.Filterstore
-import com.kapitalletter.wardoffice.overview.OverviewViewModel
+import com.kapitalletter.wardoffice.datamodel.FilterStore
+import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kapitalletter.wardoffice.view.MainActivity
+import com.kapitalletter.wardoffice.view.ActivityMain
 import java.util.*
 
 
@@ -29,7 +29,7 @@ class detail_menu : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if (context is MainActivity) {
+        if (context is ActivityMain) {
             mContext = context
         }
     }
@@ -139,8 +139,8 @@ class detail_menu : Fragment() {
         return binding.root
     }
 
-    private fun detailItemData() : Filterstore {
-        val passingData = overViewModel.distanceStoreData.value!!.Filterstore
+    private fun detailItemData() : FilterStore {
+        val passingData = overViewModel.distanceStoreData.value!!.filterStore
         for(storeData in passingData){
             if(storeData.document.docId == this.storeData.dogId) {
                 return storeData

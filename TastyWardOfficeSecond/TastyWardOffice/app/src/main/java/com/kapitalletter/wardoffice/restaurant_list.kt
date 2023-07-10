@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.*
-import com.kapitalletter.wardoffice.adapter.StoreListAdapter
+import com.kapitalletter.wardoffice.view.mainview.adapter.StoreListAdapter
 import com.kapitalletter.wardoffice.databinding.FragmentRestaurantListBinding
-import com.kapitalletter.wardoffice.datamodel.Filterstore
+import com.kapitalletter.wardoffice.datamodel.FilterStore
 import com.kapitalletter.wardoffice.datamodel.FinalStoreDataModel
-import com.kapitalletter.wardoffice.overview.OverviewViewModel
-import com.kapitalletter.wardoffice.view.MainActivity
+import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
+import com.kapitalletter.wardoffice.view.ActivityMain
 
 class restaurant_list : Fragment() {
 
@@ -23,7 +23,7 @@ class restaurant_list : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if (context is MainActivity) {
+        if (context is ActivityMain) {
             mContext = context
         }
     }
@@ -54,15 +54,15 @@ class restaurant_list : Fragment() {
 
         val recyclerView = binding.photosGrid
 
-        if(myDataset.Filterstore.isEmpty()) {
+        if(myDataset.filterStore.isEmpty()) {
             binding.statusImage.setImageResource(R.drawable.emptylist)
         }
 
-        val filterDocument = mutableListOf<Filterstore>()
+        val filterDocument = mutableListOf<FilterStore>()
         val filterDataset = FinalStoreDataModel(filterDocument)
 
         if(overViewModel.filterState.value != "all"){
-            for (i in myDataset.Filterstore) {
+            for (i in myDataset.filterStore) {
                 if (i.document.storeTitle == overViewModel.filterState.value) {
                     filterDocument.add(i)
                 }

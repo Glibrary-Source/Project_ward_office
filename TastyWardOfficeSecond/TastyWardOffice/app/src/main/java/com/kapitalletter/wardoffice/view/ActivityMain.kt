@@ -15,7 +15,7 @@ import com.kapitalletter.wardoffice.MyGlobals
 import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class ActivityMain : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -29,12 +29,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
+        userCurrentLocationSet()
         MobileAds.initialize(this) {}
         setAdFullScreen()
         setBottomNav()
 
+    }
+
+    private fun userCurrentLocationSet() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     @SuppressLint("MissingPermission")

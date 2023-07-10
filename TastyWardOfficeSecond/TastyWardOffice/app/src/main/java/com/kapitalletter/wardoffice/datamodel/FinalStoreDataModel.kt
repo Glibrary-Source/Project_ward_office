@@ -15,10 +15,10 @@ data class RequestLocationData (
 data class FinalStoreDataModel(
     @Expose
     @SerializedName("Filterstore")
-    val Filterstore: List<Filterstore>
+    val filterStore: List<FilterStore>
 )
 
-data class Filterstore(
+data class FilterStore(
     @Expose
     @SerializedName("document")
     val document: Documents
