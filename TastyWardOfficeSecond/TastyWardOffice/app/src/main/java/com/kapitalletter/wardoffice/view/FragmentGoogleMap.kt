@@ -79,10 +79,10 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
     }
 
-    @SuppressLint("MissingPermission", "UseCompatLoadingForDrawables", "PotentialBehaviorOverride")
+    @SuppressLint("MissingPermission", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
-        mapController = MapController(GoogleMap)
+        mapController = MapController(GoogleMap, requireContext())
 
         mapController.mapLimitBoundaryKorea()
         mapController.moveUserViewLocation(
@@ -97,31 +97,18 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
             googleMap.clear()
             setTargetAndZoom()
-            getAroundStoreData()
+            callAroundStoreData()
+            mapController.setMarkCurrentLocation(permissionModule)
 
-            val currentDrawable =
-                resources.getDrawable(R.drawable.marker_icons_mylocation, null) as BitmapDrawable
-            val img = currentDrawable.bitmap
-            val currentLocationMarker = Bitmap.createScaledBitmap(img, 80, 80, false)
-
-            GoogleMap.addMarker(
-                MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromBitmap(currentLocationMarker))
-                    .position(LatLng(permissionModule.latitude, permissionModule.longitude))
-                    .title("현위치")
-            )
-
-            binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
             binding.includeBtnFilterbar.layoutExpand2.visibility = View.GONE
             binding.includeBtnFilterbar.layoutExpand3.visibility = View.GONE
+            binding.includeBtnMenubar.layoutExpand.visibility = View.GONE
         }
 
         overViewModel.distanceStoreData.observe(this) {
             second()
             if (overViewModel.distanceStoreData.value!!.filterStore.isEmpty()) {
-                toast?.cancel()
-                toast = Toast.makeText(requireContext(), "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
-                toast?.show()
+                toastEmptyStore()
             }
         }
     }
@@ -154,12 +141,13 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
                 when (overViewModel.filterState.value) {
                     getString(R.string.korean) -> {
                         if (i.document.storeTitle == getString(R.string.korean)) {
-                            GoogleMap.addMarker(
-                                MarkerOptions()
-                                    .position(storeLatLng)
-                                    .title(i.document.storeId)
-                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                            )
+//                            GoogleMap.addMarker(
+//                                MarkerOptions()
+//                                    .position(storeLatLng)
+//                                    .title(i.document.storeId)
+//                                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+//                            )
+                            mapController.addStoreMarker(storeLatLng, i, smallMarker)
 
                         }
                     }
@@ -244,7 +232,6 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
                         }
                     }
                     else -> {
-
                         GoogleMap.addMarker(
                             MarkerOptions()
                                 .position(storeLatLng)
@@ -787,10 +774,16 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
         )
     }
 
-    private fun getAroundStoreData() {
+    private fun callAroundStoreData() {
         CoroutineScope(IO).launch {
             overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
         }
+    }
+
+    private fun toastEmptyStore() {
+        toast?.cancel()
+        toast = Toast.makeText(requireContext(), "이 위치에는 가게가 없습니다.\n지도를 이동해주세요", Toast.LENGTH_SHORT)
+        toast?.show()
     }
 
 }
