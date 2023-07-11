@@ -45,7 +45,7 @@ class OverviewViewModel : ViewModel() {
         })
     }
 
-    fun findStoreData(p0 : Marker): Documents {
+    fun findStoreData(p0 : Marker) {
         val passingData = distanceStoreData.value!!.filterStore
         for (storeData in passingData) {
             val storePosition = LatLng(
@@ -54,10 +54,8 @@ class OverviewViewModel : ViewModel() {
             )
             if (storePosition == p0.position) {
                 _markerStoreData.value = storeData.document
-                return _markerStoreData.value!!
             }
         }
-        return distanceStoreData.value!!.filterStore[0].document
     }
 
     fun setCameraTargetAndZoom(

@@ -113,7 +113,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/filter_button_geuncheon"
+                android:id="@+id/filter_button_geumcheon"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
