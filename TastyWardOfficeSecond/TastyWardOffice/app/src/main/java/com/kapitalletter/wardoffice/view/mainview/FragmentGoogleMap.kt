@@ -1,4 +1,4 @@
-package com.kapitalletter.wardoffice.view
+package com.kapitalletter.wardoffice.view.mainview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -261,7 +261,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
     private fun callAroundStoreData() {
         CoroutineScope(IO).launch {
-            overViewModel.distanceTo(overViewModel.cameraTarget.value!!)
+            overViewModel.setDistanceToData(overViewModel.cameraTarget.value!!)
         }
     }
 

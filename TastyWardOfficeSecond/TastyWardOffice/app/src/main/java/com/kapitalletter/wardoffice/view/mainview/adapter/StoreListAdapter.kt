@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.adapter.bindImage
 import com.kapitalletter.wardoffice.datamodel.FinalStoreDataModel
-import com.kapitalletter.wardoffice.restaurant_listDirections
 import com.google.android.gms.maps.model.LatLng
 import com.kapitalletter.wardoffice.MyGlobals
+import com.kapitalletter.wardoffice.view.mainview.FragmentRestaurantListDirections
+import com.kapitalletter.wardoffice.view.mainview.util.StoreListAdapterItemRank
 
 class StoreListAdapter(
     private val dataset: FinalStoreDataModel,
     private val context: Context
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
+
+    private var storeListAdapterItemRank = StoreListAdapterItemRank()
 
     init {
         notifyDataSetChanged()
@@ -42,46 +45,18 @@ class StoreListAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.filterStore[position]
+
         holder.storeTextView.text = item.document.storeId
 
-        try{
-            bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0])
-        }
-        catch (e: Exception) {holder.menuImage.setImageResource(R.drawable.blank_img)}
+        try{ bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0]) }
+        catch (e: Exception) { holder.menuImage.setImageResource(R.drawable.blank_img) }
 
-        //좋아요 수에따른 구분
-        if(item.document.storeCntLikes >= 300) {
-            holder.rankText.text = "1급"
-        }
-        else if(item.document.storeCntLikes >= 250){
-            holder.rankText.text = "2급"
-        }
-        else if(item.document.storeCntLikes >= 200){
-            holder.rankText.text = "3급"
-        }
-        else if(item.document.storeCntLikes >= 150 ){
-            holder.rankText.text = "4급"
-        }
-        else if(item.document.storeCntLikes >= 100){
-            holder.rankText.text = "5급"
-        }
-        else if(item.document.storeCntLikes >= 50){
-            holder.rankText.text = "6급"
-        }
-        else if(item.document.storeCntLikes >= 40){
-            holder.rankText.text = "7급"
-        }
-        else if(item.document.storeCntLikes >= 10){
-            holder.rankText.text = "8급"
-        }
-        else{
-            holder.rankText.text = "9급"
-        }
+        storeListAdapterItemRank.setRankText(item, holder)
 
         holder.priceAverage.text = "${item.document.storePriceMin}원~${item.document.storePriceMax}원"
         holder.menuImage.clipToOutline = true
         holder.itemView.setOnClickListener {
-            val action = restaurant_listDirections.actionRestaurantListToDetailMenu3(
+            val action = FragmentRestaurantListDirections.actionRestaurantListToDetailMenu3(
                 storename = holder.storeTextView.text.toString(),
                 dogId = item.document.docId,
                 latlng = LatLng(item.document.storeGEOPoints[0], item.document.storeGEOPoints[1])
@@ -95,13 +70,10 @@ class StoreListAdapter(
             } catch (e:Exception) {
 
             }
-
         }
-
     }
 
     override fun getItemCount(): Int {
         return dataset.filterStore.size
     }
-
 }

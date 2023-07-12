@@ -19,7 +19,7 @@ class DetailMenuAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.detail_menu_item, parent, false)
+            .inflate(R.layout.fragment_detail_menu_item, parent, false)
         return ItemViewHolder(adapterLayout)
     }
 

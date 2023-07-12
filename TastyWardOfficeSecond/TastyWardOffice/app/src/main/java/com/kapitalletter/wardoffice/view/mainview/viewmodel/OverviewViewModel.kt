@@ -30,7 +30,7 @@ class OverviewViewModel : ViewModel() {
         changeFilterState()
     }
 
-    suspend fun distanceTo(position: LatLng = LatLng(37.510402, 126.945915)) {
+    suspend fun setDistanceToData(position: LatLng = LatLng(37.510402, 126.945915)) {
         val myLocation = listOf(position.latitude, position.longitude)
         val requestType = RequestLocationData("How_long", myLocation)
         TastyWardApi.service.getLocationDistanceTo(requestType).enqueue(object : Callback<FinalStoreDataModel> {
@@ -43,6 +43,14 @@ class OverviewViewModel : ViewModel() {
 
             }
         })
+    }
+
+    fun getDistanceToData() : FinalStoreDataModel {
+        return try {
+            distanceStoreData.value!!
+        } catch (e: Exception) {
+            FinalStoreDataModel(listOf())
+        }
     }
 
     fun findStoreData(p0 : Marker) {

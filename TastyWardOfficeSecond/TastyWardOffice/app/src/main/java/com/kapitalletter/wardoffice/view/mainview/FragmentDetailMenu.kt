@@ -1,4 +1,4 @@
-package com.kapitalletter.wardoffice
+package com.kapitalletter.wardoffice.view.mainview
 
 import android.content.Context
 import android.location.Address
@@ -16,14 +16,17 @@ import com.kapitalletter.wardoffice.datamodel.FilterStore
 import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kapitalletter.wardoffice.view.ActivityMain
+import com.kapitalletter.wardoffice.MyGlobals
+import com.kapitalletter.wardoffice.R
+import com.kapitalletter.wardoffice.detail_googleMap
+import com.kapitalletter.wardoffice.menu_image
 import java.util.*
 
 
-class detail_menu : Fragment() {
+class FragmentDetailMenu : Fragment() {
 
     private lateinit var mContext: Context
-    private val storeData by navArgs<detail_menuArgs>()
+    private val storeData by navArgs<FragmentDetailMenuArgs>()
     private lateinit var overViewModel: OverviewViewModel
 
     override fun onAttach(context: Context) {

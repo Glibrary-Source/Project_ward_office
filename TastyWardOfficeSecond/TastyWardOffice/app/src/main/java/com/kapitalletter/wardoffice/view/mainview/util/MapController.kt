@@ -10,7 +10,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.datamodel.FilterStore
-import com.kapitalletter.wardoffice.view.FragmentGoogleMapDirections
+import com.kapitalletter.wardoffice.view.mainview.FragmentGoogleMapDirections
 
 class MapController(
     private val googleMap: GoogleMap,

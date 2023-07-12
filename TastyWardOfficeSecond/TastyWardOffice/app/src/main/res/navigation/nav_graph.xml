@@ -6,7 +6,7 @@
     app:startDestination="@id/google_map">
     <fragment
         android:id="@+id/google_map"
-        android:name="com.kapitalletter.wardoffice.view.FragmentGoogleMap"
+        android:name="com.kapitalletter.wardoffice.view.mainview.FragmentGoogleMap"
         android:label="fragment_google_map"
         tools:layout="@layout/fragment_google_map" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/restaurant_list"
-        android:name="com.kapitalletter.wardoffice.restaurant_list"
+        android:name="com.kapitalletter.wardoffice.view.mainview.FragmentRestaurantList"
         android:label="fragment_restaurant_list"
         tools:layout="@layout/fragment_restaurant_list" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail_menu3"
-        android:name="com.kapitalletter.wardoffice.detail_menu"
+        android:name="com.kapitalletter.wardoffice.view.mainview.FragmentDetailMenu"
         android:label="fragment_detail_menu"
         tools:layout="@layout/fragment_detail_menu" >
         <argument
