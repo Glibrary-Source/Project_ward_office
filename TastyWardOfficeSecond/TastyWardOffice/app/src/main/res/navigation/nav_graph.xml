@@ -45,7 +45,7 @@
             android:name="storename"
             app:argType="string" />
         <argument
-            android:name="dogId"
+            android:name="docId"
             app:argType="string" />
         <action
             android:id="@+id/action_detail_menu3_to_menu_image3"
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/menu_image3"
-        android:name="com.kapitalletter.wardoffice.menu_image"
+        android:name="com.kapitalletter.wardoffice.view.mainview.FragmentMenuImage"
         android:label="fragment_menu_image"
         tools:layout="@layout/fragment_menu_image" >
         <argument

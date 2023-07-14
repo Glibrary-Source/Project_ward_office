@@ -13,7 +13,6 @@ class RestaurantListDataController(
     private val binding: FragmentRestaurantListBinding,
     private val myDataset: FinalStoreDataModel
 ) {
-
     fun setEmptyListImg() {
         if (myDataset.filterStore.isEmpty()) {
             binding.statusImage.setImageResource(R.drawable.emptylist)

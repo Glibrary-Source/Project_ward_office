@@ -137,9 +137,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
             findNavController().navigate(
                 mapController.mapInfoClickAction(p0, overViewModel.markerStoreData.value!!.docId)
             )
-        } catch (e: Exception) {
-            Log.d("TestAction", e.message.toString())
-        }
+        } catch (e: Exception) { }
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
@@ -174,7 +172,6 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
     override fun onStart() {
         super.onStart()
-
         binding.includeBtnFilterbar.filterWardOfficeButton.setOnClickListener(this)
         binding.includeBtnMenubar.titleButton.setOnClickListener(this)
 

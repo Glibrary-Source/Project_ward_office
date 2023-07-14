@@ -1,7 +1,6 @@
 package com.kapitalletter.wardoffice.view.mainview.adapter
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +13,9 @@ import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.adapter.bindImage
 import com.kapitalletter.wardoffice.datamodel.FinalStoreDataModel
 import com.google.android.gms.maps.model.LatLng
-import com.kapitalletter.wardoffice.MyGlobals
 import com.kapitalletter.wardoffice.view.mainview.FragmentRestaurantListDirections
+import com.kapitalletter.wardoffice.view.mainview.util.AdmobController
+import com.kapitalletter.wardoffice.view.mainview.util.StoreListAdapterClickEvent
 import com.kapitalletter.wardoffice.view.mainview.util.StoreListAdapterItemRank
 
 class StoreListAdapter(
@@ -24,6 +24,8 @@ class StoreListAdapter(
 ): RecyclerView.Adapter<StoreListAdapter.ItemViewHolder>() {
 
     private var storeListAdapterItemRank = StoreListAdapterItemRank()
+    private var admobController = AdmobController(context)
+    private var storeListAdapterClickEvent = StoreListAdapterClickEvent()
 
     init {
         notifyDataSetChanged()
@@ -46,34 +48,22 @@ class StoreListAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.filterStore[position]
 
-        holder.storeTextView.text = item.document.storeId
-
         try{ bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0]) }
         catch (e: Exception) { holder.menuImage.setImageResource(R.drawable.blank_img) }
 
-        storeListAdapterItemRank.setRankText(item, holder)
-
+        holder.storeTextView.text = item.document.storeId
         holder.priceAverage.text = "${item.document.storePriceMin}원~${item.document.storePriceMax}원"
         holder.menuImage.clipToOutline = true
-        holder.itemView.setOnClickListener {
-            val action = FragmentRestaurantListDirections.actionRestaurantListToDetailMenu3(
-                storename = holder.storeTextView.text.toString(),
-                dogId = item.document.docId,
-                latlng = LatLng(item.document.storeGEOPoints[0], item.document.storeGEOPoints[1])
-            )
-            holder.itemView.findNavController().navigate(action)
 
-            try{
-                if (MyGlobals.instance?.adMobCount!! % 5 == 0) {
-                    MyGlobals.instance?.fullAD!!.show(context as Activity)
-                }
-            } catch (e:Exception) {
+        holder.itemView.setOnClickListener(
+            storeListAdapterClickEvent.actionRestaurantListToDetail(holder,item, admobController)
+        )
 
-            }
-        }
+        storeListAdapterItemRank.setRankText(item, holder)
     }
 
     override fun getItemCount(): Int {
         return dataset.filterStore.size
     }
+
 }

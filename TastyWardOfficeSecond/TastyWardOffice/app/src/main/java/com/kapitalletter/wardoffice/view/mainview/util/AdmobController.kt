@@ -14,6 +14,10 @@ class AdmobController(
 
     private var mInterstitialAd: InterstitialAd? = null
 
+    fun detailFragmentClickCounter() {
+        MyGlobals.instance?.adMobCount = MyGlobals.instance?.adMobCount!! + 1
+    }
+
     fun mapInfoClickCallAd() {
         if (MyGlobals.instance?.adMobCount!! % 5 == 0) {
             MyGlobals.instance?.fullAD!!.show(context as Activity)

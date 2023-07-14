@@ -1,6 +1,5 @@
 package com.kapitalletter.wardoffice.view.mainview.util
 
-import androidx.appcompat.view.menu.MenuView
 import com.kapitalletter.wardoffice.datamodel.FilterStore
 import com.kapitalletter.wardoffice.view.mainview.adapter.StoreListAdapter
 

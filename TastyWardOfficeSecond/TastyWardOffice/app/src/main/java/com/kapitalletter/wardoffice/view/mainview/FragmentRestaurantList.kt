@@ -48,4 +48,5 @@ class FragmentRestaurantList : Fragment() {
 
         return binding.root
     }
+
 }
