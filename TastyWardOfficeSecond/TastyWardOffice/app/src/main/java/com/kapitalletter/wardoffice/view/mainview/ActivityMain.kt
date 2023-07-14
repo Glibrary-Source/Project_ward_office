@@ -43,13 +43,15 @@ class ActivityMain : AppCompatActivity() {
         val options = navigationOptionsManager.setBottomTransformOption()
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.google_map -> {
-                    navController.navigate(R.id.google_map, null, options)
-                }
-                R.id.restaurant_list -> {
-                    navController.navigate(R.id.restaurant_list, null, options)
-                }
+            val currentDestination = navController.currentDestination
+            val selectedDestination = when (item.itemId) {
+                R.id.google_map -> R.id.google_map
+                R.id.restaurant_list -> R.id.restaurant_list
+                else -> return@setOnItemSelectedListener true
+            }
+
+            if(currentDestination?.id != selectedDestination) {
+                navController.navigate(selectedDestination, null, options)
             }
             true
         }

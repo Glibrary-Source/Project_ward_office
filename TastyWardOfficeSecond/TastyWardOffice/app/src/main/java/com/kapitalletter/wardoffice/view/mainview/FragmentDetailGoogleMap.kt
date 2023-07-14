@@ -8,13 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.kapitalletter.wardoffice.databinding.FragmentDetailGoogleMapBinding
 import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
-import com.kapitalletter.wardoffice.MyGlobals
 import com.kapitalletter.wardoffice.view.mainview.util.DetailGoogleMapMarker
 
 class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {

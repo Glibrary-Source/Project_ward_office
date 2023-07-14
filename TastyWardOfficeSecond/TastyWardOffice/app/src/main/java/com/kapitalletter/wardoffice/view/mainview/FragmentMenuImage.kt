@@ -21,7 +21,7 @@ class FragmentMenuImage : Fragment() {
         val binding = FragmentMenuImageBinding.inflate(inflater)
 
         try{ bindImage(binding.mainMenuImage, arguments?.getString("Url")) }
-        catch (e:Exception) {binding.mainMenuImage.setImageResource(R.drawable.blank_img)}
+        catch (e:Exception) { binding.mainMenuImage.setImageResource(R.drawable.blank_img) }
 
         binding.mainMenuImage.scaleType = ImageView.ScaleType.FIT_XY
 
