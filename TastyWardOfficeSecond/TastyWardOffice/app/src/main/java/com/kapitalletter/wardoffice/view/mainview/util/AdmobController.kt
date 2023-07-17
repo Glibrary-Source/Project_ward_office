@@ -28,7 +28,6 @@ class AdmobController(
     fun setAdFullScreen(
         mAdView : AdView,
         adRequest : AdRequest
-
     ) {
         mAdView.loadAd(adRequest)
 

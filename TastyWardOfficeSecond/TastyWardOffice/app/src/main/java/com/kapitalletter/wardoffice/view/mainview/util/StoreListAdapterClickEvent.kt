@@ -14,6 +14,7 @@ class StoreListAdapterClickEvent {
         item: FilterStore,
         admobController: AdmobController
     ): View.OnClickListener {
+
         val clickListener = View.OnClickListener {
             val action = FragmentRestaurantListDirections.actionRestaurantListToDetailMenu3 (
                 storename = holder.storeTextView.text.toString(),
@@ -21,9 +22,8 @@ class StoreListAdapterClickEvent {
                 latlng = LatLng(item.document.storeGEOPoints[0], item.document.storeGEOPoints[1])
             )
             holder.itemView.findNavController().navigate(action)
+            admobController.mapInfoClickCallAd()
         }
-
-        admobController.mapInfoClickCallAd()
 
         return clickListener
     }

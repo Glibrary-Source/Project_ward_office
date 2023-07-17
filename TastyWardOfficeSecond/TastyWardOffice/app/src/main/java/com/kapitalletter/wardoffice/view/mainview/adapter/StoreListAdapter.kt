@@ -56,7 +56,7 @@ class StoreListAdapter(
         holder.menuImage.clipToOutline = true
 
         holder.itemView.setOnClickListener(
-            storeListAdapterClickEvent.actionRestaurantListToDetail(holder,item, admobController)
+            storeListAdapterClickEvent.actionRestaurantListToDetail(holder, item, admobController)
         )
 
         storeListAdapterItemRank.setRankText(item, holder)
