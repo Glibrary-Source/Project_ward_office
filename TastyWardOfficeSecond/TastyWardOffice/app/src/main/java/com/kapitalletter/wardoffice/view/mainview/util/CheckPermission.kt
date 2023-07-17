@@ -28,6 +28,7 @@ class CheckPermission {
     @SuppressLint("MissingPermission")
     fun checkLocationPermission(context: Context) {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
