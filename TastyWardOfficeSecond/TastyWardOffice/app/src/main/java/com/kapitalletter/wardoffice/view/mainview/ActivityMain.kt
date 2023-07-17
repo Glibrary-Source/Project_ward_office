@@ -10,6 +10,10 @@ import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.databinding.ActivityMainBinding
 import com.kapitalletter.wardoffice.view.mainview.util.AdmobController
 import com.kapitalletter.wardoffice.view.mainview.util.NavigationOptionsManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
 class ActivityMain : AppCompatActivity() {
 
@@ -26,7 +30,7 @@ class ActivityMain : AppCompatActivity() {
 
         MobileAds.initialize(this) {}
         adMobController = AdmobController(this)
-        adMobController.setAdFullScreen(binding.adView, AdRequest.Builder().build())
+        adMobController.setAdFullScreen( binding.adView, AdRequest.Builder().build() )
 
         setBottomNav()
     }
