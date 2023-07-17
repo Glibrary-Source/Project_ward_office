@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/navbar_img"
                 android:layout_width="24sp"
-                android:layout_height="26sp"
+                android:layout_height="28sp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/activity_main_titlebar_img"
@@ -65,7 +65,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
-        app:itemPaddingTop="13dp"
         app:itemIconSize="24dp"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"

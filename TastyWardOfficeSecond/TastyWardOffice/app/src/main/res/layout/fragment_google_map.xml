@@ -21,27 +21,21 @@
         android:id="@+id/include_btn_menubar"
         layout="@layout/fragment_google_map_menu_button" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+    <ImageButton
+        android:id="@+id/myLocationButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_img"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_my_location_24"
+        app:fabSize="mini"
+        app:tint="@color/quantum_lightblue"
+        tools:ignore="ContentDescription" />
 
-        <ImageButton
-            android:id="@+id/myLocationButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/border_img"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_baseline_my_location_24"
-            app:fabSize="mini"
-            app:tint="@color/quantum_lightblue"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
 </FrameLayout>
 
 

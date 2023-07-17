@@ -12,5 +12,4 @@
         android:enabled="true"
         android:icon="@drawable/activity_main_bottomnav_list_ic"
         android:title="@string/bottom_navigation_list" />
-
 </menu>

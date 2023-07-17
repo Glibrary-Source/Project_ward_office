@@ -5,7 +5,7 @@
             <stroke
                 android:width="2dp"
                 android:color="@android:color/holo_blue_light" />
-            <corners android:radius="20dp" />
+            <corners android:radius="10dp" />
             <padding
                 android:left="16dp"
                 android:right="16dp"
@@ -19,7 +19,7 @@
             <stroke
                 android:width="2dp"
                 android:color="@color/white" />
-            <corners android:radius="20dp" />
+            <corners android:radius="10dp" />
             <padding
                 android:left="16dp"
                 android:right="16dp"
