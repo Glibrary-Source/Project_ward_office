@@ -4,6 +4,7 @@ import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.*
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -55,8 +56,11 @@ class ActivityMain : AppCompatActivity() {
                 else -> return@setOnItemSelectedListener true
             }
 
+//            if(currentDestination?.id != selectedDestination) {
+//                navController.navigate(selectedDestination, null, options)
+//            }
             if(currentDestination?.id != selectedDestination) {
-                navController.navigate(selectedDestination, null, options)
+                navController.navigate(selectedDestination, null)
             }
             true
         }
