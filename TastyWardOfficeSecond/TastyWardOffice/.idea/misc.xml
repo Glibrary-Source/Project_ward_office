@@ -11,6 +11,8 @@
         <entry key="..\:/Users/qn651/Downloads/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.1875" />
         <entry key="..\:/Users/qn651/Downloads/TastyWardOffice/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.1875" />
         <entry key="..\:/Users/qn651/Downloads/TastyWardOffice/app/src/main/res/menu/bottom_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/activity_main_bottomnav_list_ic.xml" value="0.1" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/activity_main_bottomnav_map_ic.xml" value="0.1195" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/ic_baseline_broken_image_24.xml" value="0.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/ic_baseline_close_24.xml" value="0.1285" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/drawable-v24/ic_baseline_map_24.xml" value="0.115" />
@@ -53,7 +55,7 @@
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.25" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/grid_view_item.xml" value="0.33" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/ic_marker_phone.xml" value="0.2848731884057971" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/menu/bottom_menu.xml" value="0.5833333333333334" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
       </map>
     </option>
   </component>
