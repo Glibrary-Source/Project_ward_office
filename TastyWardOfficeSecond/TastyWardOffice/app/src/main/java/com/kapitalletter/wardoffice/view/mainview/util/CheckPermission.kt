@@ -21,7 +21,8 @@ class CheckPermission {
     var longitude = 126.945915
     private val requiredPermissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+
     )
     private val multiplePermissionCode = 100
 

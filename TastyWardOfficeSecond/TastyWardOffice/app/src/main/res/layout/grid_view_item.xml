@@ -3,36 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="5dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/round_image" >
+        android:background="@drawable/round_image"
+        android:backgroundTint="#80f3a2">
 
         <LinearLayout
             android:id="@+id/text_fild"
-            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/menu_image">
 
             <TextView
                 android:id="@+id/name_store"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notoserifkr_bold"
-                android:textSize="12dp"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:fontFamily="@font/notoserifkr_bold"
+                android:maxLines="1"
+                android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -44,41 +45,124 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notoserifkr_bold"
                 android:textSize="12dp"
-                tools:text="음식 가격"
                 app:layout_constraintStart_toStartOf="@id/name_store"
-                app:layout_constraintTop_toBottomOf="@id/name_store" />
+                app:layout_constraintTop_toBottomOf="@id/name_store"
+                tools:text="음식 가격" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/img_rank"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="9급"
-            app:layout_constraintStart_toEndOf="@id/menu_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
         <ImageView
             android:id="@+id/menu_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_margin="2dp"
             android:adjustViewBounds="true"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:scaleType="centerCrop"
-            android:clipToOutline="true"
             android:background="@drawable/border_greed_item_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription,UnusedAttribute"
-            tools:src="@tools:sample/backgrounds/scenic"/>
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/img_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_image"
+            tools:text="9급" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content">-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:layout_marginStart="15dp"-->
+    <!--        android:layout_marginEnd="15dp"-->
+    <!--        android:layout_marginBottom="5dp"-->
+    <!--        android:layout_gravity="center_vertical"-->
+    <!--        android:background="@drawable/round_image" >-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/text_fild"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="11dp"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/name_store"-->
+    <!--                android:layout_width="180dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/notoserifkr_bold"-->
+    <!--                android:textSize="12dp"-->
+    <!--                android:maxLines="1"-->
+    <!--                android:ellipsize="end"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                tools:text="상호명" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/price_average"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/notoserifkr_bold"-->
+    <!--                android:textSize="12dp"-->
+    <!--                tools:text="음식 가격"-->
+    <!--                app:layout_constraintStart_toStartOf="@id/name_store"-->
+    <!--                app:layout_constraintTop_toBottomOf="@id/name_store" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/img_rank"-->
+    <!--            android:textStyle="bold"-->
+    <!--            android:gravity="center"-->
+    <!--            android:textSize="18dp"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            tools:text="9급"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/menu_image"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/menu_image"-->
+    <!--            android:layout_width="80dp"-->
+    <!--            android:layout_height="80dp"-->
+    <!--            android:adjustViewBounds="true"-->
+    <!--            android:layout_marginEnd="60dp"-->
+    <!--            android:layout_marginTop="2dp"-->
+    <!--            android:layout_marginBottom="2dp"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:clipToOutline="true"-->
+    <!--            android:background="@drawable/border_greed_item_image"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            tools:ignore="ContentDescription,UnusedAttribute"-->
+    <!--            tools:src="@tools:sample/backgrounds/scenic"/>-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--</LinearLayout>-->
