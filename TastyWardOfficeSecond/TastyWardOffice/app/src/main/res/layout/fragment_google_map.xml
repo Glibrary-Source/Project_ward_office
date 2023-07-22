@@ -35,7 +35,6 @@
         app:fabSize="mini"
         app:tint="@color/quantum_lightblue"
         tools:ignore="ContentDescription" />
-
 </FrameLayout>
 
 
