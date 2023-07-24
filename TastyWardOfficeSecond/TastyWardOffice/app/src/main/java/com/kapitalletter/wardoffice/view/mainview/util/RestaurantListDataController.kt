@@ -14,7 +14,7 @@ class RestaurantListDataController(
     private val myDataset: FinalStoreDataModel
 ) {
     fun setEmptyListImg() {
-        if (myDataset.filterStore.isEmpty()) {
+        if (myDataset.Filterstore.isEmpty()) {
             binding.statusImage.setImageResource(R.drawable.emptylist)
         }
     }
@@ -38,7 +38,7 @@ class RestaurantListDataController(
         filterDocument: MutableList<FilterStore>,
         filterState: String
     ) {
-        for ( i in myDataset.filterStore ) {
+        for ( i in myDataset.Filterstore ) {
             if ( i.document.storeTitle == filterState ) {
                 filterDocument.add(i)
             }

@@ -46,9 +46,9 @@ class StoreListAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset.filterStore[position]
+        val item = dataset.Filterstore[position]
 
-        try{ bindImage(holder.menuImage, item.document.storeMenuPictureUrlsStore[0]) }
+        try{ bindImage(holder.menuImage, item.document.storeMenuPictureUrls.store[0]) }
         catch (e: Exception) { holder.menuImage.setImageResource(R.drawable.blank_img) }
 
         holder.storeTextView.text = item.document.storeId
@@ -63,7 +63,7 @@ class StoreListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return dataset.filterStore.size
+        return dataset.Filterstore.size
     }
 
 }

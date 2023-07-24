@@ -21,10 +21,10 @@ class ViewPagerController {
                 positionOffsetPixels: Int
             ) {
                 val pictureListSize: Int =
-                    if (storeDetailData.document.storeMenuPictureUrlsMenu.isEmpty()) {
+                    if (storeDetailData.document.storeMenuPictureUrls.menu.isEmpty()) {
                         3
                     } else {
-                        storeDetailData.document.storeMenuPictureUrlsMenu.size
+                        storeDetailData.document.storeMenuPictureUrls.menu.size
                     }
                 if (currentState == ViewPager2.SCROLL_STATE_DRAGGING && currentPos == position) {
                     if (currentPos == 0) {

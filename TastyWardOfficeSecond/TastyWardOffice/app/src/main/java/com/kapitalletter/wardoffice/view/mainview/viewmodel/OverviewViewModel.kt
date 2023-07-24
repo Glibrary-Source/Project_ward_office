@@ -54,7 +54,7 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun findStoreData(p0 : Marker) {
-        val passingData = distanceStoreData.value!!.filterStore
+        val passingData = distanceStoreData.value!!.Filterstore
         for (storeData in passingData) {
             val storePosition = LatLng(
                 storeData.document.storeGEOPoints[0],

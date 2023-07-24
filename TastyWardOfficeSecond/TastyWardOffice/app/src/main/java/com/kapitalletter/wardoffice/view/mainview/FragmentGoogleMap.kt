@@ -121,7 +121,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
         overViewModel.distanceStoreData.observe(this) {
             createMarkerAroundShop()
 
-            if (overViewModel.distanceStoreData.value!!.filterStore.isEmpty()) {
+            if (overViewModel.distanceStoreData.value!!.Filterstore.isEmpty()) {
                 toastEmptyStore()
             }
         }
@@ -269,7 +269,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
 
     private fun createMarkerAroundShop() {
         try {
-            for (i in overViewModel.distanceStoreData.value!!.filterStore) {
+            for (i in overViewModel.distanceStoreData.value!!.Filterstore) {
                 mapController.createFilterStateMarker(overViewModel.filterState.value!!, i)
             }
         } catch (e: Exception) {

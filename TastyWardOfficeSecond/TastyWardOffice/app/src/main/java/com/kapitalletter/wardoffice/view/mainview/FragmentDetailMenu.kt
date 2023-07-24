@@ -83,7 +83,7 @@ class FragmentDetailMenu : Fragment() {
             R.id.nav_bar,
             FragmentMenuImage().apply {
                 arguments = Bundle().apply {
-                    putString("Url", storeDetailData.document.storeMenuPictureUrlsMenu[0])
+                    putString("Url", storeDetailData.document.storeMenuPictureUrls.menu[0])
                 }
             }
         ).commit()
@@ -93,7 +93,7 @@ class FragmentDetailMenu : Fragment() {
                 R.id.nav_bar,
                 FragmentMenuImage().apply {
                     arguments = Bundle().apply {
-                        putString("Url", storeDetailData.document.storeMenuPictureUrlsMenu[0])
+                        putString("Url", storeDetailData.document.storeMenuPictureUrls.menu[0])
                     }
                 }
             ).commit()

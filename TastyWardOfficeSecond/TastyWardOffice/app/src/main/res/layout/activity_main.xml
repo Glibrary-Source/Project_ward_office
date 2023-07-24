@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/quantum_grey200"
-        android:theme="?attr/actionBarTheme"
         android:elevation="10dp"
-        app:layout_constraintVertical_weight="1"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" >
+        app:layout_constraintVertical_weight="1"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -69,9 +70,9 @@
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:labelVisibilityMode="labeled"
-        app:layout_constraintVertical_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
+        app:layout_constraintVertical_weight="1"
         app:menu="@menu/bottom_menu" />
 
     <com.google.android.gms.ads.AdView
@@ -80,9 +81,10 @@
         android:layout_height="0dp"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-6701701941192034/8085048542"
-        app:layout_constraintVertical_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_navigation" />
+        app:layout_constraintTop_toBottomOf="@+id/bottom_navigation"
+        app:layout_constraintVertical_weight="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

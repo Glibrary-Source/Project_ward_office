@@ -9,7 +9,7 @@ class DetailMenuDataController {
         overViewModel: OverviewViewModel,
         dogId: String
     ) : FilterStore {
-        val passingData = overViewModel.distanceStoreData.value!!.filterStore
+        val passingData = overViewModel.distanceStoreData.value!!.Filterstore
         for( filterStore in passingData ) {
             if( filterStore.document.docId == dogId ) {
                 return filterStore
