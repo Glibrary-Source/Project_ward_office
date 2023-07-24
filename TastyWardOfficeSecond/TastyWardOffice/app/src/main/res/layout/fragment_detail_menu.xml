@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detail_menu">
+    tools:context=".view.mainview.FragmentDetailMenu">
 
     <ScrollView
         android:id="@+id/my_scroll"
@@ -26,6 +26,7 @@
                 android:layout_height="361dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border_detailmenu_image"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

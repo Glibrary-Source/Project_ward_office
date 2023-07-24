@@ -15,10 +15,10 @@ data class RequestLocationData (
 data class FinalStoreDataModel(
     @Expose
     @SerializedName("Filterstore")
-    val Filterstore: List<Filterstore>
+    val Filterstore: List<FilterStore>
 )
 
-data class Filterstore(
+data class FilterStore(
     @Expose
     @SerializedName("document")
     val document: Documents
@@ -32,6 +32,9 @@ data class Documents(
     @SerializedName("docId")
     val docId: String,
     @Expose
+    @SerializedName("id")
+    val id: String,
+    @Expose
     @SerializedName("storeCategory")
     val storeCategory: Int,
     @Expose
@@ -44,14 +47,11 @@ data class Documents(
     @SerializedName("storeId")
     val storeId: String,
     @Expose
-    @SerializedName("storeMenuPictureUrls.menu")
-    val storeMenuPictureUrlsMenu :List<String>,
-    @Expose
-    @SerializedName("storeMenuPictureUrls.store")
-    val storeMenuPictureUrlsStore :List<String>,
+    @SerializedName("storeMenuPictureUrls")
+    val storeMenuPictureUrls: StoreMenuPictureUrls,
     @Expose
     @SerializedName("storeMenus")
-    val storeMenus: List<StoreMenus1>,
+    val storeMenus: List<StoreMenus>,
     @Expose
     @SerializedName("storePriceMax")
     val storePriceMax: Int,
@@ -66,11 +66,20 @@ data class Documents(
     val storeTitle: String
 )
 
-data class StoreMenus1(
+data class StoreMenus(
     @Expose
     @SerializedName("menuPrice")
-    val menuPrice: Int,
+    val menuPrice: String,
     @Expose
     @SerializedName("menuTitle")
     val menuTitle: String
+)
+
+data class StoreMenuPictureUrls(
+    @Expose
+    @SerializedName("menu")
+    val menu: List<String>,
+    @Expose
+    @SerializedName("store")
+    val store: List<String>
 )
