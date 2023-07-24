@@ -47,7 +47,6 @@ class StoreListAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset.Filterstore[position]
-
         try{ bindImage(holder.menuImage, item.document.storeMenuPictureUrls.store[0]) }
         catch (e: Exception) { holder.menuImage.setImageResource(R.drawable.blank_img) }
 
