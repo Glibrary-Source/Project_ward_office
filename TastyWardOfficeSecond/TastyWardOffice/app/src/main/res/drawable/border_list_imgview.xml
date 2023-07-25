@@ -25,7 +25,7 @@
                 android:right="4dp"
                 android:top="4dp"
                 android:bottom="4dp" />
-            <solid android:color="#FFFFFF" />
+            <solid android:color="#FDF4EA" />
         </shape>
     </item>
 </selector>

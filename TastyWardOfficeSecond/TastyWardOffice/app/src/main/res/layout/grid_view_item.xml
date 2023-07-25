@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp">
+    android:background="@drawable/round_image"
+    android:elevation="10dp"
+    android:layout_margin="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/round_image" >
 
         <ImageView
@@ -47,6 +45,7 @@
                 android:fontFamily="@font/notoserifkr_bold"
                 android:maxLines="1"
                 android:textSize="16dp"
+                android:textColor="#707070"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -58,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notoserifkr_bold"
                 android:textSize="12dp"
+                android:textColor="#707070"
                 app:layout_constraintStart_toStartOf="@id/name_store"
                 app:layout_constraintTop_toBottomOf="@id/name_store"
                 tools:text="음식 가격" />
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="#707070"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

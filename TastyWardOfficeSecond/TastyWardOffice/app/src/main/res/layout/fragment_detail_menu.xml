@@ -119,7 +119,7 @@
                 android:id="@+id/nav_bar"
                 android:layout_width="366dp"
                 android:layout_height="361dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/border_detailmenu_image"
                 app:layout_constraintStart_toStartOf="@id/viewPager2"
                 app:layout_constraintTop_toBottomOf="@id/nav_button" />
