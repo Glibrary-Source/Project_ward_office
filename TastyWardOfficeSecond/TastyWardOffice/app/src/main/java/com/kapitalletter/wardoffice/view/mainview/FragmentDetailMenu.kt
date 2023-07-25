@@ -81,10 +81,9 @@ class FragmentDetailMenu : Fragment() {
 
         parentFragmentManager.beginTransaction().replace(
             R.id.nav_bar,
-            FragmentMenuImage().apply {
-                arguments = Bundle().apply {
-                    putString("Url", storeDetailData.document.storeMenuPictureUrls.menu[0])
-                }
+            FragmentDetailGoogleMap().apply {
+                MyGlobals.instance?.detailLatLng = LatLng(storeDetailData.document.storeGEOPoints[0],storeDetailData.document.storeGEOPoints[1])
+                MyGlobals.instance?.detailStoreId = storeDetailData.document.storeId
             }
         ).commit()
 
