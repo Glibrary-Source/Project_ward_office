@@ -1,9 +1,10 @@
-package com.kapitalletter.wardoffice
+package com.kapitalletter.wardoffice.adapter
 
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import coil.load
+import com.kapitalletter.wardoffice.R
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {

@@ -4,12 +4,12 @@
     <item
         android:id="@+id/google_map"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_map_24"
-        android:title="@string/bottom_navigation_first" />
+        android:icon="@drawable/activity_main_bottomnav_map_ic"
+        android:title="@string/bottom_navigation_map" />
 
     <item
         android:id="@+id/restaurant_list"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_view_list_24"
-        android:title="@string/bottom_navigation_second" />
+        android:icon="@drawable/activity_main_bottomnav_list_ic"
+        android:title="@string/bottom_navigation_list" />
 </menu>

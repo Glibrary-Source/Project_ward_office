@@ -18,18 +18,16 @@ android {
         applicationId "com.kapitalletter.wardoffice"
         minSdk 21
         targetSdk 32
-        versionCode 3
-        versionName "1.0.3"
-
+        versionCode 6
+        versionName "1.0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
         debug {
-            debuggable true
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "MAPS_DETAIL_LOCATION_KEY", "" + localProperties['MAPS_DETAIL_LOCATION_KEY'] + "")
         }
         release {
@@ -55,7 +53,6 @@ android {
 
 }
 
-
 dependencies {
 
     implementation "io.coil-kt:coil:1.1.1"
@@ -69,8 +66,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-
     implementation 'com.google.android.material:material:1.9.0-alpha02'
 
 

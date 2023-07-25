@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kapitalletter.wardoffice" >
+    package="com.kapitalletter.wardoffice">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:allowBackup="true"
@@ -18,10 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
+        tools:targetApi="31">
 
         <activity
-            android:name="com.kapitalletter.wardoffice.SplashActivity"
+            android:name=".view.splashview.ActivitySplash"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait">
@@ -29,23 +29,21 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="${MAPS_API_KEY}" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${ADID}" />
 
         <activity
-            android:name="com.kapitalletter.wardoffice.MainActivity"
+            android:name="com.kapitalletter.wardoffice.view.mainview.ActivityMain"
             android:exported="true"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 </manifest>
