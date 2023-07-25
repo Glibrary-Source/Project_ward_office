@@ -44,6 +44,8 @@ class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
+        GoogleMap.uiSettings.isZoomControlsEnabled = true
+
         mapController = MapController(GoogleMap, requireContext())
         mapController.addMarkCurrentLocation(checkPermission)
 
