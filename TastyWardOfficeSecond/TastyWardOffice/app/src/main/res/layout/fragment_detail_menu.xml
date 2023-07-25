@@ -50,7 +50,7 @@
                 android:layout_marginTop="46dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#757575"
+                android:textColor="@color/backgroundWhiteTextColor"
                 app:layout_constraintStart_toStartOf="@id/viewPager2"
                 app:layout_constraintTop_toBottomOf="@id/viewPager2"
                 tools:text="돌쇠와 석쇠" />
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#757575"
+                android:textColor="@color/backgroundWhiteTextColor"
                 app:layout_constraintStart_toStartOf="@id/store_name"
                 app:layout_constraintTop_toBottomOf="@id/store_name"
                 tools:text="대한민국 서울특별시 동작구 노량진동1동123-43" />
@@ -88,7 +88,7 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_marginEnd="3dp"
                     android:background="@drawable/border_button_pressed"
-                    android:textColor="#707070"
+                    android:textColor="@color/backgroundLightYellowTextColor"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_marginEnd="3dp"
                     android:background="@drawable/border_button_pressed"
-                    android:textColor="#707070"
+                    android:textColor="@color/backgroundLightYellowTextColor"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -115,7 +115,7 @@
                     android:gravity="center"
                     style="?android:attr/buttonBarButtonStyle"
                     android:background="@drawable/border_button_pressed"
-                    android:textColor="#707070"
+                    android:textColor="@color/backgroundLightYellowTextColor"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>

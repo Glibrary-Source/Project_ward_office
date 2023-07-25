@@ -89,6 +89,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
     @SuppressLint("MissingPermission", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
+        GoogleMap.setMinZoomPreference(17f)
 
         mapController = MapController(GoogleMap, requireContext())
         mapFilterButtonController = MapFilterButtonController(

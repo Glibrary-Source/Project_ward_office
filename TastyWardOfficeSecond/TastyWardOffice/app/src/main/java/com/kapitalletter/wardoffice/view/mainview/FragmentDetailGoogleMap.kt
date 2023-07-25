@@ -11,7 +11,9 @@ import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.kapitalletter.wardoffice.view.mainview.util.CheckPermission
 import com.kapitalletter.wardoffice.view.mainview.util.DetailGoogleMapMarker
+import com.kapitalletter.wardoffice.view.mainview.util.MapController
 
 class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {
 
@@ -19,10 +21,13 @@ class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {
     private lateinit var GoogleMap: GoogleMap
     private lateinit var overViewModel: OverviewViewModel
     private lateinit var detailGoogleMapMarker: DetailGoogleMapMarker
+    private lateinit var mapController: MapController
+    private lateinit var checkPermission: CheckPermission
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
+        checkPermission = CheckPermission()
     }
 
     override fun onCreateView(
@@ -39,6 +44,9 @@ class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
+        mapController = MapController(GoogleMap, requireContext())
+        mapController.addMarkCurrentLocation(checkPermission)
+
         detailGoogleMapMarker = DetailGoogleMapMarker(GoogleMap)
         detailGoogleMapMarker.setDetailGoogleMap()
     }

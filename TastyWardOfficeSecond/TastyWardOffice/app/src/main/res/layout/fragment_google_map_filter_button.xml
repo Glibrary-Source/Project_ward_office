@@ -23,6 +23,7 @@
             android:layout_height="48dp"
             android:background="@drawable/border_imgview"
             android:text="@string/wardLocation"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textSize="20dp"
             android:textStyle="bold" />
     </androidx.constraintlayout.widget.ConstraintLayout>
