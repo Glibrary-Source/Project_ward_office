@@ -18,7 +18,7 @@
             android:id="@+id/menu_image"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:layout_margin="2dp"
+
             android:adjustViewBounds="true"
             android:background="@drawable/border_greed_item_image"
             android:clipToOutline="true"
@@ -32,7 +32,7 @@
             android:id="@+id/text_fild"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/menu_image">
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="@font/notoserifkr_bold"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:maxLines="1"
                 android:textSize="16dp"
                 android:textColor="@color/backgroundLightYellowTextColor"
