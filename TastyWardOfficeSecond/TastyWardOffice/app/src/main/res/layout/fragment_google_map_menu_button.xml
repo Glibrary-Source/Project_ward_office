@@ -43,6 +43,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/buttonAll"/>
 
@@ -53,6 +54,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/japan"/>
         <Button
@@ -62,6 +64,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/korean"/>
         <Button
@@ -71,6 +74,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/chines"/>
         <Button
@@ -80,6 +84,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/kimbap"/>
         <Button
@@ -89,6 +94,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/western"/>
         <Button
@@ -98,6 +104,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/dessert"/>
         <Button
@@ -107,6 +114,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/asian"/>
         <Button
@@ -116,6 +124,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/chiken"/>
         <Button
@@ -123,8 +132,10 @@
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
             android:textSize="18dp"
             android:background="@drawable/border_list_imgview"
+            android:textColor="@color/backgroundLightYellowTextColor"
             android:textStyle="bold"
             android:text="@string/bar"/>
     </LinearLayout>

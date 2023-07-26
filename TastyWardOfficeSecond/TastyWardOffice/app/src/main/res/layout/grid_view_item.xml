@@ -32,7 +32,7 @@
             android:id="@+id/text_fild"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
+            android:layout_marginStart="12dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/menu_image">
@@ -43,6 +43,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="@font/notoserifkr_bold"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
                 android:maxLines="1"
                 android:textSize="16dp"
                 android:textColor="@color/backgroundLightYellowTextColor"
@@ -50,24 +52,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="상호명" />
-
-            <TextView
-                android:id="@+id/price_average"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notoserifkr_bold"
-                android:textSize="12dp"
-                android:textColor="@color/backgroundLightYellowTextColor"
-                app:layout_constraintStart_toStartOf="@id/name_store"
-                app:layout_constraintTop_toBottomOf="@id/name_store"
-                tools:text="음식 가격" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/img_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
             android:textColor="@color/backgroundLightYellowTextColor"
             android:textSize="18dp"

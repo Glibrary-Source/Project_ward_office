@@ -16,6 +16,9 @@ class MapController(
     private val googleMap: GoogleMap,
     private val context: Context
 ) {
+
+    var firstTime = true
+
     fun mapLimitBoundaryKorea() {
         val builder = LatLngBounds.Builder()
         builder.include(LatLng(33.1422, 124.0384))
@@ -49,6 +52,20 @@ class MapController(
                 .position(LatLng(permissionModule.latitude, permissionModule.longitude))
                 .title("현위치")
         )
+
+        setFirstCurrentLocation(permissionModule)
+    }
+
+    private fun setFirstCurrentLocation(permissionModule: CheckPermission) {
+        if(firstTime) {
+            googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(permissionModule.latitude, permissionModule.longitude),
+                    16f
+                )
+            )
+            firstTime = false
+        }
     }
 
     fun createFilterStateMarker(

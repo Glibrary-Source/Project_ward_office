@@ -34,7 +34,6 @@ class StoreListAdapter(
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val storeTextView : TextView = view.findViewById(R.id.name_store)
         val menuImage : ImageView = view.findViewById(R.id.menu_image)
-        val priceAverage : TextView = view.findViewById(R.id.price_average)
         val rankText : TextView = view.findViewById(R.id.img_rank)
     }
 
@@ -51,7 +50,6 @@ class StoreListAdapter(
         catch (e: Exception) { holder.menuImage.setImageResource(R.drawable.blank_img) }
 
         holder.storeTextView.text = item.document.storeId
-        holder.priceAverage.text = "${item.document.storePriceMin}원~${item.document.storePriceMax}원"
         holder.menuImage.clipToOutline = true
 
         holder.itemView.setOnClickListener(

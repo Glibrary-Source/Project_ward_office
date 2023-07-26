@@ -25,7 +25,7 @@
                 android:right="16dp"
                 android:top="8dp"
                 android:bottom="8dp" />
-            <solid android:color="#FDF4EA" />
+            <solid android:color="@color/backgroundLightYellow" />
         </shape>
     </item>
 </selector>

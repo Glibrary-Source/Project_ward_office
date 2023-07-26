@@ -89,7 +89,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
     @SuppressLint("MissingPermission", "PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
-        GoogleMap.setMinZoomPreference(17f)
+        GoogleMap.setMinZoomPreference(16f)
 
         mapController = MapController(GoogleMap, requireContext())
         mapFilterButtonController = MapFilterButtonController(
@@ -126,11 +126,6 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
                 toastEmptyStore()
             }
         }
-
-        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-            LatLng(permissionModule.latitude, permissionModule.longitude),
-            16f
-        ))
     }
 
     override fun onInfoWindowClick(p0: Marker) {
