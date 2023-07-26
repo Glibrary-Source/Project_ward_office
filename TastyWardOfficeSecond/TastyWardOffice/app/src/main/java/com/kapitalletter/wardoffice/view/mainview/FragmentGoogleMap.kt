@@ -126,6 +126,11 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
                 toastEmptyStore()
             }
         }
+
+        GoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+            LatLng(permissionModule.latitude, permissionModule.longitude),
+            16f
+        ))
     }
 
     override fun onInfoWindowClick(p0: Marker) {
