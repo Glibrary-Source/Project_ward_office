@@ -1,16 +1,21 @@
 package com.kapitalletter.wardoffice.view.mainview
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.kapitalletter.wardoffice.databinding.FragmentDetailGoogleMapBinding
 import com.kapitalletter.wardoffice.view.mainview.viewmodel.OverviewViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.Marker
+import com.kapitalletter.wardoffice.MyGlobals
 import com.kapitalletter.wardoffice.view.mainview.util.CheckPermission
 import com.kapitalletter.wardoffice.view.mainview.util.DetailGoogleMapMarker
 import com.kapitalletter.wardoffice.view.mainview.util.MapController
@@ -22,12 +27,10 @@ class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {
     private lateinit var overViewModel: OverviewViewModel
     private lateinit var detailGoogleMapMarker: DetailGoogleMapMarker
     private lateinit var mapController: MapController
-    private lateinit var checkPermission: CheckPermission
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overViewModel = ViewModelProvider(requireActivity())[OverviewViewModel::class.java]
-        checkPermission = CheckPermission()
     }
 
     override fun onCreateView(
@@ -42,12 +45,14 @@ class FragmentDetailGoogleMap : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
+    @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
         GoogleMap = googleMap
         GoogleMap.uiSettings.isZoomControlsEnabled = true
 
+
         mapController = MapController(GoogleMap, requireContext())
-        mapController.addMarkCurrentLocation(checkPermission)
+        mapController.addMarkCurrentLocation(CheckPermission)
 
         detailGoogleMapMarker = DetailGoogleMapMarker(GoogleMap)
         detailGoogleMapMarker.setDetailGoogleMap()

@@ -18,16 +18,19 @@ class OverviewViewModel : ViewModel() {
     private val _markerStoreData = MutableLiveData<Documents>()
     private val _cameraZoom = MutableLiveData<Float>()
     private val _filterState = MutableLiveData<String>()
+    private val _mapLoadCounter = MutableLiveData<Boolean>()
 
     val distanceStoreData: LiveData<FinalStoreDataModel> get() = _distanceStoreData
     val cameraTarget: LiveData<LatLng> get() = _cameraTarget
     val markerStoreData: LiveData<Documents> get() = _markerStoreData
     val cameraZoom: LiveData<Float> get() = _cameraZoom
     val filterState: LiveData<String> get() = _filterState
+    val mapLoadCounter: LiveData<Boolean> get() = _mapLoadCounter
 
     init {
         setCameraTargetAndZoom()
         changeFilterState()
+        checkMapLoad()
     }
 
     suspend fun setDistanceToData(position: LatLng = LatLng(37.510402, 126.945915)) {
@@ -76,6 +79,14 @@ class OverviewViewModel : ViewModel() {
 
     fun changeFilterState(filterState : String = "all") {
         _filterState.value = filterState
+    }
+
+    private fun checkMapLoad() {
+        _mapLoadCounter.value = true
+    }
+
+    fun checkMapLoadComplete() {
+        _mapLoadCounter.value = false
     }
 }
 

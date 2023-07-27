@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import com.kapitalletter.wardoffice.R
 import com.kapitalletter.wardoffice.view.mainview.ActivityMain
+import com.kapitalletter.wardoffice.view.mainview.util.CheckPermission
 
 class ActivitySplash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,8 @@ class ActivitySplash : AppCompatActivity() {
 
             finish()
         }, 1000)
+
+        CheckPermission.checkLocationPermission(this)
     }
 
 }

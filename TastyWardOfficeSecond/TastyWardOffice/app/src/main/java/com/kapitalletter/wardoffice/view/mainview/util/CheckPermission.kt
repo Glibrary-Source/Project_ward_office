@@ -15,16 +15,16 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.kapitalletter.wardoffice.R
 
-class CheckPermission {
+object CheckPermission {
 
-    var latitude = 37.510402
-    var longitude = 126.945915
+    var latitude = 37.551685
+    var longitude = 126.992718
     private val requiredPermissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION,
 
     )
-    private val multiplePermissionCode = 100
+    private const val multiplePermissionCode = 100
 
     @SuppressLint("MissingPermission")
     fun checkLocationPermission(context: Context) {

@@ -3,6 +3,7 @@ package com.kapitalletter.wardoffice.view.mainview
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,12 +39,10 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
     private lateinit var filterMenuView: FragmentGoogleMapMenuButtonBinding
     private lateinit var filterLocalView: FragmentGoogleMapFilterButtonBinding
 
-
     private lateinit var mapController: MapController
     private lateinit var adMobController: AdmobController
     private lateinit var mapFilterButtonController: MapFilterButtonController
 
-    private val permissionModule = CheckPermission()
     private var backPressTime: Long = 0
     private var toast: Toast? = null
 
@@ -73,7 +72,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
         filterMenuView = binding.includeBtnMenubar
         filterLocalView = binding.includeBtnFilterbar
 
-        permissionModule.checkLocationPermission(requireContext())
+        CheckPermission.checkLocationPermission(requireContext())
 
         binding.myLocationButton.setOnClickListener {
             try {
@@ -102,10 +101,19 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
         )
 
         mapController.mapLimitBoundaryKorea()
-        mapController.moveUserViewLocation(
-            overViewModel.cameraTarget.value!!,
-            overViewModel.cameraZoom.value!!
-        )
+
+        if(overViewModel.mapLoadCounter.value!!){
+            mapController.moveUserViewLocation(
+                LatLng(CheckPermission.latitude,CheckPermission.longitude),
+                overViewModel.cameraZoom.value!!
+            )
+            overViewModel.checkMapLoadComplete()
+        } else {
+            mapController.moveUserViewLocation(
+                overViewModel.cameraTarget.value!!,
+                overViewModel.cameraZoom.value!!
+            )
+        }
 
         googleMap.setOnInfoWindowClickListener(this)
         googleMap.setOnMarkerClickListener(this)
@@ -114,7 +122,7 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
             googleMap.clear()
             setTargetAndZoom()
             callAroundStoreData()
-            mapController.addMarkCurrentLocation(permissionModule)
+            mapController.addMarkCurrentLocation(CheckPermission)
 
             mapFilterButtonController.filterViewExpandClose()
         }
@@ -240,10 +248,10 @@ class FragmentGoogleMap : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindow
     }
 
     private fun moveCurrentLocation() {
-        permissionModule.checkLocationPermission(requireContext())
+        CheckPermission.checkLocationPermission(requireContext())
         GoogleMap.animateCamera(
             CameraUpdateFactory.newLatLngZoom(
-                LatLng(permissionModule.latitude, permissionModule.longitude),
+                LatLng(CheckPermission.latitude, CheckPermission.longitude),
                 GoogleMap.cameraPosition.zoom
             )
         )

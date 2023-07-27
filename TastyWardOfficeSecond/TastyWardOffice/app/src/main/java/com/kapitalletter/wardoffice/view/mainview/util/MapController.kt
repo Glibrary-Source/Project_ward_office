@@ -16,9 +16,6 @@ class MapController(
     private val googleMap: GoogleMap,
     private val context: Context
 ) {
-
-    var firstTime = true
-
     fun mapLimitBoundaryKorea() {
         val builder = LatLngBounds.Builder()
         builder.include(LatLng(33.1422, 124.0384))
