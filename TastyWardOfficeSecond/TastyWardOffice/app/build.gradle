@@ -17,9 +17,9 @@ android {
     defaultConfig {
         applicationId "com.kapitalletter.wardoffice"
         minSdk 21
-        targetSdk 32
-        versionCode 8
-        versionName "1.0.8"
+        targetSdk 33
+        versionCode 9
+        versionName "1.0.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,6 +50,7 @@ android {
         viewBinding true
         dataBinding true
     }
+    namespace 'com.kapitalletter.wardoffice'
 
 }
 
@@ -57,7 +58,7 @@ dependencies {
 
     implementation "io.coil-kt:coil:1.1.1"
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.libraries.places:places:2.7.0'

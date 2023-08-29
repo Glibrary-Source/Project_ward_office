@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -49,21 +48,28 @@
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_google_map.xml" value="0.22" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_menu.xml" value="0.33" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_detail_menu_item.xml" value="0.15" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.22" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map_filter_button.xml" value="0.75" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map.xml" value="0.2491448118586089" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map_filter_button.xml" value="1.1" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_google_map_menu_button.xml" value="0.67" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_menu_image.xml" value="0.2669826224328594" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.25" />
-        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/grid_view_item.xml" value="0.33" />
+        <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/grid_view_item.xml" value="0.25" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/layout/ic_marker_phone.xml" value="0.2848731884057971" />
         <entry key="..\:/Users/qn651/NewVersionMap/TastyWardOfficeSecond/TastyWardOffice/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5" />
+      </ProjectState>
+    </option>
   </component>
 </project>

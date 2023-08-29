@@ -44,7 +44,6 @@
                 android:text="@string/title_name"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
-
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -80,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-6701701941192034/8085048542"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_navigation"
         app:layout_constraintVertical_weight="1" />

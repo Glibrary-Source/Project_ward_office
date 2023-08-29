@@ -26,8 +26,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_margin="8dp"
+        android:elevation="8dp"
         android:background="@drawable/border_img"
         android:clickable="true"
         android:focusable="true"
@@ -35,8 +35,4 @@
         app:fabSize="mini"
         app:tint="@color/quantum_lightblue"
         tools:ignore="ContentDescription" />
-
 </FrameLayout>
-
-
-

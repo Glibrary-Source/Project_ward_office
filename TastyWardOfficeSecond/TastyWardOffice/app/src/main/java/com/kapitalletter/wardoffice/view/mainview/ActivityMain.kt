@@ -26,7 +26,7 @@ class ActivityMain : AppCompatActivity() {
 
         MobileAds.initialize(this) {}
         adMobController = AdmobController(this)
-        adMobController.setAdFullScreen( binding.adView, AdRequest.Builder().build() )
+        adMobController.setAdFullScreen(binding.adView, AdRequest.Builder().build())
 
         setBottomNav()
     }
@@ -50,7 +50,7 @@ class ActivityMain : AppCompatActivity() {
                 else -> return@setOnItemSelectedListener true
             }
 
-            if(currentDestination?.id != selectedDestination) {
+            if (currentDestination?.id != selectedDestination) {
                 navController.navigate(selectedDestination, null, options)
             }
 
